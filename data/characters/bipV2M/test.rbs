@@ -1,0 +1,222 @@
+# Define the rigid bodies that will make up the character
+
+A_RigidBody
+	name pelvis
+	mass 11.777
+	moi 0.1028 0.0871 0.0579
+	frictionCoefficient 0.85
+	restitutionCoefficient 0.35
+	mesh ../data/models/opensim/sacrum.obj
+	mesh ../data/models/opensim/pelvis.obj
+	mesh ../data/models/opensim/l_pelvis.obj
+/End
+
+A_RigidBody
+	name femur_r
+	mass 9.3014
+	moi 0.1339 0.0351 0.1412
+	frictionCoefficient 0.85
+	restitutionCoefficient 0.35
+	mesh ../data/models/opensim/femur.obj
+/End
+
+A_RigidBody
+	name tibia_r
+	mass 3.7075
+	moi 0.0504 0.0051 0.0511
+	frictionCoefficient 0.85
+	restitutionCoefficient 0.35
+	mesh ../data/models/opensim/tibia.obj
+	mesh ../data/models/opensim/fibula.obj
+/End
+
+A_RigidBody
+	name talus_r
+	mass 0.1
+	moi 0.001 0.001 0.001
+	frictionCoefficient 0.85
+	restitutionCoefficient 0.35
+	mesh ../data/models/opensim/talus.obj
+/End
+
+A_RigidBody
+	name calcn_r
+	mass 1.25
+	moi 0.0014 0.0039 0.0041
+	frictionCoefficient 0.85
+	restitutionCoefficient 0.35
+	mesh ../data/models/opensim/foot.obj
+/End
+
+A_RigidBody
+	name toes_r
+	mass 0.2166
+	moi 0.0001 0.0002 0.0001
+	frictionCoefficient 0.85
+	restitutionCoefficient 0.35
+	mesh ../data/models/opensim/bofoot.obj
+/End
+
+A_RigidBody
+	name femur_l
+	mass 9.3014
+	moi 0.1339 0.0351 0.1412
+	frictionCoefficient 0.85
+	restitutionCoefficient 0.35
+	mesh ../data/models/opensim/l_femur.obj
+/End
+
+A_RigidBody
+	name tibia_l
+	mass 3.7075
+	moi 0.0504 0.0051 0.0511
+	frictionCoefficient 0.85
+	restitutionCoefficient 0.35
+	mesh ../data/models/opensim/l_tibia.obj
+	mesh ../data/models/opensim/l_fibula.obj
+/End
+
+A_RigidBody
+	name talus_l
+	mass 0.1
+	moi 0.001 0.001 0.001
+	frictionCoefficient 0.85
+	restitutionCoefficient 0.35
+	mesh ../data/models/opensim/l_talus.obj
+/End
+
+A_RigidBody
+	name calcn_l
+	mass 1.25
+	moi 0.0014 0.0039 0.0041
+	frictionCoefficient 0.85
+	restitutionCoefficient 0.35
+	mesh ../data/models/opensim/l_foot.obj
+/End
+
+A_RigidBody
+	name toes_l
+	mass 0.2166
+	moi 0.0001 0.0002 0.0001
+	frictionCoefficient 0.85
+	restitutionCoefficient 0.35
+	mesh ../data/models/opensim/l_bofoot.obj
+/End
+
+A_RigidBody
+	name torso
+	mass 34.2366
+	moi 1.4745 0.7555 1.4314
+	frictionCoefficient 0.85
+	restitutionCoefficient 0.35
+	mesh ../data/models/opensim/hat_spine.obj
+	mesh ../data/models/opensim/hat_jaw.obj
+	mesh ../data/models/opensim/hat_skull.obj
+	mesh ../data/models/opensim/hat_ribs.obj
+/End
+
+#joints
+
+ArticulatedFigure
+	root pelvis
+
+	hingeJoint 1 0 0 
+		jointLimits -2.0944 2.0944
+		name hip_r
+		parent pelvis
+		child femur_r
+		jointPPos -0.0707 -0.0661 0.0835
+		jointCPos 0 0 0
+	/Joint
+
+	hingeJoint 1 0 0 
+		jointLimits -2.0944 0.174533
+		name knee_r
+		parent femur_r
+		child tibia_r
+		jointPPos 0 0 0
+		jointCPos 0 0 0
+	/Joint
+
+	hingeJoint 1 0 0 
+		jointLimits -1.5708 1.5708
+		name ankle_r
+		parent tibia_r
+		child talus_r
+		jointPPos 0 -0.43 0
+		jointCPos 0 0 0
+	/Joint
+
+	hingeJoint 1 0 0 
+		jointLimits 0 0
+		name subtalar_r
+		parent talus_r
+		child calcn_r
+		jointPPos -0.04877 -0.04195 0.00792
+		jointCPos 0 0 0
+	/Joint
+
+	hingeJoint 1 0 0 
+		jointLimits 0 0
+		name mtp_r
+		parent calcn_r
+		child toes_r
+		jointPPos 0.1788 -0.002 0.00108
+		jointCPos 0 0 0
+	/Joint
+
+	hingeJoint 1 0 0 
+		jointLimits -2.0944 2.0944
+		name hip_l
+		parent pelvis
+		child femur_l
+		jointPPos -0.0707 -0.0661 -0.0835
+		jointCPos 0 0 0
+	/Joint
+
+	hingeJoint 1 0 0 
+		jointLimits -2.0944 0.174533
+		name knee_l
+		parent femur_l
+		child tibia_l
+		jointPPos 0 0 0
+		jointCPos 0 0 0
+	/Joint
+
+	hingeJoint 1 0 0 
+		jointLimits -1.0472 1.0472
+		name ankle_l
+		parent tibia_l
+		child talus_l
+		jointPPos 0 -0.43 0
+		jointCPos 0 0 0
+	/Joint
+
+	hingeJoint 1 0 0 
+		jointLimits 0 0
+		name subtalar_l
+		parent talus_l
+		child calcn_l
+		jointPPos -0.04877 -0.04195 -0.00792
+		jointCPos 0 0 0
+	/Joint
+
+	hingeJoint 1 0 0 
+		jointLimits 0 0
+		name mtp_l
+		parent calcn_l
+		child toes_l
+		jointPPos 0.1788 -0.002 -0.00108
+		jointCPos 0 0 0
+	/Joint
+
+	hingeJoint 1 0 0 
+		jointLimits -1.5708 1.5708
+		name back
+		parent pelvis
+		child torso
+		jointPPos -0.1007 0.0815 0
+		jointCPos 0 0 0
+	/Joint
+
+/ArticulatedFigure

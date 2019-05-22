@@ -1,0 +1,123 @@
+	Muscle
+		name TRIlong 
+		A_RigidBody rUpperarm
+		position 0.067069 -0.006640 -0.027140
+			
+		A_RigidBody rUpperarm
+		position -0.044891 -0.012170 -0.031840
+			 
+		A_RigidBody rUpperarm
+		position -0.086091 -0.012080 -0.017430 
+			 
+		A_RigidBody rLowerarm
+		position 0.191939 -0.000780 -0.021900
+			
+		maxForce 798.52 
+		optimalLength 0.134 
+		slackLength 0.2145
+	/Muscle					
+
+	Muscle					
+		name TRIlat 
+		A_RigidBody rUpperarm
+		position 0.055019 0.004280 -0.005990 
+		
+		A_RigidBody rUpperarm
+		position 0.036199 0.009280 -0.023440 
+		
+		A_RigidBody rUpperarm
+		position -0.044891 -0.012170 -0.031840 
+		
+		A_RigidBody rUpperarm
+		position -0.086091 -0.012080 -0.017430
+		
+		A_RigidBody rLowerarm
+		position 0.191939 -0.000780 -0.021900
+		
+		maxForce 624.3 
+		optimalLength 0.1138 
+		slackLength 0.147 
+	/Muscle
+ 
+	Muscle				
+		name TRImed 
+		A_RigidBody rUpperarm
+		position 0.044529 -0.009060 -0.008380 
+
+		A_RigidBody rUpperarm
+		position 0.030089 -0.010800 -0.026010
+
+		A_RigidBody rUpperarm
+		position -0.044891 -0.012170 -0.031840 
+
+		A_RigidBody rUpperarm
+		position -0.086091 -0.012080 -0.017430 
+
+		A_RigidBody rLowerarm
+		position 0.191939 -0.000780 -0.021900 
+
+		maxForce 624.3 
+		optimalLength 0.1138 
+		slackLength 0.1362 
+	/Muscle
+	
+	Muscle				
+		name BIClong 
+		A_RigidBody rUpperarm
+		position 0.199409 0.010280 0.021310 
+		
+		A_RigidBody rUpperarm
+		position 0.176369 0.012010 0.023780 
+		
+		A_RigidBody rUpperarm
+		position 0.153209 0.001360 0.013450 
+		
+		A_RigidBody rUpperarm
+		position 0.104119 -0.001650 0.010680
+		
+		A_RigidBody rUpperarm
+		position 0.060229 0.000240 0.017030 
+		
+		A_RigidBody rUpperarm
+		position 0.006079 -0.006300 0.022800 
+		
+		A_RigidBody rLowerarm
+		position 0.133089 0.021790 0.007510 
+		
+								
+		maxForce 624.3 
+		optimalLength 0.1157 
+		slackLength 0.40845 
+	/Muscle
+
+	Muscle					
+		name BICshort 
+		A_RigidBody rUpperarm
+		position 0.105719 -0.011010 0.011170 
+									
+		A_RigidBody rUpperarm
+		position 0.060229 -0.010790 0.017030 
+									
+		A_RigidBody rUpperarm
+		position 0.006079 -0.006300 0.022800 
+									
+		A_RigidBody rLowerarm
+		position 0.133089 0.021790 0.007510 
+									
+		maxForce 435.56 
+		optimalLength 0.1321 
+		slackLength 0.28845 
+	/Muscle
+	
+	Muscle					
+		name BRA 
+		A_RigidBody rUpperarm
+		position 0.007579 -0.003600 0.006800 
+
+		A_RigidBody rLowerarm
+		position 0.157579 0.000900 -0.003200 
+
+		maxForce 987.26 
+		optimalLength 0.0858 
+		slackLength 0.08025 
+	/Muscle

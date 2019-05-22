@@ -1,0 +1,447 @@
+# Define the rigid bodies that will make up the character
+
+A_RigidBody
+	name pelvis
+	mass 11.777
+	moi 0.1028 0.0871 0.0579
+	frictionCoefficient 0.85
+	restitutionCoefficient 0.35
+	mesh ../data/models/opensim/sacrum.obj
+	mesh ../data/models/opensim/pelvis.obj
+	mesh ../data/models/opensim/l_pelvis.obj
+/End
+
+A_RigidBody
+	name femur_r
+	mass 9.3014
+	moi 0.1339 0.0351 0.1412
+	frictionCoefficient 0.85
+	restitutionCoefficient 0.35
+	mesh ../data/models/opensim/femur.obj
+/End
+
+A_RigidBody
+	name tibia_r
+	mass 3.7075
+	moi 0.0504 0.0051 0.0511
+	frictionCoefficient 0.85
+	restitutionCoefficient 0.35
+	mesh ../data/models/opensim/tibia.obj
+	mesh ../data/models/opensim/fibula.obj
+/End
+
+A_RigidBody
+	name talus_r
+	mass 0.1
+	moi 0.001 0.001 0.001
+	frictionCoefficient 0.85
+	restitutionCoefficient 0.35
+	mesh ../data/models/opensim/talus.obj
+/End
+
+A_RigidBody
+	name calcn_r
+	mass 1.25
+	moi 0.0014 0.0039 0.0041
+	frictionCoefficient 0.85
+	restitutionCoefficient 0.35
+	mesh ../data/models/opensim/foot.obj
+/End
+
+A_RigidBody
+	name toes_r
+	mass 0.2166
+	moi 0.0001 0.0002 0.0001
+	frictionCoefficient 0.85
+	restitutionCoefficient 0.35
+	mesh ../data/models/opensim/bofoot.obj
+/End
+
+A_RigidBody
+	name femur_l
+	mass 9.3014
+	moi 0.1339 0.0351 0.1412
+	frictionCoefficient 0.85
+	restitutionCoefficient 0.35
+	mesh ../data/models/opensim/l_femur.obj
+/End
+
+A_RigidBody
+	name tibia_l
+	mass 3.7075
+	moi 0.0504 0.0051 0.0511
+	frictionCoefficient 0.85
+	restitutionCoefficient 0.35
+	mesh ../data/models/opensim/l_tibia.obj
+	mesh ../data/models/opensim/l_fibula.obj
+/End
+
+A_RigidBody
+	name talus_l
+	mass 0.1
+	moi 0.001 0.001 0.001
+	frictionCoefficient 0.85
+	restitutionCoefficient 0.35
+	mesh ../data/models/opensim/l_talus.obj
+/End
+
+A_RigidBody
+	name calcn_l
+	mass 1.25
+	moi 0.0014 0.0039 0.0041
+	frictionCoefficient 0.85
+	restitutionCoefficient 0.35
+	mesh ../data/models/opensim/l_foot.obj
+/End
+
+A_RigidBody
+	name toes_l
+	mass 0.2166
+	moi 0.0001 0.0002 0.0001
+	frictionCoefficient 0.85
+	restitutionCoefficient 0.35
+	mesh ../data/models/opensim/l_bofoot.obj
+/End
+
+A_RigidBody
+	name torso
+	mass 34.2366
+	moi 1.4745 0.7555 1.4314
+	frictionCoefficient 0.85
+	restitutionCoefficient 0.35
+	mesh ../data/models/opensim/hat_spine.obj
+	mesh ../data/models/opensim/hat_jaw.obj
+	mesh ../data/models/opensim/hat_skull.obj
+	mesh ../data/models/opensim/hat_ribs.obj
+/End
+
+#joints
+
+ArticulatedFigure
+	root pelvis
+
+	hingeJoint 0 0 1 
+		name hip_r
+		parent pelvis
+		child femur_r
+		jointPPos -0.0707 -0.0661 0.0835
+		jointCPos 0 0 0
+		jointLimits -2.0944 2.0944 
+	/Joint
+
+	hingeJoint 0 0 1
+		name knee_r
+		parent femur_r
+		child tibia_r
+		jointPPos -0.005435 -0.395264 0
+		jointCPos 0 0 0
+		jointLimits -2.0944 0.174533 
+	/Joint
+
+	hingeJoint 0 0 1 
+		name ankle_r
+		parent tibia_r
+		child talus_r
+		jointPPos 0 -0.43 0
+		jointCPos 0 0 0
+		jointLimits -1.5708 1.5708 
+	/Joint
+
+	stiffJoint
+		name subtalar_r
+		parent talus_r
+		child calcn_r
+		jointPPos -0.04877 -0.04195 0.00792
+		jointCPos 0 0 0
+		jointLimits 
+	/Joint
+
+	stiffJoint
+		name mtp_r
+		parent calcn_r
+		child toes_r
+		jointPPos 0.1788 -0.002 0.00108
+		jointCPos 0 0 0
+		jointLimits 
+	/Joint
+
+	hingeJoint 0 0 1 
+		name hip_l
+		parent pelvis
+		child femur_l
+		jointPPos -0.0707 -0.0661 -0.0835
+		jointCPos 0 0 0
+		jointLimits -2.0944 2.0944 
+	/Joint
+
+	hingeJoint 0 0 1
+		name knee_l
+		parent femur_l
+		child tibia_l
+		jointPPos 0 0 0
+		jointCPos 0 0 0
+		jointLimits -2.0944 0.174533 
+	/Joint
+
+	hingeJoint 0 0 1 
+		name ankle_l
+		parent tibia_l
+		child talus_l
+		jointPPos 0 -0.43 0
+		jointCPos 0 0 0
+		jointLimits -1.0472 1.0472 
+	/Joint
+
+	stiffJoint
+		name subtalar_l
+		parent talus_l
+		child calcn_l
+		jointPPos -0.04877 -0.04195 -0.00792
+		jointCPos 0 0 0
+		jointLimits 
+	/Joint
+
+	stiffJoint
+		name mtp_l
+		parent calcn_l
+		child toes_l
+		jointPPos 0.1788 -0.002 -0.00108
+		jointCPos 0 0 0
+		jointLimits 
+	/Joint
+
+	hingeJoint 0 0 1 
+		name back
+		parent pelvis
+		child torso
+		jointPPos -0.1007 0.0815 0
+		jointCPos 0 0 0
+		jointLimits -1.5708 1.5708 
+	/Joint
+
+#muscles
+
+	Muscle
+		name hamstrings_r
+		maxForce 2700
+		optimalLength 0.109
+		slackLength 0.326
+		A_RigidBody pelvis
+		position -0.12596 -0.10257 0.06944
+		A_RigidBody tibia_r
+		position -0.0301 -0.036 0.02943
+		A_RigidBody tibia_r
+		position -0.0234 -0.0563 0.0343
+	/Muscle
+
+	Muscle
+		name bifemsh_r
+		maxForce 804
+		optimalLength 0.173
+		slackLength 0.089
+		A_RigidBody femur_r
+		position 0.005 -0.2111 0.0234
+		A_RigidBody tibia_r
+		position -0.0301 -0.036 0.02943
+		A_RigidBody tibia_r
+		position -0.0234 -0.0563 0.0343
+	/Muscle
+
+	Muscle
+		name glut_max_r
+		maxForce 1944
+		optimalLength 0.1569
+		slackLength 0.0733
+		A_RigidBody pelvis
+		position -0.1317 0.0087 0.0462
+		A_RigidBody pelvis
+		position -0.1344 -0.0609 0.0813
+		A_RigidBody femur_r
+		position -0.045 -0.0584 0.0252
+		A_RigidBody femur_r
+		position -0.0156 -0.1016 0.0419
+	/Muscle
+
+	Muscle
+		name iliopsoas_r
+		maxForce 2342
+		optimalLength 0.1
+		slackLength 0.16
+		A_RigidBody pelvis
+		position -0.0647 0.0887 0.0289
+		A_RigidBody pelvis
+		position -0.0238 -0.057 0.0759
+		A_RigidBody femur_r
+		position 0.0016 -0.0507 0.0038
+		A_RigidBody femur_r
+		position -0.0188 -0.0597 0.0104
+	/Muscle
+
+	Muscle
+		name rect_fem_r
+		maxForce 1169
+		optimalLength 0.114
+		slackLength 0.31
+		A_RigidBody pelvis
+		position -0.0295 -0.0311 0.0968
+	/Muscle
+
+	Muscle
+		name vasti_r
+		maxForce 5000
+		optimalLength 0.107
+		slackLength 0.116
+		A_RigidBody femur_r
+		position 0.029 -0.1924 0.031
+		A_RigidBody femur_r
+		position 0.0335 -0.2084 0.0285
+	/Muscle
+
+	Muscle
+		name gastroc_r
+		maxForce 2500
+		optimalLength 0.09
+		slackLength 0.36
+		A_RigidBody femur_r
+		position -0.019 -0.3929 -0.0235
+		A_RigidBody calcn_r
+		position 0 0.031 -0.0053
+	/Muscle
+
+	Muscle
+		name soleus_r
+		maxForce 5137
+		optimalLength 0.05
+		slackLength 0.25
+		A_RigidBody tibia_r
+		position -0.0024 -0.1533 0.0071
+		A_RigidBody calcn_r
+		position 0 0.031 -0.0053
+	/Muscle
+
+	Muscle
+		name tib_ant_r
+		maxForce 3000
+		optimalLength 0.098
+		slackLength 0.223
+		A_RigidBody tibia_r
+		position 0.0179 -0.1624 0.0115
+		A_RigidBody tibia_r
+		position 0.0329 -0.3951 -0.0177
+		A_RigidBody calcn_r
+		position 0.1166 0.0178 -0.0305
+	/Muscle
+
+	Muscle
+		name hamstrings_l
+		maxForce 2700
+		optimalLength 0.109
+		slackLength 0.326
+		A_RigidBody pelvis
+		position -0.12596 -0.10257 -0.06944
+		A_RigidBody tibia_l
+		position -0.0301 -0.036 -0.02943
+		A_RigidBody tibia_l
+		position -0.0234 -0.0563 -0.0343
+	/Muscle
+
+	Muscle
+		name bifemsh_l
+		maxForce 804
+		optimalLength 0.173
+		slackLength 0.089
+		A_RigidBody femur_l
+		position 0.005 -0.2111 -0.0234
+		A_RigidBody tibia_l
+		position -0.0301 -0.036 -0.02943
+		A_RigidBody tibia_l
+		position -0.0234 -0.0563 -0.0343
+	/Muscle
+
+	Muscle
+		name glut_max_l
+		maxForce 1944
+		optimalLength 0.1569
+		slackLength 0.0733
+		A_RigidBody pelvis
+		position -0.1317 0.0087 -0.0462
+		A_RigidBody pelvis
+		position -0.1344 -0.0609 -0.0813
+		A_RigidBody femur_l
+		position -0.045 -0.0584 -0.0252
+		A_RigidBody femur_l
+		position -0.0156 -0.1016 -0.0419
+	/Muscle
+
+	Muscle
+		name iliopsoas_l
+		maxForce 2342
+		optimalLength 0.1
+		slackLength 0.16
+		A_RigidBody pelvis
+		position -0.0647 0.0887 -0.0289
+		A_RigidBody pelvis
+		position -0.0238 -0.057 -0.0759
+		A_RigidBody femur_l
+		position 0.0016 -0.0507 -0.0038
+		A_RigidBody femur_l
+		position -0.0188 -0.0597 -0.0104
+	/Muscle
+
+	Muscle
+		name rect_fem_l
+		maxForce 1169
+		optimalLength 0.114
+		slackLength 0.31
+		A_RigidBody pelvis
+		position -0.0295 -0.0311 -0.0968
+	/Muscle
+
+	Muscle
+		name vasti_l
+		maxForce 5000
+		optimalLength 0.107
+		slackLength 0.116
+		A_RigidBody femur_l
+		position 0.029 -0.1924 -0.031
+		A_RigidBody femur_l
+		position 0.0335 -0.2084 -0.0285
+	/Muscle
+
+	Muscle
+		name gastroc_l
+		maxForce 2500
+		optimalLength 0.09
+		slackLength 0.36
+		A_RigidBody femur_l
+		position -0.019 -0.3929 0.0235
+		A_RigidBody calcn_l
+		position 0 0.031 0.0053
+	/Muscle
+
+	Muscle
+		name soleus_l
+		maxForce 5137
+		optimalLength 0.05
+		slackLength 0.25
+		A_RigidBody tibia_l
+		position -0.0024 -0.1533 -0.0071
+		A_RigidBody calcn_l
+		position 0 0.031 0.0053
+	/Muscle
+
+	Muscle
+		name tib_ant_l
+		maxForce 3000
+		optimalLength 0.098
+		slackLength 0.223
+		A_RigidBody tibia_l
+		position 0.0179 -0.1624 -0.0115
+		A_RigidBody tibia_l
+		position 0.0329 -0.3951 0.0177
+		A_RigidBody calcn_l
+		position 0.1166 0.0178 0.0305
+	/Muscle
+
+/ArticulatedFigure
+

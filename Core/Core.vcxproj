@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A13EC400-F9E0-4306-8EA2-1AC15457EF6B}</ProjectGuid>
+    <RootNamespace>SimbiconCore</RootNamespace>
+    <Keyword>Qt4VSv1.0</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup Condition="'$(QtMsBuild)'=='' or !Exists('$(QtMsBuild)\qt.targets')">
+    <QtMsBuild>$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+  </PropertyGroup>
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  </Target>
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
+    <Import Project="$(QtMsBuild)\qt.props" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>14.0.23107.0</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)bin\intermediate\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)bin\intermediate\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)ode-0.16\include\;$(QtDir)\include\;$(SolutionDir)include\;$(ProjectDir)GeneratedFiles\</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalOptions>
+      </AdditionalOptions>
+      <PreprocessorDefinitions>UNICODE;_UNICODE;WIN32;WIN64;_USE_MATH_DEFINES</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+    </ClCompile>
+    <Lib>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+    </Lib>
+    <Link>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;Qt5Gui.lib;Qt5Widgets.lib;Qt5Core.lib;Qt5Charts.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(QtDir)\lib</AdditionalLibraryDirectories>
+      <SubSystem>Console</SubSystem>
+      <AdditionalOptions>/VERBOSE %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+    <ProjectReference />
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
+    <QtMoc>
+      <Define>QT_CORE_LIB;QT_OPENGL_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;dDOUBLE</Define>
+      <IncludePath>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.\..\include;.\..;C:\Qt\5.11.3\msvc2017_64\include;C:\Qt\5.11.3\msvc2017_64\include\QtCore;C:\Qt\5.11.3\msvc2017_64\include\QtOpenGL;C:\Qt\5.11.3\msvc2017_64\include\QtGui;C:\Qt\5.11.3\msvc2017_64\include\QtANGLE;C:\Qt\5.11.3\msvc2017_64\include\QtWidgets;$(SolutionDir)\ode-0.16\include;C:\Qt\5.11.3\msvc2017_64\include\QtCharts;$(NOINHERIT)</IncludePath>
+      <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <QTDIR>C:\Qt\5.11.3\msvc2017_64</QTDIR>
+    </QtMoc>
+    <QtUic>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      <OutputFile>.\GeneratedFiles\ui_%(Filename).h</OutputFile>
+      <QTDIR>C:\Qt\5.11.3\msvc2017_64</QTDIR>
+    </QtUic>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)ode-0.16\include\;$(QtDir)\include\;$(SolutionDir)include\;$(ProjectDir)GeneratedFiles\</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>UNICODE;_UNICODE;WIN32;WIN64;_USE_MATH_DEFINES</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalOptions>
+      </AdditionalOptions>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+    </ClCompile>
+    <Lib>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+    </Lib>
+    <Link>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;Qt5Gui.lib;Qt5Widgets.lib;Qt5Core.lib;Qt5Charts.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(QtDir)\lib</AdditionalLibraryDirectories>
+      <AdditionalOptions>/VERBOSE %(AdditionalOptions)</AdditionalOptions>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference />
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
+    <QtMoc>
+      <Define>QT_CORE_LIB;QT_OPENGL_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;dDOUBLE</Define>
+      <IncludePath>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.\..\include;.\..;C:\Qt\5.11.3\msvc2017_64\include;C:\Qt\5.11.3\msvc2017_64\include\QtCore;C:\Qt\5.11.3\msvc2017_64\include\QtOpenGL;C:\Qt\5.11.3\msvc2017_64\include\QtGui;C:\Qt\5.11.3\msvc2017_64\include\QtANGLE;C:\Qt\5.11.3\msvc2017_64\include\QtWidgets;$(SolutionDir)\ode-0.16\include;C:\Qt\5.11.3\msvc2017_64\include\QtCharts;$(NOINHERIT)</IncludePath>
+      <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <QTDIR>C:\Qt\5.11.3\msvc2017_64</QTDIR>
+    </QtMoc>
+    <QtUic>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      <OutputFile>.\GeneratedFiles\ui_%(Filename).h</OutputFile>
+      <QTDIR>C:\Qt\5.11.3\msvc2017_64</QTDIR>
+    </QtUic>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\AbstractRBEngine.cpp" />
+    <ClCompile Include="src\Analyzer_thread.cpp" />
+    <ClCompile Include="src\Angles_viewer.cpp" />
+    <ClCompile Include="src\Angular_acceleration.cpp" />
+    <ClCompile Include="src\Angular_velocities.cpp" />
+    <ClCompile Include="src\Arb_angular_velocities.cpp" />
+    <ClCompile Include="src\ArticulatedRigidBody.cpp" />
+    <ClCompile Include="src\Articulated_figure.cpp" />
+    <ClCompile Include="src\Balance_control.cpp" />
+    <ClCompile Include="src\BallInSocketJoint.cpp" />
+    <ClCompile Include="src\BoxCDP.cpp" />
+    <ClCompile Include="src\CapsuleCDP.cpp" />
+    <ClCompile Include="src\CCD_algorithm.cpp" />
+    <ClCompile Include="src\Character.cpp" />
+    <ClCompile Include="src\Constant.cpp" />
+    <ClCompile Include="src\Controller_interface.cpp" />
+    <ClCompile Include="src\ConUtils.cpp" />
+    <ClCompile Include="src\Custom_joint.cpp" />
+    <ClCompile Include="src\Feet_viewer.cpp" />
+    <ClCompile Include="src\Gait_analyzer.cpp" />
+    <ClCompile Include="src\HingeJoint.cpp" />
+    <ClCompile Include="src\Joint.cpp" />
+    <ClCompile Include="src\Joint_info_viewer.cpp" />
+    <ClCompile Include="src\Learning_framework.cpp" />
+    <ClCompile Include="src\Linear_function.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Model.cpp" />
+    <ClCompile Include="src\Muscle.cpp" />
+    <ClCompile Include="src\MuscleTendonUnit.cpp" />
+    <ClCompile Include="src\Muscle_controller.cpp" />
+    <ClCompile Include="src\My_qopengl_widget.cpp" />
+    <ClCompile Include="src\Observer_interface.cpp" />
+    <ClCompile Include="src\Ode_world.cpp" />
+    <ClCompile Include="src\OptimizationFramework.cpp" />
+    <ClCompile Include="src\Pelvis_pose_control.cpp" />
+    <ClCompile Include="src\PlaneCDP.cpp" />
+    <ClCompile Include="src\Pose_controller.cpp" />
+    <ClCompile Include="src\Fsm_state.cpp" />
+    <ClCompile Include="src\Position_viewer.cpp" />
+    <ClCompile Include="src\PreCollisionQuery.cpp" />
+    <ClCompile Include="src\QtGui.cpp" />
+    <ClCompile Include="src\RBUtils.cpp" />
+    <ClCompile Include="src\Rigid_body.cpp" />
+    <ClCompile Include="src\SimBiCon.cpp" />
+    <ClCompile Include="src\SimBiCon_framework.cpp" />
+    <ClCompile Include="src\SimGlobals.cpp" />
+    <ClCompile Include="src\Simm_spline.cpp" />
+    <ClCompile Include="src\Simulation_thread.cpp" />
+    <ClCompile Include="src\SphereCDP.cpp" />
+    <ClCompile Include="src\StiffJoint.cpp" />
+    <ClCompile Include="src\Subject_interface.cpp" />
+    <ClCompile Include="src\Swing_foot_controller.cpp" />
+    <ClCompile Include="src\TransformAxis.cpp" />
+    <ClCompile Include="src\TriMeshCDP.cpp" />
+    <ClCompile Include="src\Two_link_ik.cpp" />
+    <ClCompile Include="src\UniversalJoint.cpp" />
+    <ClCompile Include="src\Velocities_viewer.cpp" />
+    <ClCompile Include="src\Velocity_controller.cpp" />
+    <ClCompile Include="src\Viewer_interface.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\AbstractRBEngine.h" />
+    <ClInclude Include="src\Viewer_interface.h" />
+    <QtMoc Include="src\Analyzer_thread.h" />
+    <ClInclude Include="src\Angles_viewer.h" />
+    <ClInclude Include="src\Angular_acceleration.h" />
+    <ClInclude Include="src\Angular_velocities.h" />
+    <ClInclude Include="src\Arb_angular_velocities.h" />
+    <ClInclude Include="src\ArticulatedRigidBody.h" />
+    <ClInclude Include="src\Articulated_figure.h" />
+    <ClInclude Include="src\Balance_control.h" />
+    <ClInclude Include="src\BallInSocketJoint.h" />
+    <ClInclude Include="src\BoxCDP.h" />
+    <ClInclude Include="src\CapsuleCDP.h" />
+    <ClInclude Include="src\CCD_algorithm.h" />
+    <ClInclude Include="src\Character.h" />
+    <ClInclude Include="src\CollisionDetectionPrimitive.h" />
+    <ClInclude Include="src\Constant.h" />
+    <ClInclude Include="src\ContactPoint.h" />
+    <ClInclude Include="src\Controller_interface.h" />
+    <ClInclude Include="src\ConUtils.h" />
+    <ClInclude Include="src\Coordinate.h" />
+    <ClInclude Include="src\Custom_joint.h" />
+    <ClInclude Include="src\Feet_viewer.h" />
+    <ClInclude Include="src\Force_utilitary.h" />
+    <ClInclude Include="src\Function.h" />
+    <ClInclude Include="src\Gait_analyzer.h" />
+    <ClInclude Include="src\HingeJoint.h" />
+    <ClInclude Include="src\Joint.h" />
+    <ClInclude Include="src\Joint_info_viewer.h" />
+    <QtMoc Include="src\Learning_framework.h" />
+    <ClInclude Include="src\Linear_function.h" />
+    <ClInclude Include="src\Model.h" />
+    <ClInclude Include="src\Muscle.h" />
+    <ClInclude Include="src\MuscleTendonUnit.h" />
+    <ClInclude Include="src\Muscle_controller.h" />
+    <QtMoc Include="src\My_qopengl_widget.h" />
+    <ClInclude Include="src\Observer_interface.h" />
+    <ClInclude Include="src\Ode_world.h" />
+    <QtMoc Include="src\OptimizationFramework.h" />
+    <ClInclude Include="src\Pelvis_pose_control.h" />
+    <ClInclude Include="src\PlaneCDP.h" />
+    <ClInclude Include="src\Pose_controller.h" />
+    <ClInclude Include="src\Position_viewer.h" />
+    <ClInclude Include="src\PreCollisionQuery.h" />
+    <QtMoc Include="src\QtGui.h" />
+    <ClInclude Include="src\RBUtils.h" />
+    <ClInclude Include="src\Reduced_character_state.h" />
+    <ClInclude Include="src\Fsm_state.h" />
+    <ClInclude Include="src\Rigid_body.h" />
+    <ClInclude Include="src\SimBiCon.h" />
+    <ClInclude Include="src\SimBiCon_framework.h" />
+    <ClInclude Include="src\SimGlobals.h" />
+    <ClInclude Include="src\Simm_spline.h" />
+    <QtMoc Include="src\Simulation_thread.h" />
+    <ClInclude Include="src\SphereCDP.h" />
+    <ClInclude Include="src\StiffJoint.h" />
+    <ClInclude Include="src\Subject_interface.h" />
+    <ClInclude Include="src\Swing_foot_controller.h" />
+    <ClInclude Include="src\Trajectory.h" />
+    <ClInclude Include="src\TransformAxis.h" />
+    <ClInclude Include="src\TriMeshCDP.h" />
+    <ClInclude Include="src\Two_link_ik.h" />
+    <ClInclude Include="src\UniversalJoint.h" />
+    <ClInclude Include="src\Velocities_viewer.h" />
+    <ClInclude Include="src\Velocity_controller.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MathLib\MathLib.vcxproj">
+      <Project>{b9366919-a2ec-4f79-a095-b838f94ffe24}</Project>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
+    <ProjectReference Include="..\ode-0.16\build\vs2008\ode.vcxproj">
+      <Project>{5d0c3e6b-d632-8142-939f-accb939df0c5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Utils\Utils.vcxproj">
+      <Project>{622aeeda-4eda-41aa-b132-93855145aabd}</Project>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="src\Qt_gui.ui" />
+    <QtUic Include="src\Viewer_widget_form.ui" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
+    <Import Project="$(QtMsBuild)\qt.targets" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

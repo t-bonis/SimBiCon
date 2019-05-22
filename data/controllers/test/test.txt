@@ -1,0 +1,156 @@
+trajectory pelvis
+component
+translationAxis -1.000000 0.000000 0.000000
+baseTrajectory
+	0 0
+	1 0
+/baseTrajectory
+/component
+component
+translationAxis 0.000000 1.000000 0.000000
+baseTrajectory
+	0 0.99
+	1 0.99 
+/baseTrajectory
+/component
+component
+translationAxis 0.000000 0.000000 1.000000
+baseTrajectory
+	0 0
+	1 0
+/baseTrajectory
+/component
+/trajectory
+
+trajectory pelvis
+component
+rotationAxis -1.000000 0.000000 0.000000
+baseTrajectory
+	0 0
+	1 0
+/baseTrajectory
+/component
+component
+rotationAxis 0.000000 1.000000 0.000000
+baseTrajectory
+	0 0
+	1 0
+/baseTrajectory
+/component
+component
+rotationAxis 0.000000 0.000000 1.000000
+baseTrajectory
+	0 0
+	1 0
+/baseTrajectory
+/component
+/trajectory
+
+trajectory hip_r
+component
+rotationAxis -1.000000 0.000000 0.000000
+baseTrajectory
+	0 0
+	1 0
+/baseTrajectory
+/component
+component
+rotationAxis 0.000000 1.000000 0.000000
+baseTrajectory
+	0 0
+	1 0
+/baseTrajectory
+/component
+component
+rotationAxis 0.000000 0.000000 1.000000
+baseTrajectory
+	0 0
+	1 0
+/baseTrajectory
+/component
+/trajectory
+
+trajectory hip_l
+component
+rotationAxis -1.000000 0.000000 0.000000
+baseTrajectory
+	0 0
+	1 0
+/baseTrajectory
+/component
+component
+rotationAxis 0.000000 -1.000000 0.000000
+baseTrajectory
+	0 0
+	1 0
+/baseTrajectory
+/component
+component
+rotationAxis 0.000000 0.000000 -1.000000
+baseTrajectory
+	0 0
+	1 0
+/baseTrajectory
+/component
+/trajectory
+
+trajectory knee_l
+component
+rotationAxis -1.000000 0.000000 0.000000
+baseTrajectory
+	0 0
+	1 0
+/baseTrajectory
+/component
+/trajectory
+
+trajectory ankle_l
+component
+rotationAxis -0.979126 0.174022 0.105014
+baseTrajectory
+	0 0
+	1 0
+/baseTrajectory
+/component
+/trajectory
+
+trajectory subtalar_l
+component
+rotationAxis 0.120949 -0.604747 -0.787180
+baseTrajectory
+	0 0
+	1 0
+/baseTrajectory
+/component
+/trajectory
+
+trajectory knee_r
+component
+rotationAxis -1.000000 0.000000 0.000000
+baseTrajectory
+	0 0
+	1 0
+/baseTrajectory
+/component
+/trajectory
+
+trajectory ankle_r
+component
+rotationAxis -0.979126 -0.174022 -0.105014
+baseTrajectory
+	0 0
+	1 0
+/baseTrajectory
+/component
+/trajectory
+
+trajectory subtalar_r
+component
+rotationAxis 0.120949 0.604747 0.787180
+baseTrajectory
+	0 0
+	1 0
+/baseTrajectory
+/component
+/trajectory
+

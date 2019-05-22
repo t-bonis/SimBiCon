@@ -1,0 +1,262 @@
+PDParams
+#	joint name			Kp			Kd				MaxTorque			ScaleX			ScaleY			ScaleZ
+	hip_r			300.0			30.0			10000.0			1.0			0.660000			1.0
+	knee_r			300.0			30.0			10000.0			1.0			0.200000			1.0
+	ankle_r			75.000000		10.00000		10000.0			1.0			0.200000			1.0
+	subtalar_r		75.000000		10.00000		10000.0			1.0			1.0			0.200000
+	mtp_r			10.000000		0.500000		10000.0			1.0			1.0			1.0
+	hip_l			300.0			30.0			10000.0			1.0			0.660000			1.0
+	knee_l			300.0			30.0			10000.0			1.0			0.200000			1.0
+	ankle_l			75.000000		10.00000		10000.0			1.0			0.200000			1.0
+	subtalar_l		75.000000		10.00000		10000.0			1.0			1.0			0.200000
+	mtp_l			10.000000		0.500000		10000.0			1.0			1.0			1.0
+	back			200.0			30.0			10000.0			1.0			0.200000 		1.0
+/PDParams
+
+stanceHipDamping 25.0
+stanceHipMaxVelocity 4.0
+
+
+Con_open_sim_State 0
+	description First state in walking controller
+	nextState 1
+	transitionOn timeUp
+	stateStance same
+	time 0.300000
+
+	trajectory SWING_hip
+		component
+			rotationAxis 0.000000 1.000000 0.000000
+			reverseTargetAngleOnStance left
+			baseTrajectory
+				0.000000 0.00000
+			/baseTrajectory
+		/component
+
+		component
+			rotationAxis 1.000000 0.000000 0.000000
+			baseTrajectory
+				0.000000 -1.000000
+			/baseTrajectory
+		/component
+
+		component
+			rotationAxis 0.000000 0.000000 1.000000
+			reverseTargetAngleOnStance left
+			feedback linear
+				feedbackProjectionAxis 1.000000 0.000000 0.000000
+				cd 0.550000
+				cv 0.300000
+			/feedback
+			baseTrajectory
+				0.000000 0.000000
+			/baseTrajectory
+		/component
+	/trajectory
+
+	trajectory SWING_knee
+		component
+			rotationAxis 1.000000 0.000000 0.000000
+			baseTrajectory
+				0.000000 2.0000
+			/baseTrajectory
+		/component
+	/trajectory
+
+	trajectory STANCE_knee
+		component
+			rotationAxis 1.000000 0.000000 0.000000
+			baseTrajectory
+				0.000000 0.000000
+			/baseTrajectory
+		/component
+	/trajectory
+
+	trajectory SWING_ankle
+		component
+			rotationAxis -0.97912632 -0.17402245 -0.10501355
+			baseTrajectory
+				0.000000 -0.00000
+			/baseTrajectory
+		/component
+	/trajectory
+
+	trajectory SWING_subtalar
+		component
+			rotationAxis 0.12094949 0.60474746 0.78717961
+			baseTrajectory
+				0.000000 -0.00000
+			/baseTrajectory
+		/component
+	/trajectory
+
+	trajectory STANCE_ankle
+		component
+			rotationAxis -0.97912632 -0.17402245 -0.10501355
+			baseTrajectory
+				0.000000 0.000000
+			/baseTrajectory
+		/component
+	/trajectory
+
+	trajectory STANCE_subtalar
+		component
+			rotationAxis 0.12094949 0.60474746 0.78717961
+			baseTrajectory
+				0.000000 0.000000
+			/baseTrajectory
+		/component
+	/trajectory
+
+	trajectory back
+		component
+			rotationAxis 1.000000 0.000000 0.000000
+			baseTrajectory
+				0.000000 0.500000
+			/baseTrajectory
+		/component
+
+		component
+			rotationAxis 0.000000 1.000000 0.000000
+			reverseTargetAngleOnStance right
+			baseTrajectory
+				0.000000 0.000000
+			/baseTrajectory
+		/component
+
+		component
+			rotationAxis 0.000000 0.000000 1.000000
+			reverseTargetAngleOnStance right
+			baseTrajectory
+				0.000000 0.000000
+			/baseTrajectory
+		/component
+	/trajectory
+/ConState
+
+Con_open_sim_State 1
+	description Second state in walking controller
+	nextState 0
+	transitionOn footDown
+	stateStance reverse
+
+	trajectory SWING_hip
+		component
+			rotationAxis 0.000000 1.000000 0.000000
+			reverseTargetAngleOnStance left
+			baseTrajectory
+				0.000000 0.000000
+			/baseTrajectory
+		/component
+
+		component
+			rotationAxis 1.000000 0.000000 0.000000
+			feedback linear
+				feedbackProjectionAxis 0.000000 0.000000 1.000000
+				cd -0.300000
+				cv -0.300000
+			/feedback
+			baseTrajectory
+				0.000000 1.000000
+			/baseTrajectory
+		/component
+
+		component
+			rotationAxis 0.000000 0.000000 1.000000
+			feedback linear
+				feedbackProjectionAxis 1.000000 0.000000 0.000000
+				cd 0.550000
+				cv 0.300000
+			/feedback
+			reverseTargetAngleOnStance left
+			baseTrajectory
+				0.000000 0.000000
+			/baseTrajectory
+		/component
+	/trajectory
+
+	trajectory SWING_knee
+		component
+			rotationAxis 1.000000 0.000000 0.000000
+			baseTrajectory
+				0.000000 0.000000
+			/baseTrajectory
+		/component
+	/trajectory
+
+	trajectory STANCE_knee
+		component
+			rotationAxis 1.000000 0.000000 0.000000
+			baseTrajectory
+				0.000000 0.000000
+			/baseTrajectory
+		/component
+	/trajectory
+
+	trajectory SWING_ankle
+		component
+			rotationAxis -0.97912632 -0.17402245 -0.10501355
+			baseTrajectory
+				0.000000 -0.000000
+			/baseTrajectory
+		/component
+	/trajectory
+
+	trajectory SWING_subtalar
+		component
+			rotationAxis 0.12094949 0.60474746 0.78717961
+			baseTrajectory
+				0.000000 -0.00000
+			/baseTrajectory
+		/component
+	/trajectory
+
+	trajectory STANCE_ankle
+		component
+			rotationAxis -0.97912632 -0.17402245 -0.10501355
+			baseTrajectory
+				0.000000 0.000000
+			/baseTrajectory
+		/component
+	/trajectory
+
+	trajectory STANCE_subtalar
+		component
+			rotationAxis 0.12094949 0.60474746 0.78717961
+			baseTrajectory
+				0.000000 0.000000
+			/baseTrajectory
+		/component
+	/trajectory
+
+	trajectory back
+		component
+			rotationAxis 1.000000 0.000000 0.000000
+			baseTrajectory
+				0.000000 0.500000
+			/baseTrajectory
+		/component
+
+		component
+			rotationAxis 0.000000 1.000000 0.000000
+			reverseTargetAngleOnStance right
+			baseTrajectory
+				0.000000 0.000000
+			/baseTrajectory
+		/component
+
+		component
+			rotationAxis 0.000000 0.000000 1.000000
+			reverseTargetAngleOnStance right
+			baseTrajectory
+				0.000000 0.000000
+			/baseTrajectory
+		/component
+	/trajectory
+/ConState
+
+startAtState 0
+startingStance left
+
+load_open_sim_CharacterState ../data/controllers/OpenSim/test.rs
+//Usefull comment

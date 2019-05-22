@@ -1,0 +1,164 @@
+PDParams 
+#joint name		Kp				Kd				MaxTorque		ScaleX		ScaleY		ScaleZ
+hip_r			1583.747653075374 48.4351896115665			10000.0			1.0			1.0			1.0
+knee_r			6575.276273587335 56.00382345406008			10000.0			1.0			1.0			1.0
+ankle_r			1283.235132414239 168.0892565948841			10000.0			1.0			1.0			1.0
+hip_l			1583.747653075374 48.4351896115665			10000.0			1.0			1.0			1.0
+knee_l			6575.276273587335 56.00382345406008			10000.0			1.0			1.0			1.0
+ankle_l			1283.235132414239 168.0892565948841			10000.0			1.0			1.0			1.0
+back			513.0742068383465 54.38570423454571			10000.0			1.0			1.0			1.0
+subtalar_l		1300.825099331905 33.45605781392317			10000.0			1.0			1.0			1.0
+subtalar_r		1300.825099331905 33.45605781392317			10000.0			1.0			1.0			1.0
+mtp_l			0.003460207950142265 151.0791828392508			10000.0			1.0			1.0			1.0
+mtp_r			0.003460207950142265 151.0791828392508			10000.0			1.0			1.0			1.0
+     
+/PDParams
+
+Con_OpenSim_State 0
+description second phase
+nextState 1
+stateStance reverse
+transitionOn footDown
+time 0.5
+
+trajectory back
+component
+rotationAxis -1.000000 0.000000 0.000000
+baseTrajectory
+	0.000000 0.0
+	1.000000 0.0
+/baseTrajectory
+/component
+component
+rotationAxis 0.000000 1.000000 0.000000
+baseTrajectory
+	0.000000 0.0
+	1.000000 0.0
+/baseTrajectory
+/component
+component
+rotationAxis 0.000000 0.000000 1.000000
+baseTrajectory
+	0.000000 0.0
+	1.000000 0.0
+/baseTrajectory
+/component
+/trajectory
+
+trajectory SWING_hip
+component
+rotationAxis -1.000000 0.000000 0.000000
+baseTrajectory
+	0.000000 0.0
+	1.000000 0.0
+/baseTrajectory
+/component
+component
+rotationAxis 0.000000 -1.000000 0.000000
+baseTrajectory
+	0.000000 0.0
+	1.000000 0.0
+/baseTrajectory
+/component
+component
+rotationAxis 0.000000 0.000000 -1.000000
+baseTrajectory
+	0.000000 0.0
+	1.000000 0.0
+/baseTrajectory
+/component
+/trajectory
+
+trajectory STANCE_hip
+component
+rotationAxis -1.000000 0.000000 0.000000
+baseTrajectory
+	0.000000 0.0
+	1.000000 0.0
+/baseTrajectory
+/component
+component
+rotationAxis 0.000000 1.000000 0.000000
+baseTrajectory
+	0.000000 0.0
+	1.000000 0.0
+/baseTrajectory
+/component
+component
+rotationAxis 0.000000 0.000000 1.000000
+baseTrajectory
+	0.000000 0.0
+	1.000000 0.0
+/baseTrajectory
+/component
+/trajectory
+
+trajectory SWING_knee
+component
+rotationAxis -1.000000 0.000000 0.000000
+baseTrajectory
+	0.000000 0.0
+	1.000000 0.0
+/baseTrajectory
+/component
+/trajectory
+
+trajectory SWING_ankle
+component
+rotationAxis -0.979126 0.174022 0.105014
+baseTrajectory
+	0.000000 0.0
+	1.000000 0.0
+/baseTrajectory
+/component
+/trajectory
+
+trajectory SWING_subtalar
+component
+rotationAxis 0.120949 -0.604747 -0.787180
+baseTrajectory
+	0.000000 0.0
+	1.000000 0.0
+/baseTrajectory
+/component
+/trajectory
+
+trajectory STANCE_knee
+component
+rotationAxis -1.000000 0.000000 0.000000
+baseTrajectory
+	0.000000 0.0
+	1.000000 0.0
+/baseTrajectory
+/component
+/trajectory
+
+trajectory STANCE_ankle
+component
+rotationAxis -0.979126 -0.174022 -0.105014
+baseTrajectory
+	0.000000 0.0
+	1.000000 0.0
+/baseTrajectory
+/component
+/trajectory
+
+trajectory STANCE_subtalar
+component
+rotationAxis 0.120949 0.604747 0.787180
+baseTrajectory
+	0.000000 0.0
+	1.000000 0.0
+/baseTrajectory
+/component
+/trajectory
+
+/ConState
+
+startAtState 0
+startingStance right
+starting_phi 0.505155
+starting_time_in_ref 0.735000
+
+#load_open_sim_CharacterState ../data/controllers/test/test.rs
+#Usefull comment

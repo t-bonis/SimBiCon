@@ -1,0 +1,23 @@
+#	name			attribute			values		      	
+	Kp				hip_l				300.000000	
+	Kp				knee_l				300.000000	
+	Kp				ankle_l				300.000000	
+	Kp				subtalar_l			300.000000		
+
+
+#   name			attribute			values		      	
+	Kd				hip_l				50.000000	
+	Kd				knee_l				50.000000	
+	Kd				ankle_l				50.000000	
+	Kd				subtalar_l			50.000000	
+
+
+#	name			attribute			values
+#	TorqueOffset	hip_l				0 0 0 0 0	0 0 0 0 0	0 0 0 0 0
+#	TorqueOffset	hip_r				0 0 0 0 0	0 0 0 0 0	0 0 0 0 0
+#	TorqueOffset	knee_l				0 0 0 0 0
+#	TorqueOffset	knee_r				0 0 0 0 0
+#	TorqueOffset	ankle_l				0 0 0 0 0
+#	TorqueOffset	ankle_r				0 0 0 0 0
+#	TorqueOffset	subtalar_l			0 0 0 0 0
+#	TorqueOffset	subtalar_r			0 0 0 0 0

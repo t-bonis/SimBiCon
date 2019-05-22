@@ -1,0 +1,568 @@
+	Muscle
+		name HAM_L
+		maxForce 2700.0
+		optimalLength 0.109
+		slackLength 0.326
+		A_RigidBody pelvis
+		position 0.069440 -0.102570 -0.055260 
+		A_RigidBody lLowerleg
+		position 0.029430 0.150700 -0.030100 
+		A_RigidBody lLowerleg
+		position 0.034300 0.130400 -0.023400 
+	/Muscle
+	
+	Muscle
+ 		name GLU_L
+ 		maxForce 1944
+ 		optimalLength 0.1569
+ 		slackLength 0.0733
+ 		A_RigidBody pelvis
+ 		position 0.046200 0.008700 -0.061000
+ 		A_RigidBody pelvis
+ 		position 0.081300 -0.060900 -0.063700 
+ 		A_RigidBody lUpperleg
+ 		position 0.025200 0.111600 -0.045000
+ 		A_RigidBody lUpperleg
+ 		position 0.041900 0.068400 -0.015600
+ 	/Muscle
+ 
+ 	Muscle
+ 		name RF_L
+ 		maxForce 1169
+ 		optimalLength 0.114
+ 		slackLength 0.31
+ 		A_RigidBody pelvis
+ 		position 0.096800 -0.031100 0.041200
+ 		A_RigidBody lUpperleg
+ 		position 0.001900 -0.233000 0.033400
+ 		A_RigidBody lLowerleg
+ 		position 0.001400 0.207684 0.061758
+ 	/Muscle
+ 	
+ 	Muscle
+ 		name VAS_L
+ 		maxForce 5000
+ 		optimalLength 0.107
+ 		slackLength 0.116
+ 		A_RigidBody lUpperleg
+ 		position 0.031000 -0.022400 0.029000
+ 		A_RigidBody lUpperleg
+ 		position 0.028500 -0.038400 0.033500
+ 		A_RigidBody lUpperleg
+ 		position 0.005500 -0.233000 0.034300
+ 		A_RigidBody lLowerleg
+ 		position 0.001800 0.211992 0.055463
+ 	/Muscle
+ 	
+ 	Muscle
+ 		name GAS_L
+ 		maxForce 2500
+ 		optimalLength 0.09
+ 		slackLength 0.36
+ 		A_RigidBody lUpperleg
+ 		position -0.023500 -0.222900 -0.019000
+ 		A_RigidBody lUpperleg
+ 		position -0.025800 -0.232200 -0.030000
+ 		A_RigidBody lFoot
+ 		position -0.005300 0.001000 -0.100000
+ 	/Muscle
+
+ 	Muscle
+ 		name SOL_L
+ 		maxForce 5137
+ 		optimalLength 0.05
+ 		slackLength 0.2500
+ 		A_RigidBody lLowerleg
+ 		position 0.007100 0.033400 -0.002400
+ 		A_RigidBody lFoot
+ 		position -0.005300 0.001000 -0.100000
+ 	/Muscle
+ 	
+ 	Muscle
+ 		name TA_L
+ 		maxForce 3000
+ 		optimalLength 0.098
+ 		slackLength 0.223
+ 		A_RigidBody lLowerleg
+ 		position 0.011500 0.024300 0.017900
+ 		A_RigidBody lLowerleg
+ 		position -0.017700 -0.208400 0.032900
+ 		A_RigidBody lFoot
+ 		position -0.030500 -0.012200 0.016600
+ 	/Muscle
+ 	
+ 	Muscle
+ 		name HFL_iliopsoas_L
+ 		maxForce 2342
+ 		optimalLength 0.1
+ 		slackLength 0.16
+ 		A_RigidBody pelvis
+ 		position 0.028900 0.088700 0.006000
+ 		A_RigidBody pelvis
+ 		position 0.075900 -0.057000 0.046900
+ 		A_RigidBody pelvis
+ 		position 0.081600 -0.080500 0.041900
+ 		A_RigidBody lUpperleg
+ 		position -0.003800 0.119300 0.001600
+ 		A_RigidBody lUpperleg
+ 		position -0.010400 0.110300 -0.018800
+ 	/Muscle
+ 	
+ 	Muscle
+ 		name HAM_R
+ 		maxForce 2700.0
+ 		optimalLength 0.109
+ 		slackLength 0.326
+ 		A_RigidBody pelvis
+ 		position -0.069440 -0.102570 -0.055260 
+ 		A_RigidBody rLowerleg
+ 		position -0.029430 0.150700 -0.030100 
+ 		A_RigidBody rLowerleg
+ 		position -0.034300 0.130400 -0.023400 
+ 	/Muscle
+ 	
+ 	Muscle
+ 		name GLU_R
+ 		maxForce 1944
+ 		optimalLength 0.1569
+ 		slackLength 0.0733
+ 		A_RigidBody pelvis
+ 		position -0.046200 0.008700 -0.061000
+ 		A_RigidBody pelvis
+ 		position -0.081300 -0.060900 -0.063700 
+ 		A_RigidBody rUpperleg
+ 		position -0.025200 0.111600 -0.045000
+ 		A_RigidBody rUpperleg
+ 		position -0.041900 0.068400 -0.015600
+ 	/Muscle
+
+ 	Muscle
+ 		name RF_R
+ 		maxForce 1169
+ 		optimalLength 0.114
+ 		slackLength 0.31
+ 		A_RigidBody pelvis
+ 		position -0.096800 -0.031100 0.041200
+ 		A_RigidBody rUpperleg
+ 		position -0.001900 -0.233000 0.033400
+ 		A_RigidBody rLowerleg
+ 		position -0.001400 0.207684 0.061758
+ 	/Muscle
+ 	
+ 	Muscle
+ 		name VAS_R
+ 		maxForce 5000
+ 		optimalLength 0.107
+ 		slackLength 0.116
+ 		A_RigidBody rUpperleg
+ 		position -0.031000 -0.022400 0.029000
+ 		A_RigidBody rUpperleg
+ 		position -0.028500 -0.038400 0.033500
+ 		A_RigidBody rUpperleg
+ 		position -0.005500 -0.233000 0.034300
+ 		A_RigidBody rLowerleg
+ 		position -0.001800 0.211992 0.055463
+ 	/Muscle
+ 	
+ 	Muscle
+ 		name GAS_R
+ 		maxForce 2500
+ 		optimalLength 0.09
+ 		slackLength 0.36
+ 		A_RigidBody rUpperleg
+ 		position 0.023500 -0.222900 -0.019000
+ 		A_RigidBody rUpperleg
+ 		position 0.025800 -0.232200 -0.030000
+ 		A_RigidBody rFoot
+ 		position 0.005300 0.001000 -0.100000
+ 	/Muscle
+
+ 	Muscle
+ 		name SOL_R
+ 		maxForce 5137
+ 		optimalLength 0.05
+ 		slackLength 0.2500
+ 		A_RigidBody rLowerleg
+ 		position -0.007100 0.033400 -0.002400
+ 		A_RigidBody rFoot
+ 		position 0.005300 0.001000 -0.100000
+ 	/Muscle
+ 	
+ 	Muscle
+ 		name TA_R
+ 		maxForce 3000
+ 		optimalLength 0.098
+ 		slackLength 0.223
+ 		A_RigidBody rLowerleg
+ 		position -0.011500 0.024300 0.017900
+ 		A_RigidBody rLowerleg
+ 		position 0.017700 -0.208400 0.032900
+ 		A_RigidBody rFoot
+ 		position 0.030500 -0.012200 0.016600
+ 	/Muscle
+ 	
+ 	Muscle
+ 		name HFL_iliopsoas_R
+ 		maxForce 2342
+ 		optimalLength 0.1
+ 		slackLength 0.16
+ 		A_RigidBody pelvis
+ 		position -0.028900 0.088700 0.006000
+ 		A_RigidBody pelvis
+ 		position -0.075900 -0.057000 0.046900
+ 		A_RigidBody pelvis
+ 		position -0.081600 -0.080500 0.041900
+ 		A_RigidBody rUpperleg
+ 		position 0.003800 0.119300 0.001600
+ 		A_RigidBody rUpperleg
+ 		position 0.010400 0.110300 -0.018800
+ 	/Muscle
+###########################################################################################################
+#hips
+###########################################################################################################	
+left only
+Muscle
+ 		name GLU_L
+		#hip extension
+ 		maxForce 1944
+ 		optimalLength 0.1569
+ 		slackLength 0.0733
+ 		A_RigidBody pelvis
+ 		position 0.046200 0.008700 -0.061000
+ 		A_RigidBody pelvis
+ 		position 0.1 -0.060900 -0.063700 
+ 		A_RigidBody lUpperleg
+ 		position 0.0 0.111600 -0.045000
+ 		A_RigidBody lUpperleg
+ 		position 0.041900 0.068400 -0.015600
+ 	/Muscle
+ 	
+	Muscle
+ 		name HFL_L
+		#hip flexion
+ 		maxForce 2342
+ 		optimalLength 0.1
+ 		slackLength 0.16
+ 		A_RigidBody pelvis
+ 		position 0.028900 0.088700 0.006000
+ 		A_RigidBody pelvis
+ 		position 0.075900 -0.057000 0.046900
+ 		A_RigidBody pelvis
+ 		position 0.0962 -0.080500 0.041900
+ 		A_RigidBody lUpperleg
+ 		position -0.003800 0.119300 0.001600
+ 		A_RigidBody lUpperleg
+ 		position -0.010400 0.110300 -0.018800
+ 	/Muscle
+	
+
+	Muscle
+		name HipAbd
+		#hip abduction
+		#OpenSim glut_med2
+		maxForce 1000
+ 		optimalLength 0.0845
+ 		slackLength 0.053
+		A_RigidBody pelvis
+ 		position 0.1 0.04435 0
+		A_RigidBody lUpperleg
+ 		position 0.041 0.21 0
+	/Muscle
+	
+	Muscle
+		name HipAdd
+		#hip adduction
+		#OpenSim add_brev
+		maxForce 1000
+ 		optimalLength 0.133
+ 		slackLength 0.02
+		A_RigidBody pelvis
+ 		position 0.05 -0.05 0
+		A_RigidBody lUpperleg
+ 		position -0.01 0.1 0
+	/Muscle
+	
+	Muscle
+		name HipInRot
+		#hip internal rotation
+		#OpenSim glut_med1
+		maxForce 1000
+ 		optimalLength 0.0535
+ 		slackLength 0.078 
+		A_RigidBody pelvis
+ 		position 0.05 -0.05 0
+		A_RigidBody lUpperleg
+ 		position -0.01 0.21 0.05
+	/Muscle
+	
+	Muscle
+		name HipExRot
+		#hip external rotation
+		#OpenSim gem
+		maxForce 1000
+ 		optimalLength 0.024
+ 		slackLength 0.039
+		A_RigidBody pelvis
+		position 0.1 -0.060900 -0.063700 
+		A_RigidBody lUpperleg
+ 		position 0.041 0.21 0
+	/Muscle
+	###
+	Muscle
+ 		name GLU_R
+		#hip extension
+ 		maxForce 1944
+ 		optimalLength 0.1569
+ 		slackLength 0.0733
+ 		A_RigidBody pelvis
+ 		position -0.046200 0.008700 -0.061000
+ 		A_RigidBody pelvis
+ 		position -0.1 -0.060900 -0.063700 
+ 		A_RigidBody rUpperleg
+ 		position -0.0 0.111600 -0.045000
+ 		A_RigidBody rUpperleg
+ 		position -0.041900 0.068400 -0.015600
+ 	/Muscle
+ 	
+	Muscle
+ 		name HFL_R
+		#hip flexion
+ 		maxForce 2342
+ 		optimalLength 0.1
+ 		slackLength 0.16
+ 		A_RigidBody pelvis
+ 		position -0.028900 0.088700 0.006000
+ 		A_RigidBody pelvis
+ 		position -0.075900 -0.057000 0.046900
+ 		A_RigidBody pelvis
+ 		position -0.0962 -0.080500 0.041900
+ 		A_RigidBody rUpperleg
+ 		position 0.003800 0.119300 0.001600
+ 		A_RigidBody rUpperleg
+ 		position 0.010400 0.110300 -0.018800
+ 	/Muscle
+	
+
+	Muscle
+		name HipAbd_R
+		#hip abduction
+		#OpenSim glut_med2
+		maxForce 1000
+ 		optimalLength 0.0845
+ 		slackLength 0.053
+		A_RigidBody pelvis
+ 		position -0.1 0.04435 0
+		A_RigidBody rUpperleg
+ 		position -0.041 0.21 0
+	/Muscle
+	
+	Muscle
+		name HipAdd_R
+		#hip adduction
+		#OpenSim add_brev
+		maxForce 1000
+ 		optimalLength 0.133
+ 		slackLength 0.02
+		A_RigidBody pelvis
+ 		position -0.05 -0.05 0
+		A_RigidBody rUpperleg
+ 		position 0.01 0.1 0
+	/Muscle
+	
+	Muscle
+		name HipInRot_R
+		#hip internal rotation
+		#OpenSim glut_med1
+		maxForce 1000
+ 		optimalLength 0.0535
+ 		slackLength 0.078 
+		A_RigidBody pelvis
+ 		position -0.05 -0.05 0
+		A_RigidBody rUpperleg
+ 		position 0.01 0.21 0.05
+	/Muscle
+	
+	Muscle
+		name HipExRot_R
+		#hip external rotation
+		#OpenSim gem
+		maxForce 1000
+ 		optimalLength 0.024
+ 		slackLength 0.039
+		A_RigidBody pelvis
+		position -0.1 -0.060900 -0.063700 
+		A_RigidBody rUpperleg
+ 		position -0.041 0.21 0
+	/Muscle
+###########################################################################################################
+#knees
+###########################################################################################################
+	Muscle
+		name HAM_L
+		#left knee flexor
+		#HAM force + GAS force :
+		maxForce 5200
+		optimalLength 0.109
+		slackLength 0.326
+		A_RigidBody lUpperleg
+		position 0.0 0.21 -0.055260 
+		A_RigidBody lLowerleg
+		position 0.0 0.150700 -0.030100 
+		A_RigidBody lLowerleg
+		position 0.0053 0.130400 -0.023400 
+		delay 0.005
+	/Muscle
+	
+ 	Muscle
+ 		name VAS_L
+		#left knee extensor
+		#VAS force + RF force :
+		maxForce 6169
+ 		optimalLength 0.107
+ 		slackLength 0.116
+ 		A_RigidBody lUpperleg
+ 		position 0.031000 -0.022400 0.029000
+ 		A_RigidBody lUpperleg
+ 		position 0.028500 -0.038400 0.033500
+ 		A_RigidBody lUpperleg
+ 		position 0.001800 -0.233000 0.054300
+ 		A_RigidBody lLowerleg
+ 		position 0.001800 0.211992 0.055463
+		delay 0.005
+ 	/Muscle
+ 	
+	Muscle
+		name HAM_R
+		#right knee flexor
+		#HAM force + GAS force :
+		maxForce 5200
+		optimalLength 0.109
+		slackLength 0.326
+		A_RigidBody rUpperleg
+		position 0.0 0.21 -0.055260 
+		A_RigidBody rLowerleg
+		position 0.0 0.150700 -0.030100 
+		A_RigidBody rLowerleg
+		position -0.0053 0.130400 -0.023400 
+		delay 0.005
+	/Muscle
+	
+ 	Muscle
+ 		name VAS_R
+		#right knee extensor
+		#VAS force + RF force :
+		maxForce 6169
+ 		optimalLength 0.107
+ 		slackLength 0.116
+ 		A_RigidBody rUpperleg
+ 		position -0.031000 -0.022400 0.029000
+ 		A_RigidBody rUpperleg
+ 		position -0.028500 -0.038400 0.033500
+ 		A_RigidBody rUpperleg
+ 		position -0.001800 -0.233000 0.054300
+ 		A_RigidBody rLowerleg
+ 		position -0.001800 0.211992 0.055463
+		delay 0.005
+ 	/Muscle	
+###########################################################################################################
+#ankles
+###########################################################################################################
+ 	Muscle
+ 		name SOL_L
+ 		maxForce 5137
+ 		optimalLength 0.057
+ 		slackLength 0.2500
+ 		A_RigidBody lLowerleg
+ 		position 0.007100 0.033400 -0.002400
+ 		A_RigidBody lFoot
+ 		position -0.005300 0.001000 -0.100000
+		delay 0.02
+ 	/Muscle
+ 	
+ 	Muscle
+ 		name TA_L
+ 		maxForce 3000
+ 		optimalLength 0.088
+ 		slackLength 0.223
+ 		A_RigidBody lLowerleg
+ 		position 0.011500 0.024300 0.017900
+ 		A_RigidBody lLowerleg
+ 		position 0 -0.208400 0.032900
+ 		A_RigidBody lFoot
+ 		position 0 -0.012200 0.016600		
+		delay 0.02
+ 	/Muscle
+	
+	Muscle
+ 		name IN_L
+ 		maxForce 2000
+ 		optimalLength 0.0325
+ 		slackLength 0.19
+ 		A_RigidBody lLowerleg
+ 		position -0.02400 -0.05 0.007100
+ 		A_RigidBody lFoot
+ 		position -0.05 0.001 -0.04
+		delay 0.02
+ 	/Muscle
+ 	
+ 	Muscle
+ 		name OUT_L
+ 		maxForce 2000
+ 		optimalLength 0.0325
+ 		slackLength 0.19
+ 		A_RigidBody lLowerleg
+ 		position 0.02400 -0.05 0.007100
+ 		A_RigidBody lFoot
+ 		position 0.05 0.001 -0.04
+		delay 0.02
+ 	/Muscle
+
+ 	Muscle
+ 		name SOL_R
+ 		maxForce 5137
+ 		optimalLength 0.057
+ 		slackLength 0.2500
+ 		A_RigidBody rLowerleg
+ 		position -0.007100 0.033400 -0.002400
+ 		A_RigidBody rFoot
+ 		position 0.005300 0.001000 -0.100000
+		delay 0.02
+ 	/Muscle
+ 	
+ 	Muscle
+ 		name TA_R
+ 		maxForce 3000
+ 		optimalLength 0.088
+ 		slackLength 0.223
+ 		A_RigidBody rLowerleg
+ 		position -0.011500 0.024300 0.017900
+ 		A_RigidBody rLowerleg
+ 		position 0 -0.208400 0.032900
+ 		A_RigidBody rFoot
+ 		position 0 -0.012200 0.016600		
+		delay 0.02
+ 	/Muscle
+	
+	Muscle
+ 		name IN_R
+ 		maxForce 2000
+ 		optimalLength 0.0325
+ 		slackLength 0.19
+ 		A_RigidBody rLowerleg
+ 		position 0.02400 -0.05 0.007100
+ 		A_RigidBody rFoot
+ 		position 0.05 0.001 -0.04
+		delay 0.02
+ 	/Muscle
+ 	
+ 	Muscle
+ 		name OUT_R
+ 		maxForce 2000
+ 		optimalLength 0.0325
+ 		slackLength 0.19
+ 		A_RigidBody rLowerleg
+ 		position -0.02400 -0.05 0.007100
+ 		A_RigidBody rFoot
+ 		position -0.05 0.001 -0.04
+		delay 0.02
+ 	/Muscle

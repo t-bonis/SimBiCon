@@ -1,0 +1,135 @@
+
+// valeurs des tableaux muscleTorques et torques 
+void MuscularBiController::writeDataToFile(char * fileName, double t){
+        //the index of the joint of which we want to track the torques
+        uint jointIndex = 9;
+        char* jointName = character->joints[jointIndex]->getName();
+        Vector3d torque = torques[jointIndex];
+        Vector3d torqueM = muscleTorques[jointIndex];
+        //open the file if needed
+        if (!Globals::fileOpened) {
+                sprintf(fileName, "..\\controlShots\\c%s_%f.csv", jointName, t);
+                tprintf("SAVING STUFF to %s\n\n\n\n", fileName);
+                if (fileName == NULL || (Globals::fileData = fopen(fileName, "w")) == NULL)
+                        return;
+                Globals::fileOpened = true;
+                fprintf(Globals::fileData, "%s\n", jointName);
+                fprintf(Globals::fileData, "torque;;;;muscleTorque\nx;y;z;;x;y;z\n");
+        }
+        //track the torque
+        fprintf(Globals::fileData, "%f;%f;%f;;%f;%f;%f\n", torque.x, torque.y, torque.z, torqueM.x, torqueM.y, torqueM.z);
+}
+
+// feedbackTorques, moment arms normalisés + longueurs, deisredTorques, deisredForces, desiredActivations, excitations, activations
+void MuscularBiController::writeDataToFile(char * fileName, double t){
+	//the index of the joint of which we want to track the torques
+	uint jointIndex = 9; //rElbow
+	char* jointName = character->joints[jointIndex]->getName();
+	Vector3d torque = torques[jointIndex];
+	Vector3d torqueM = feedbackTorques[jointIndex];//muscleTorques[jointIndex];
+	//test with 2 muscles
+	char* m0name = character->muscles[0]->name;
+	char* m1name = character->muscles[1]->name;
+
+	//open the file if needed
+	if (!Globals::fileOpened) {
+		sprintf(fileName, "..\\controlShots\\c%s_%f2.csv", jointName, t);
+		tprintf("SAVING STUFF to %s\n\n\n\n", fileName);
+		if (fileName == NULL || (Globals::fileData = fopen(fileName, "w")) == NULL)
+			return;
+		Globals::fileOpened = true;
+
+		fprintf(Globals::fileData, "%s;maxIsoForces;a_init;u_init;actuated;normalized\n", jointName);
+		double max_iso = 10000;
+		double a_init = MuscleTendonUnit::initActivation;
+		double u_init = MuscleTendonUnit::initExcitation;
+		fprintf(Globals::fileData, ";%f;%f;%f;no;no\n", max_iso, a_init, u_init);
+		//fprintf(Globals::fileData, "torque;;;;muscleTorque\nx;y;z;;x;y;z\n");
+		fprintf(Globals::fileData, "FeedbackTorque;;;momentArms;;;;;;lengths;;desiredTorques;;desiredForces;;%s;;%s;;usedActivation\nx;y;z;%s;;;%s;;;%s;%s;%s;%s;%s;%s;activation;excitation;activation;excitation;%s;%s",
+			m0name, m1name,
+			m0name, m1name,
+			m0name, m1name,
+			m0name, m1name,
+			m0name, m1name,
+			m0name, m1name,
+			m0name, m1name,
+			m0name, m1name);
+
+		fprintf(Globals::fileData, "\n");
+	}
+	//track the torque
+	//fprintf(Globals::fileData, "%f;%f;%f;;%f;%f;%f\n", torque.x, torque.y, torque.z, torqueM.x, torqueM.y, torqueM.z);
+	fprintf(Globals::fileData, "%f;%f;%f;", torqueM.x, torqueM.y, torqueM.z);
+	double rl0, rl1, dt0, dt1, dF0, dF1;
+
+	//Vector3d momentArm = character->muscles[muscleId]->computeMomentArm(jointId);
+	Vector3d momentArm0 = character->muscles[0]->computeMomentArm(0);
+	Vector3d momentArm1 = character->muscles[1]->computeMomentArm(0);
+	
+	//Muscle* muscle = character->muscles[0];
+	////get the world coordinates of the joint
+	//Point3d j = muscle->joints[0]->getWorldCoord();
+	////get the segment that overlaps this joint
+	//Vector3d s = muscle->segments[muscle->linesOverJoints[0]];
+	////get the world coordinates of a point on the segment
+	////for the segment Pi->P(i+1), take the via point Pi
+	//Point3d p = muscle->viaPoints[muscle->linesOverJoints[0]].getWorldCoord();
+	//Vector3d jp = p - j;
+	//momentArm0 = (jp).crossProductWith(s / s.length());
+	//muscle = character->muscles[1];
+	////get the world coordinates of the joint
+	//j = muscle->joints[0]->getWorldCoord();
+	////get the segment that overlaps this joint
+	// s = muscle->segments[muscle->linesOverJoints[0]];
+	////get the world coordinates of a point on the segment
+	////for the segment Pi->P(i+1), take the via point Pi
+	// p = muscle->viaPoints[muscle->linesOverJoints[0]].getWorldCoord();
+	// jp = p - j;
+	//momentArm1 = (jp).crossProductWith(s / s.length());
+	fprintf(Globals::fileData, "%f;%f;%f;%f;%f;%f;", momentArm0.x, momentArm0.y, momentArm0.z,
+		momentArm1.x, momentArm1.y, momentArm1.z);
+
+	//desired torques
+	dt0 = computeDesiredTorque(0, 0, rl0);
+	dt1 = computeDesiredTorque(1, 0, rl1);
+	momentArm0 = momentArm0 / rl0;
+	momentArm1 = momentArm1 / rl1;
+
+	fprintf(Globals::fileData, "%f;%f;", rl0, rl1);
+	fprintf(Globals::fileData, "%f;%f;", dt0, dt1);
+
+	//desired forces
+	dF0 = computeDesiredForce(0);
+	dF1 = computeDesiredForce(1);
+	fprintf(Globals::fileData, "%f;%f;", dF0, dF1);
+
+	//max forces
+	//double fM0 = character->muscles[0]->getMaxIsoForce();
+	//double fM1 = character->muscles[1]->getMaxIsoForce();
+	//fprintf(Globals::fileData, "%f;%f;", fM0, fM1);
+
+	//desired activations and excitations
+	double a0;// = computeDesiredForce(0) / character->muscles[0]->getMaxIsoForce();
+	double a1;// = computeDesiredForce(1) / character->muscles[1]->getMaxIsoForce();
+
+	a0 = computeDesiredActivation(0);
+	a1 = computeDesiredActivation(1);
+	double u0 = computeDesiredExcitation(0);
+	double u1 = computeDesiredExcitation(1);
+	fprintf(Globals::fileData, "%f;%f;", a0, u0);
+	fprintf(Globals::fileData, "%f;%f;", a1, u1);
+
+	
+	//	u = computeDesiredExcitation(i);
+	character->muscles[0]->updateActivation(u0, SimGlobals::dt);
+	character->muscles[1]->updateActivation(u1, SimGlobals::dt);
+
+	//actual activations
+	a0 = character->muscles[0]->getActivation();
+	a1 = character->muscles[1]->getActivation();
+	fprintf(Globals::fileData, "%f;%f;", a0, a1);
+
+	//forces
+	//torques
+	fprintf(Globals::fileData, "\n");
+}
