@@ -143,7 +143,7 @@ void Model::add_meshes(std::vector<Mesh> meshes)
 void Model::add_box(Vector3d min, const Vector3d& max)
 {
 	// load a box of size (1,1,1)
-	load_from_file("../data/models/box111.obj");
+	load_from_file("../../data/models/box111.obj");
 	// resize to max - min
 	const auto scale_factor = max - min;
 	scale_meshes(scale_factor);

@@ -5,7 +5,7 @@
 #include "BoxCDP.h"
 #include "SphereCDP.h"
 #include "TriMeshCDP.h"
-#include "Core/src/Model.h"
+#include "Model.h"
 #include <boost/algorithm/string.hpp>
 #include <filesystem>
 #include "Utils/src/Utils.h"

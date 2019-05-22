@@ -40,7 +40,7 @@
  ******************************************************************/
 
 #define dTRIMESH_ENABLED 1
-#define dTRIMESH_OPCODE 1
+#define dTRIMESH_GIMPACT 1
 #define dTRIMESH_16BIT_INDICES 0
 
 #define dTRIMESH_OPCODE_USE_OLD_TRIMESH_TRIMESH_COLLIDER 0

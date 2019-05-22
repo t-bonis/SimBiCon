@@ -2,10 +2,10 @@
 #include "Simulation_thread.h"
 #include "OptimizationFramework.h"
 #include <QtCore/QThreadPool>
-#include "Core/src/Velocities_viewer.h"
-#include "Core/src/Angles_viewer.h"
-#include "Core/src/Angular_velocities.h"
-#include "Core/src/Feet_viewer.h"
+#include "Velocities_viewer.h"
+#include "Angles_viewer.h"
+#include "Angular_velocities.h"
+#include "Feet_viewer.h"
 #include "Learning_framework.h"
 
 Qt_gui::Qt_gui(QWidget* parent) : QMainWindow(parent)
@@ -31,7 +31,7 @@ void Qt_gui::setup_simulation()
 
 		SimGlobals::draw = true;
 		std::cout << std::setprecision(std::numeric_limits<double>::digits10 + 1);
-		std::string inputConF = "../init/input.conF";
+		std::string inputConF = "../../init/input.conF";
 
 		//Setup SimBiCon_framework
 		//auto temp = std::make_shared<SimBiCon_framework>(inputConF);
@@ -74,11 +74,11 @@ void Qt_gui::setup_optimization()
 	{
 		SimGlobals::optimization = true;
 		//Load SimBiCon_framework
-		std::string input_con_f = "../init/input.conF";
+		std::string input_con_f = "../../init/input.conF";
 		m_optimization_framework = std::make_shared<Optimization_framework>(input_con_f);
 
 		//Load and setup optimization parameters
-		std::string f_name = "../init/opti_both_leg.optI";
+		std::string f_name = "../../init/opti_both_leg.optI";
 		m_optimization_framework->load_optimization_parameters(f_name);
 	}
 	catch (const std::exception& err)
@@ -102,11 +102,11 @@ void Qt_gui::start_learning()
 	{
 		SimGlobals::learning = true;
 		//Load SimBiCon_framework
-		std::string input_con_f = "../init/input.conF";
+		std::string input_con_f = "../../init/input.conF";
 		m_learning_framework = std::make_shared<Learning_framework>(input_con_f);
 
 		//Load and setup optimization parameters
-		std::string f_name = "../init/opti_both_leg.optI";
+		std::string f_name = "../../init/opti_both_leg.optI";
 		m_learning_framework->load_learning_parameters(f_name);
 	}
 	catch (const std::exception& err)

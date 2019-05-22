@@ -65,8 +65,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		Qt5Version = msvc2017_64_5.11.3
-		SolutionGuid = {2771AE41-83A2-4400-ABA7-257B7CC0BCE8}
 		VisualSVNWorkingCopyRoot = .
+		SolutionGuid = {2771AE41-83A2-4400-ABA7-257B7CC0BCE8}
+		Qt5Version = msvc2017_64_5.11.3
 	EndGlobalSection
 EndGlobal

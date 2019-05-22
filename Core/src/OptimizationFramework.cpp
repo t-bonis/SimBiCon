@@ -273,7 +273,7 @@ SimBiCon_framework* Optimization_framework::create_simbicon_framework()
 	//Load Model
 	try
 	{
-		std::string inputConF = "../init/input.conF";
+		std::string inputConF = "../../init/input.conF";
 		auto simbicon_framework = std::make_shared<SimBiCon_framework>(*m_default_simbicon_framework);
 		//Setup OpenGLWindow for rendering
 		m_simbicon_frameworks.push_back(simbicon_framework);

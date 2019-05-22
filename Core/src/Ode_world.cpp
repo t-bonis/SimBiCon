@@ -1,6 +1,6 @@
 #include <cmath>
 #include "Ode_world.h"
-#include "Core/src/SimGlobals.h"
+#include "SimGlobals.h"
 
 Ode_world::Ode_world()
 {

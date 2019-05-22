@@ -66,7 +66,7 @@ void My_qopengl_widget::fill_meshes_storage()
 	for (auto& mesh_name : meshes_list)
 	{
 		Model temp_model;
-		temp_model.load_from_file("../data/models/" + mesh_name + ".obj");
+		temp_model.load_from_file("../../data/models/" + mesh_name + ".obj");
 		meshes_storage.emplace_back(mesh_name, temp_model.get_meshes());
 	}
 }

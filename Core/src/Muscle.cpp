@@ -1,6 +1,6 @@
 #include "Muscle.h"
 #include "RBUtils.h"
-#include "Core/src/SimGlobals.h"
+#include "SimGlobals.h"
 #include "AbstractRBEngine.h"
 #include <utility>
 

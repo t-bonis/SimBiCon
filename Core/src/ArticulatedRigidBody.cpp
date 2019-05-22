@@ -1,5 +1,5 @@
 #include "ArticulatedRigidBody.h"
-#include "Core/src/Character.h"
+#include "Character.h"
 
 Articulated_rigid_body::Articulated_rigid_body(const Articulated_rigid_body& other) : Rigid_body(other)
 {

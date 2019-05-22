@@ -12,7 +12,7 @@ Plane_cdp::Plane_cdp(const Vector3d& n, const Point3d& o)
 
 	m_model = std::make_shared<Model>();
 	m_model->set_position(o);
-	m_model->load_from_file("../data/models/plane.obj");
+	m_model->load_from_file("../../data/models/plane.obj");
 }
  
 Plane_cdp::Plane_cdp(const Plane_cdp& other) : CollisionDetectionPrimitive(other)

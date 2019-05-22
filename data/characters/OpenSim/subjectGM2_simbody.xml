@@ -21,7 +21,7 @@
 						<item>1.00000000000000000e+00</item>
 						<item>1.00000000000000000e+00</item>
 					</color>
-					<file_name>../data/models/opensim/sacrum.obj</file_name>
+					<file_name>../../data/models/opensim/sacrum.obj</file_name>
 				</item>
 				<item>
 					<color>
@@ -31,7 +31,7 @@
 						<item>1.00000000000000000e+00</item>
 						<item>1.00000000000000000e+00</item>
 					</color>
-					<file_name>../data/models/opensim/pelvis.obj</file_name>
+					<file_name>../../data/models/opensim/pelvis.obj</file_name>
 				</item>
 				<item>
 					<color>
@@ -41,7 +41,7 @@
 						<item>1.00000000000000000e+00</item>
 						<item>1.00000000000000000e+00</item>
 					</color>
-					<file_name>../data/models/opensim/l_pelvis.obj</file_name>
+					<file_name>../../data/models/opensim/l_pelvis.obj</file_name>
 				</item>
 			</meshs>
 			<center_of_mass>
@@ -88,7 +88,7 @@
 						<item>1.00000000000000000e+00</item>
 						<item>1.00000000000000000e+00</item>
 					</color>
-					<file_name>../data/models/opensim/femur_r.obj</file_name>
+					<file_name>../../data/models/opensim/femur_r.obj</file_name>
 				</item>
 			</meshs>
 			<center_of_mass>
@@ -135,7 +135,7 @@
 						<item>1.00000000000000000e+00</item>
 						<item>1.00000000000000000e+00</item>
 					</color>
-					<file_name>../data/models/opensim/tibia_r.obj</file_name>
+					<file_name>../../data/models/opensim/tibia_r.obj</file_name>
 				</item>
 				<item>
 					<color>
@@ -145,7 +145,7 @@
 						<item>1.00000000000000000e+00</item>
 						<item>1.00000000000000000e+00</item>
 					</color>
-					<file_name>../data/models/opensim/fibula.obj</file_name>
+					<file_name>../../data/models/opensim/fibula.obj</file_name>
 				</item>
 			</meshs>
 			<center_of_mass>
@@ -192,7 +192,7 @@
 						<item>1.00000000000000000e+00</item>
 						<item>1.00000000000000000e+00</item>
 					</color>
-					<file_name>../data/models/opensim/talus.obj</file_name>
+					<file_name>../../data/models/opensim/talus.obj</file_name>
 				</item>
 			</meshs>
 			<center_of_mass>
@@ -239,7 +239,7 @@
 						<item>1.00000000000000000e+00</item>
 						<item>1.00000000000000000e+00</item>
 					</color>
-					<file_name>../data/models/opensim/foot.obj</file_name>
+					<file_name>../../data/models/opensim/foot.obj</file_name>
 				</item>
 			</meshs>
 			<center_of_mass>
@@ -286,7 +286,7 @@
 						<item>1.00000000000000000e+00</item>
 						<item>1.00000000000000000e+00</item>
 					</color>
-					<file_name>../data/models/opensim/bofoot.obj</file_name>
+					<file_name>../../data/models/opensim/bofoot.obj</file_name>
 				</item>
 			</meshs>
 			<center_of_mass>
@@ -333,7 +333,7 @@
 						<item>1.00000000000000000e+00</item>
 						<item>1.00000000000000000e+00</item>
 					</color>
-					<file_name>../data/models/opensim/femur_l.obj</file_name>
+					<file_name>../../data/models/opensim/femur_l.obj</file_name>
 				</item>
 			</meshs>
 			<center_of_mass>
@@ -380,7 +380,7 @@
 						<item>1.00000000000000000e+00</item>
 						<item>1.00000000000000000e+00</item>
 					</color>
-					<file_name>../data/models/opensim/tibia_l.obj</file_name>
+					<file_name>../../data/models/opensim/tibia_l.obj</file_name>
 				</item>
 				<item>
 					<color>
@@ -390,7 +390,7 @@
 						<item>1.00000000000000000e+00</item>
 						<item>1.00000000000000000e+00</item>
 					</color>
-					<file_name>../data/models/opensim/l_fibula.obj</file_name>
+					<file_name>../../data/models/opensim/l_fibula.obj</file_name>
 				</item>
 			</meshs>
 			<center_of_mass>
@@ -437,7 +437,7 @@
 						<item>1.00000000000000000e+00</item>
 						<item>1.00000000000000000e+00</item>
 					</color>
-					<file_name>../data/models/opensim/l_talus.obj</file_name>
+					<file_name>../../data/models/opensim/l_talus.obj</file_name>
 				</item>
 			</meshs>
 			<center_of_mass>
@@ -484,7 +484,7 @@
 						<item>1.00000000000000000e+00</item>
 						<item>1.00000000000000000e+00</item>
 					</color>
-					<file_name>../data/models/opensim/l_foot.obj</file_name>
+					<file_name>../../data/models/opensim/l_foot.obj</file_name>
 				</item>
 			</meshs>
 			<center_of_mass>
@@ -531,7 +531,7 @@
 						<item>1.00000000000000000e+00</item>
 						<item>1.00000000000000000e+00</item>
 					</color>
-					<file_name>../data/models/opensim/l_bofoot.obj</file_name>
+					<file_name>../../data/models/opensim/l_bofoot.obj</file_name>
 				</item>
 			</meshs>
 			<center_of_mass>
@@ -578,7 +578,7 @@
 						<item>1.00000000000000000e+00</item>
 						<item>1.00000000000000000e+00</item>
 					</color>
-					<file_name>../data/models/opensim/hat_spine.obj</file_name>
+					<file_name>../../data/models/opensim/hat_spine.obj</file_name>
 				</item>
 				<item>
 					<color>
@@ -588,7 +588,7 @@
 						<item>1.00000000000000000e+00</item>
 						<item>1.00000000000000000e+00</item>
 					</color>
-					<file_name>../data/models/opensim/hat_jaw.obj</file_name>
+					<file_name>../../data/models/opensim/hat_jaw.obj</file_name>
 				</item>
 				<item>
 					<color>
@@ -598,7 +598,7 @@
 						<item>1.00000000000000000e+00</item>
 						<item>1.00000000000000000e+00</item>
 					</color>
-					<file_name>../data/models/opensim/hat_skull.obj</file_name>
+					<file_name>../../data/models/opensim/hat_skull.obj</file_name>
 				</item>
 				<item>
 					<color>
@@ -608,7 +608,7 @@
 						<item>1.00000000000000000e+00</item>
 						<item>1.00000000000000000e+00</item>
 					</color>
-					<file_name>../data/models/opensim/hat_ribs.obj</file_name>
+					<file_name>../../data/models/opensim/hat_ribs.obj</file_name>
 				</item>
 			</meshs>
 			<center_of_mass>
