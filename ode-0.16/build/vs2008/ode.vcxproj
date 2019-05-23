@@ -63,6 +63,8 @@
       <WarningLevel>Level3</WarningLevel>
       <ProgramDataBaseFileName>$(OutDir)oded.pdb</ProgramDataBaseFileName>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <SupportJustMyCode>true</SupportJustMyCode>
+      <MinimalRebuild />
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_MT;_DEBUG;dIDEDOUBLE;CCD_IDEDOUBLE;WIN32;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;_USE_MATH_DEFINES;_OU_NAMESPACE=odeou;_OU_FEATURE_SET=_OU_FEATURE_SET_TLS;ODE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -79,7 +81,6 @@
     </Midl>
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
-      <OmitFramePointers>true</OmitFramePointers>
       <AdditionalIncludeDirectories>..\..\include;..\..\ode\src;..\..\ode\src\joints;..\..\OPCODE;..\..\GIMPACT\include;..\..\libccd\src\custom;..\..\libccd\src;..\..\ou\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_MT;NDEBUG;dNODEBUG;dIDEDOUBLE;CCD_IDEDOUBLE;WIN32;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;_USE_MATH_DEFINES;_OU_NAMESPACE=odeou;_OU_FEATURE_SET=_OU_FEATURE_SET_TLS;ODE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
@@ -88,8 +89,9 @@
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <ProgramDataBaseFileName>$(OutDir)ode.pdb</ProgramDataBaseFileName>
-      <DebugInformationFormat />
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MinimalRebuild />
+      <SupportJustMyCode>true</SupportJustMyCode>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_MT;NDEBUG;dNODEBUG;dIDEDOUBLE;CCD_IDEDOUBLE;WIN32;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;_USE_MATH_DEFINES;_OU_NAMESPACE=odeou;_OU_FEATURE_SET=_OU_FEATURE_SET_TLS;ODE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>

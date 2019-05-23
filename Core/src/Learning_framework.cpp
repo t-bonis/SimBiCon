@@ -65,7 +65,7 @@ Learning_framework::~Learning_framework()
 
 void Learning_framework::load_learning_parameters(std::string& f_name)
 {
-	const auto dim = 17; // must be change manually (number of parameter to optimize (time is 100*dim to 300*dim^2))
+	const auto dim = 18; // must be change manually (number of parameter to optimize (time is 100*dim to 300*dim^2))
 
 	double x_start[dim];
 	for (auto& i : x_start)
@@ -112,7 +112,6 @@ void Learning_framework::assign_values(SimBiCon_framework& available_framework, 
 					->base_trj;
 				const auto default_value = base_trajectory->getKnotValue(current_knot.knot_id);
 				base_trajectory->setKnotValue(current_knot.knot_id, default_value + m_cma[i]->pop[sample_to_eval][param_nb]);
-
 				current_knot = get_next_knot(fsm_states, current_knot);
 			}
 			param_nb++;

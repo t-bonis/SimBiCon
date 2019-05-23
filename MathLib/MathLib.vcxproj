@@ -65,7 +65,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <AdditionalIncludeDirectories>$(SolutionDir);$(QTDIR)\include</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>QT_CORE_LIB;_USE_MATH_DEFINES</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_USE_MATH_DEFINES</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <BrowseInformation>false</BrowseInformation>
@@ -85,7 +85,8 @@
       </AdditionalLibraryDirectories>
       <AdditionalDependencies>
       </AdditionalDependencies>
-      <Verbose>false</Verbose>
+      <Verbose>
+      </Verbose>
     </Lib>
     <ProjectReference />
     <Bscmake>
@@ -95,17 +96,17 @@
     <ProjectReference />
     <QtMoc>
       <IncludePath>$(SolutionDir);$(QTDIR)\include</IncludePath>
-      <Define>QT_CORE_LIB;_USE_MATH_DEFINES</Define>
+      <Define>_USE_MATH_DEFINES</Define>
     </QtMoc>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(SolutionDir);$(QTDIR)\include</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>QT_CORE_LIB;_USE_MATH_DEFINES</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_USE_MATH_DEFINES</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>None</DebugInformationFormat>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <BrowseInformation>false</BrowseInformation>
       <MinimalRebuild>false</MinimalRebuild>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -119,7 +120,8 @@
     <Lib>
       <AdditionalLibraryDirectories>
       </AdditionalLibraryDirectories>
-      <Verbose>false</Verbose>
+      <Verbose>
+      </Verbose>
       <AdditionalDependencies>
       </AdditionalDependencies>
     </Lib>
@@ -131,7 +133,7 @@
     <ProjectReference />
     <QtMoc>
       <IncludePath>$(SolutionDir);$(QTDIR)\include</IncludePath>
-      <Define>QT_CORE_LIB;_USE_MATH_DEFINES</Define>
+      <Define>_USE_MATH_DEFINES</Define>
     </QtMoc>
   </ItemDefinitionGroup>
   <ItemGroup>

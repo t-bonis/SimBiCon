@@ -68,9 +68,10 @@
       <WarningLevel>Level3</WarningLevel>
       <AdditionalOptions>
       </AdditionalOptions>
-      <PreprocessorDefinitions>UNICODE;_UNICODE;WIN32;WIN64;_USE_MATH_DEFINES</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_USE_MATH_DEFINES</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+      <SupportJustMyCode>true</SupportJustMyCode>
     </ClCompile>
     <Lib>
       <AdditionalLibraryDirectories>
@@ -105,12 +106,12 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)ode-0.16\include\;$(QtDir)\include\;$(SolutionDir)include\;$(ProjectDir)GeneratedFiles\</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>UNICODE;_UNICODE;WIN32;WIN64;_USE_MATH_DEFINES</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_USE_MATH_DEFINES</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <AdditionalOptions>
       </AdditionalOptions>
-      <SupportJustMyCode>false</SupportJustMyCode>
+      <SupportJustMyCode>true</SupportJustMyCode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
     </ClCompile>

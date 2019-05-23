@@ -53,7 +53,7 @@
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PreprocessorDefinitions>QT_CORE_LIB;_USE_MATH_DEFINES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_USE_MATH_DEFINES</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir);$(QtDir)\include\</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -70,18 +70,20 @@
       <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <QtMoc>
-      <Define>QT_CORE_LIB;_USE_MATH_DEFINES;%(PreprocessorDefinitions)</Define>
+      <Define>_USE_MATH_DEFINES</Define>
       <IncludePath>$(SolutionDir);$(QtDir)\include\</IncludePath>
     </QtMoc>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PreprocessorDefinitions>WIN64;QT_CORE_LIB;QT_NO_DEBUG;NDEBUG;_USE_MATH_DEFINES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_USE_MATH_DEFINES</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir);$(QtDir)\include\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+      <SupportJustMyCode>true</SupportJustMyCode>
+      <Optimization>MaxSpeed</Optimization>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -91,7 +93,7 @@
       <AdditionalDependencies>qtmain.lib;Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <QtMoc>
-      <Define>WIN64;QT_CORE_LIB;QT_NO_DEBUG;NDEBUG;_USE_MATH_DEFINES;%(PreprocessorDefinitions)</Define>
+      <Define>_USE_MATH_DEFINES</Define>
       <IncludePath>$(SolutionDir);$(QtDir)\include\</IncludePath>
     </QtMoc>
   </ItemDefinitionGroup>
