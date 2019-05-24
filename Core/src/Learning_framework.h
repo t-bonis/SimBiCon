@@ -20,7 +20,8 @@ struct Cma_object
 	{
 		parameters.init(dim, x_start, std_dev);
 		parameters.lambda = lambda;
-		//parameters.mu = 4; //default mu = lambda/2
+		parameters.logWarnings = true;
+		//parameters.mu = lambda / 2;
 		parameters.stopMaxFunEvals = 300 * pow(dim, 2);
 		parameters.stopTolFunHist = 0.001;
 		parameters.stopTolX = 0.001;
@@ -72,6 +73,7 @@ private slots:
 	void analyze_done(SimBiCon_framework* simbicon_framework);
 
 private:
+	void end_reconstruction();
 	std::shared_ptr<SimBiCon_framework> m_default_simbicon_framework;
 	std::vector<std::shared_ptr<SimBiCon_framework>> m_simbicon_frameworks;
 
@@ -92,11 +94,8 @@ private:
 	size_t m_next_sample_to_eval = 0;
 	size_t m_current_pop = 0;
 	size_t m_sample_evaluated = 0;
-
+	double m_reconstructed_time = 0;
+	size_t m_target_simulation_time;
 	size_t m_lambda = 2000;
-
-
-
-
 };
 

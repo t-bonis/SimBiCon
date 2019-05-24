@@ -84,6 +84,7 @@
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <SupportJustMyCode>true</SupportJustMyCode>
       <Optimization>MaxSpeed</Optimization>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

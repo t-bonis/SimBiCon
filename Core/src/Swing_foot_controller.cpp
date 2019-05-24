@@ -952,8 +952,8 @@ void Swing_foot_controller::compute_ipm_alteration(Velocity_controller* vel_cont
 
 void Swing_foot_controller::pre_simulation_step_phase_1()
 {
-	preprocess_simulation_step();
-	step_location = ipm_compute_step_location();
+	//preprocess_simulation_step();
+	//step_location = ipm_compute_step_location();
 }
 
 void Swing_foot_controller::pre_simulation_step_phase_2()

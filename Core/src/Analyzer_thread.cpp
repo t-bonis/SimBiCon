@@ -88,7 +88,7 @@ void Analyzer_thread::eval_intervals() const
 		const auto pos_diff = m_simbicon_framework->get_gait_analyzer()->compute_pelvis_pos_diff(interval);
 		const auto result = angular_diff +  pos_diff ;
 
-		std::cout << angular_diff  << " + " << pos_diff  << " = " << result << std::endl;
+		//std::cout << angular_diff  << " + " << pos_diff  << " = " << result << std::endl;
 
 		m_simbicon_framework->add_result(result);
 

@@ -15,7 +15,7 @@ void Pelvis_pose_control::pre_simulation_step_phase_1()
 void Pelvis_pose_control::pre_simulation_step_phase_2()
 {
 	//test_function_modify_desired_pose();
-	control_with_stance_leg();
+	//control_with_stance_leg();
 	//control_with_torso_2();
 }
 

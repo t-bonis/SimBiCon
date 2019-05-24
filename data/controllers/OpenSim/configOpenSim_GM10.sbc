@@ -17,7 +17,7 @@ Con_OpenSim_State 0
 description second phase
 nextState 1
 stateStance reverse
-transitionOn footDown
+transitionOn timeUp
 time 0.5
 
 trajectory root
@@ -1911,7 +1911,7 @@ Con_OpenSim_State 1
 description first phase
 nextState 0
 stateStance reverse
-transitionOn footDown
+transitionOn timeUp
 time 0.5
 
 trajectory root

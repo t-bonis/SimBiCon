@@ -23,7 +23,7 @@ void Muscle_controller::reset_state() const
 
 void Muscle_controller::pre_simulation_step_phase_1()
 {
-	convert_desired_torques_to_muscle_torques_2();
+	//convert_desired_torques_to_muscle_torques_2();
 
 }
 

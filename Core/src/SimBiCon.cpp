@@ -8,8 +8,6 @@ SimBiCon::SimBiCon(char* filename, Articulated_figure& character, SimBiCon_frame
 	Controller_interface(character, control_framework)
 {
 	load_from_file(filename);
-
-	std::cout << "SimBiCon initialized from file" << std::endl;
 }
 
 SimBiCon::SimBiCon(const SimBiCon& other, Articulated_figure& af, SimBiCon_framework& control_framework)
@@ -38,8 +36,6 @@ SimBiCon::SimBiCon(const SimBiCon& other, Articulated_figure& af, SimBiCon_frame
 	set_fsm_state_to(other.m_current_fsm_state_id);
 
 	set_stance(other.m_controlled_character->get_stance());
-
-	std::cout << "SimBiCon initialized from other" << std::endl;
 }
 
 void SimBiCon::pre_simulation_step_phase_1()
@@ -47,7 +43,7 @@ void SimBiCon::pre_simulation_step_phase_1()
 	advance_in_time(SimGlobals::dt);
 
 	compute_desired_pose();
-	compute_future_desired_pose();
+	//compute_future_desired_pose();
 }
 
 void SimBiCon::pre_simulation_step_phase_2()
@@ -96,10 +92,6 @@ void SimBiCon::transition_to_state(const size_t state_index)
 	set_fsm_state_to(state_index);
 	set_stance(m_controller_fsm_states[m_current_fsm_state_id]->get_state_stance(m_controlled_character->get_stance()));
 	this->m_phi = 0;
-	if (state_index == 1)
-	{
-		auto start_pos = Vector3d(m_controlled_character->get_arb_by_name("pelvis")->get_cm_position());
-	}
 }
 
 void SimBiCon::set_fsm_state_to(const size_t index)

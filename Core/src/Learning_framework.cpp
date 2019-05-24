@@ -10,12 +10,13 @@ Learning_framework::Learning_framework(std::string& input)
 	SimGlobals::learning = true;
 	m_windows_size = 10;
 	m_windows_start = 0;
-
+	m_target_simulation_time = 1000;
 	compute_intervals();
 }
 
 void Learning_framework::compute_intervals()
 {
+	m_intervals.clear();
 	const auto simbicon = std::dynamic_pointer_cast<SimBiCon>(m_default_simbicon_framework->get_controllers()[0]);
 	auto fsm_states = simbicon->get_fsm_states();
 	const auto state_id = simbicon->get_fsm_state_id();
@@ -26,6 +27,7 @@ void Learning_framework::compute_intervals()
 	m_intervals.push_back(starting_phi * state_duration);
 	const auto first_knot_id = trajectories[0]->components[0]->base_trj.get_first_larger_index(starting_phi);
 	knot_ptr current_knot{ state_id , 0 , 0, first_knot_id };
+
 	for (size_t i = 0; i < m_windows_size; ++i)
 	{
 		auto base_trajectory = fsm_states[current_knot.state_id]
@@ -37,6 +39,7 @@ void Learning_framework::compute_intervals()
 		current_knot = get_next_knot(fsm_states, current_knot);
 	}
 	const auto starting_time = m_intervals[0];
+
 	for (auto& time : m_intervals)
 	{
 		time -= starting_time;
@@ -65,7 +68,7 @@ Learning_framework::~Learning_framework()
 
 void Learning_framework::load_learning_parameters(std::string& f_name)
 {
-	const auto dim = 18; // must be change manually (number of parameter to optimize (time is 100*dim to 300*dim^2))
+	const auto dim = 15; // must be change manually (number of parameter to optimize (time is 100*dim to 300*dim^2))
 
 	double x_start[dim];
 	for (auto& i : x_start)
@@ -99,6 +102,10 @@ void Learning_framework::assign_values(SimBiCon_framework& available_framework, 
 	auto trajectories = fsm_states[state_id]->get_trajectories();
 	for (size_t trajectory_id = 0; trajectory_id < trajectories.size(); ++trajectory_id)
 	{
+		if (trajectories[trajectory_id]->joint_name == "root")
+		{
+			continue;
+		}
 		auto components = trajectories[trajectory_id]->components;
 		for (size_t component_id = 0; component_id < components.size(); ++component_id)
 		{
@@ -150,7 +157,7 @@ void Learning_framework::eval_simbicon_framework(SimBiCon_framework& simbicon_fr
 	connect(m_simulation_threads.back().get(), &Simulation_thread::simulation_done, this,
 		&Learning_framework::simulation_done);
 	m_simulation_threads.back()->start();
-	std::cout << "### Start eval ###\n";
+	//std::cout << "### Start eval ###\n";
 }
 
 void Learning_framework::start_learning()
@@ -159,10 +166,10 @@ void Learning_framework::start_learning()
 	{
 		cma->evo.samplePopulation();
 	}
-	auto simbicon_available = create_simbicon_framework();
-	assign_values(*simbicon_available, 0);
-	m_next_sample_to_eval++;
-	eval_simbicon_framework(*simbicon_available);
+	for (auto i = 0; i < SimGlobals::nb_threads; ++i)
+	{
+		next_eval();
+	}
 }
 
 
@@ -171,7 +178,6 @@ SimBiCon_framework* Learning_framework::create_simbicon_framework()
 	//Load Model
 	try
 	{
-		std::string inputConF = "../../init/input.conF";
 		auto simbicon_framework = std::make_shared<SimBiCon_framework>(*m_default_simbicon_framework);
 		//Setup OpenGLWindow for rendering
 		m_simbicon_frameworks.push_back(simbicon_framework);
@@ -199,7 +205,11 @@ bool Learning_framework::is_feasible(double* const p, Cma_object* cma) const
 
 void Learning_framework::next_eval()
 {
-	std::cout << "### Setup_next_eval ###\n";
+	//std::cout << "S"<< m_next_sample_to_eval;
+	if (!((m_next_sample_to_eval+1) % 500))
+	{
+		std::cout << "-";
+	}
 	auto simbicon_available = create_simbicon_framework();
 	assign_values(*simbicon_available, m_next_sample_to_eval);
 	m_next_sample_to_eval++;
@@ -209,33 +219,44 @@ void Learning_framework::next_eval()
 void Learning_framework::next_pop()
 {
 	auto advance_windows = 0;
-	std::cout << "### Setup_next_pop ###\n";
+	std::cout << "\n### Setup_next_pop ###\n";
+	bool previous_terminated = true;
 	for (size_t i = 0; i < m_max_cma_to_update; ++i)
 	{
-		if(m_cma[i]->evo.testForTermination())
+		m_cma[i]->evo.updateDistribution(m_cma[i]->fitvals);
+		std::cout << m_cma[i]->evo.get(m_cma[i]->evo.Generation) << " " << m_cma[i]->evo.get(m_cma[i]->evo.Sigma) << " " << m_cma[i]->evo.get(m_cma[i]->evo.Fitness) << std::endl;
+		if(m_cma[i]->evo.testForTermination() && previous_terminated)
 		{
-			std::cout << "cma " << i << " done" << std::endl;
+			std::cout << "cma " << i << " : " << m_cma[i]->evo.getStopMessage();
 			++advance_windows;
 		}
 		else
 		{
-			m_cma[i]->evo.updateDistribution(m_cma[i]->fitvals);
+			previous_terminated = false;
 		}
 	}
 	//TODO update : update intervals, simbicon_default_start, cma
 	if(advance_windows> 0)
 	{//TODO : run_default simbicon for advance_windows
 		std::cout << advance_windows << std::endl;
+		
 		m_simulation_threads.push_back(std::make_shared<Simulation_thread>(*m_default_simbicon_framework, true, m_intervals[advance_windows]));
 		m_simulation_threads.back()->start();
 		m_simulation_threads.back()->wait();
 		m_simulation_threads.erase(m_simulation_threads.end());
 
-		//TODO : update intervals (then must stay the same)
+		//Increase reconstructed time
+		m_reconstructed_time += m_intervals[1];
+		if (m_reconstructed_time > m_target_simulation_time)
+		{
+			end_reconstruction();
+		}
+
+		//update intervals (then must stay the same)
 		compute_intervals();
 		
-		//TODO : create new cma for new intervals
-		const auto dim = 17; // must be change manually (number of parameter to optimize (time is 100*dim to 300*dim^2))
+		//create new cma for new intervals
+		const auto dim = 15; // must be change manually (number of parameter to optimize (time is 100*dim to 300*dim^2))
 
 		double x_start[dim];
 		for (auto& i : x_start)
@@ -256,16 +277,14 @@ void Learning_framework::next_pop()
 			m_cma.push_back(cma);
 		}
 	}
+
+	//Restart for a new pop.
+	compute_intervals();
 	m_max_cma_to_update = m_cma.size();
-	for(auto& cma : m_cma)
-	{
-		cma->evo.samplePopulation();
-	}
 	m_next_sample_to_eval = 0;
 	m_sample_evaluated = 0;
 	++m_current_pop;
-
-	next_eval();		
+	start_learning();	
 }
 
 
@@ -283,7 +302,7 @@ void Learning_framework::simulation_done(SimBiCon_framework* simbicon_framework)
 	m_analyzer_thread = std::make_shared<Analyzer_thread>(*simbicon_framework, *this);
 	connect(m_analyzer_thread.get(), &Analyzer_thread::analyze_done, this, &Learning_framework::analyze_done);
 	m_analyzer_thread->start();
-	std::cout << "### Simulation done ###\n";
+	//std::cout << "### Simulation done ###\n";
 
 }
 
@@ -292,16 +311,17 @@ void Learning_framework::analyze_done(SimBiCon_framework* simbicon_framework)
 	size_t i = 0;
 	for (auto& cma : m_cma)
 	{
-		++i;
 		if (i < simbicon_framework->get_result().size())
 		{
 			cma->fitvals[simbicon_framework->get_sample_id()] = simbicon_framework->get_result()[i];
 		}
 		else
 		{
-			m_max_cma_to_update = i - 1;
+			m_max_cma_to_update = i;
+			m_intervals.resize(i+1);
 			break;
 		}
+		++i;
 	}
 	//simbicon_framework->temp_string << simbicon_framework->get_result();
 	//BOOST_LOG_TRIVIAL(trace) << simbicon_framework->temp_string.str();
@@ -315,11 +335,22 @@ void Learning_framework::analyze_done(SimBiCon_framework* simbicon_framework)
 		++j;
 	}
 	m_simbicon_frameworks.erase(j);
-	std::cout << "### Analyze done ### " << m_lambda << " " << m_sample_evaluated <<"\n";
+	//std::cout << "### Analyze done ### " << m_lambda << " " << m_sample_evaluated <<"\n";
 	m_sample_evaluated++;
 	if (m_lambda == m_sample_evaluated)
 	{
 		next_pop();
 	}
 
+}
+
+void Learning_framework::end_reconstruction()
+{
+	const auto simbicon = std::dynamic_pointer_cast<SimBiCon>(m_default_simbicon_framework->get_controllers()[0]);
+	auto fsm_states = simbicon->get_fsm_states();
+	for (auto& fsm_state : fsm_states)
+	{
+		FILE* file = fopen("../../out/result.txt", "w");
+		fsm_state->write_state(file, 0);
+	}
 }

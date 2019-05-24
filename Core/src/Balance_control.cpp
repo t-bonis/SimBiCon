@@ -11,7 +11,7 @@ Balance_control::Balance_control(Character& character, SimBiCon_framework& contr
 
 void Balance_control::pre_simulation_step_phase_1()
 {
-	add_gravity_compensation();
+	//add_gravity_compensation();
 }
 
 void Balance_control::pre_simulation_step_phase_2()
