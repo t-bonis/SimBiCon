@@ -96,6 +96,8 @@ public:
 		return m_starting_time;
 	}
 
+	void write_state(std::string name);
+
 protected:
 	//This method is used to advance the controller in time. It takes in a list of the contact points, since they might be
 	//used to determine when to transition to a new state. This method returns -1 if the controller does not advance to a new state,

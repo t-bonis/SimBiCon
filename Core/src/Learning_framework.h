@@ -16,15 +16,17 @@ struct Cma_object
 	int countevals = 0;
 	int iSampleEval = 0;
 
-	Cma_object::Cma_object(size_t lambda, const int dim, double* x_start, double* std_dev)
+	Cma_object::Cma_object(size_t lambda, const int dim,const double* x_start,const double* std_dev)
 	{
 		parameters.init(dim, x_start, std_dev);
 		parameters.lambda = lambda;
 		parameters.logWarnings = true;
-		//parameters.mu = lambda / 2;
-		parameters.stopMaxFunEvals = 300 * pow(dim, 2);
-		parameters.stopTolFunHist = 0.001;
-		parameters.stopTolX = 0.001;
+		parameters.mu = 6;
+		parameters.stopMaxFunEvals = 1e9;
+		//parameters.stopTolFunHist = 0.005;
+		parameters.stopTolX = 0.01;
+		parameters.stopTolUpXFactor = 100;
+		parameters.weightMode = parameters.LINEAR_WEIGHTS;
 		fitvals = evo.init(parameters); // alloc fitness values
 		pop = evo.samplePopulation();
 	}
@@ -55,6 +57,7 @@ public:
 
 	void load_learning_parameters(std::string& f_name);
 	void assign_values(SimBiCon_framework& simbicon_framework, size_t sample_to_eval);
+	void assign_best_values(SimBiCon_framework& available_framework, size_t nomber_to_update);
 	static knot_ptr get_next_knot(std::vector<std::shared_ptr<Fsm_state>> fsm_states, knot_ptr current_knot);
 	void eval_simbicon_framework(SimBiCon_framework& simbicon_framework);
 	void start_learning();
@@ -62,6 +65,8 @@ public:
 	bool is_feasible(double* p, Cma_object* cma) const;
 	void next_eval();
 	void next_pop();
+
+	void print_state(const std::shared_ptr<Cma_object>& cma);
 
 	std::vector<double>& get_intervals()
 	{
@@ -97,5 +102,8 @@ private:
 	double m_reconstructed_time = 0;
 	size_t m_target_simulation_time;
 	size_t m_lambda = 2000;
+	int m_dim = 15;
+	std::array<double,15> m_x_start;
+	std::array<double,15> m_std_dev;
 };
 

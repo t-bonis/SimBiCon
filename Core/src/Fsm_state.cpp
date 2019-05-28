@@ -1,6 +1,8 @@
 #include "Fsm_state.h"
 #include "ConUtils.h"
 #include "SimBiCon.h"
+#include <iostream>
+#include <fstream>
 
 void Trajectory_component::write_base_trajectory(FILE* f)
 {
@@ -17,25 +19,25 @@ void Trajectory_component::write_base_trajectory(FILE* f)
 	fprintf(f, "\t\t\t%s\n", get_con_line_string(con_utils::con_base_trajectory_end));
 }
 
-void Trajectory_component::write_trajectory_component(FILE* f)
-{
-	if (f == nullptr)
-		return;
-
-	fprintf(f, "\t\t%s\n", get_con_line_string(con_utils::con_traj_component));
-
-	fprintf(f, "\t\t\t%s %lf %lf %lf\n", get_con_line_string(con_utils::con_rotation_axis),
-	        rotation_axis.x, rotation_axis.y, rotation_axis.z);
-
-	if (reverse_angle_on_left_stance)
-		fprintf(f, "\t\t\t%s left\n", get_con_line_string(con_utils::con_reverse_angle_on_stance));
-	else if (reverse_angle_on_right_stance)
-		fprintf(f, "\t\t\t%s right\n", get_con_line_string(con_utils::con_reverse_angle_on_stance));
-
-	write_base_trajectory(f);
-
-	fprintf(f, "\t\t%s\n", get_con_line_string(con_utils::con_traj_component_end));
-}
+//void Trajectory_component::write_trajectory_component(FILE* f)
+//{
+//	if (f == nullptr)
+//		return;
+//
+//	fprintf(f, "\t\t%s\n", get_con_line_string(con_utils::con_traj_component));
+//
+//	fprintf(f, "\t\t\t%s %lf %lf %lf\n", get_con_line_string(con_utils::con_rotation_axis),
+//	        rotation_axis.x, rotation_axis.y, rotation_axis.z);
+//
+//	if (reverse_angle_on_left_stance)
+//		fprintf(f, "\t\t\t%s left\n", get_con_line_string(con_utils::con_reverse_angle_on_stance));
+//	else if (reverse_angle_on_right_stance)
+//		fprintf(f, "\t\t\t%s right\n", get_con_line_string(con_utils::con_reverse_angle_on_stance));
+//
+//	write_base_trajectory(f);
+//
+//	fprintf(f, "\t\t%s\n", get_con_line_string(con_utils::con_traj_component_end));
+//}
 
 
 
@@ -121,21 +123,21 @@ Joint_trajectory::Joint_trajectory(const Joint_trajectory& other)
 	joint_name = other.joint_name;
 }
 
-void Joint_trajectory::write_trajectory(FILE* f)
-{
-	if (f == nullptr)
-		return;
-
-	fprintf(f, "\t%s %s\n", get_con_line_string(con_utils::con_trajectory_start), joint_name.c_str());
-
-	for (auto& component : components)
-	{
-		fprintf(f, "\n");
-		component->write_trajectory_component(f);
-	}
-
-	fprintf(f, "\t%s\n", get_con_line_string(con_utils::con_trajectory_end));
-}
+//void Joint_trajectory::write_trajectory(FILE* f)
+//{
+//	if (f == nullptr)
+//		return;
+//
+//	fprintf(f, "\t%s %s\n", get_con_line_string(con_utils::con_trajectory_start), joint_name.c_str());
+//
+//	for (auto& component : components)
+//	{
+//		fprintf(f, "\n");
+//		component->write_trajectory_component(f);
+//	}
+//
+//	fprintf(f, "\t%s\n", get_con_line_string(con_utils::con_trajectory_end));
+//}
 
 Trajectory_component* Joint_trajectory::get_component(Vector3d axis, bool allow_opposite)
 {
@@ -315,39 +317,39 @@ void Fsm_state::read_state(FILE* f, size_t offset)
 	throw std::logic_error("Incorrect SIMBICON input file: No /State found");
 }
 
-void Fsm_state::write_state(FILE* f, int index)
-{
-	if (f == nullptr)
-		return;
-
-	fprintf(f, "%s %d\n", get_con_line_string(con_utils::con_state_start), index);
-
-	fprintf(f, "\t%s %s\n", get_con_line_string(con_utils::con_state_description), m_description.c_str());
-	fprintf(f, "\t%s %d\n", get_con_line_string(con_utils::con_next_state), (int)m_next_state_index);
-	fprintf(f, "\t%s %s\n", get_con_line_string(con_utils::con_transition_on),
-	        m_transition_on_foot_contact ? "footDown" : "timeUp");
-
-	if (m_reverse_stance)
-		fprintf(f, "\t%s reverse\n", get_con_line_string(con_utils::con_state_stance));
-	else if (m_keep_stance)
-		fprintf(f, "\t%s same\n", get_con_line_string(con_utils::con_state_stance));
-	else if (m_state_stance == Character::left)
-		fprintf(f, "\t%s left\n", get_con_line_string(con_utils::con_state_stance));
-	else if (m_state_stance == Character::right)
-		fprintf(f, "\t%s right\n", get_con_line_string(con_utils::con_state_stance));
-
-	fprintf(f, "\t%s %lf\n", get_con_line_string(con_utils::con_state_time), m_state_duration);
-
-	fprintf(f, "\n");
-
-	for (auto& m_trajectorie : m_trajectories)
-	{
-		fprintf(f, "\n");
-		m_trajectorie->write_trajectory(f);
-	}
-
-	fprintf(f, "%s\n", get_con_line_string(con_utils::con_state_end));
-}
+//void Fsm_state::write_state(FILE* f, int index)
+//{
+//	if (f == nullptr)
+//		return;
+//
+//	fprintf(f, "%s %d\n", get_con_line_string(con_utils::con_state_start), index);
+//
+//	fprintf(f, "\t%s %s\n", get_con_line_string(con_utils::con_state_description), m_description.c_str());
+//	fprintf(f, "\t%s %d\n", get_con_line_string(con_utils::con_next_state), (int)m_next_state_index);
+//	fprintf(f, "\t%s %s\n", get_con_line_string(con_utils::con_transition_on),
+//	        m_transition_on_foot_contact ? "footDown" : "timeUp");
+//
+//	if (m_reverse_stance)
+//		fprintf(f, "\t%s reverse\n", get_con_line_string(con_utils::con_state_stance));
+//	else if (m_keep_stance)
+//		fprintf(f, "\t%s same\n", get_con_line_string(con_utils::con_state_stance));
+//	else if (m_state_stance == Character::left)
+//		fprintf(f, "\t%s left\n", get_con_line_string(con_utils::con_state_stance));
+//	else if (m_state_stance == Character::right)
+//		fprintf(f, "\t%s right\n", get_con_line_string(con_utils::con_state_stance));
+//
+//	fprintf(f, "\t%s %lf\n", get_con_line_string(con_utils::con_state_time), m_state_duration);
+//
+//	fprintf(f, "\n");
+//
+//	for (auto& m_trajectorie : m_trajectories)
+//	{
+//		fprintf(f, "\n");
+//		m_trajectorie->write_trajectory(f);
+//	}
+//
+//	fprintf(f, "%s\n", get_con_line_string(con_utils::con_state_end));
+//}
 
 
 void Fsm_state::read_trajectory1D(FILE* f, Trajectory1D& result, con_utils endingLineType)
@@ -403,4 +405,53 @@ void Fsm_state::write_trajectory1D(FILE* f, Trajectory1D& result, con_utils star
 	}
 
 	fprintf(f, "\t%s\n", get_con_line_string(endingLineType));
+}
+
+std::ofstream & operator<<(std::ofstream & in, Trajectory_component& trajectory_component)
+{
+	in << "component" << std::endl;
+	in << "rotationAxis " << trajectory_component.rotation_axis << std::endl;
+	in << "baseTrajectory" << std::endl;
+	for (size_t i = 0; i < trajectory_component.base_trj.get_knot_count() ; ++i)
+	{
+		in << std::fixed << std::setprecision(6);
+		in << "\t" << trajectory_component.base_trj.getKnotPosition(i) << " ";
+		in << trajectory_component.base_trj.getKnotValue(i) << std::endl;
+	}
+	in << "/baseTrajectory" << std::endl;
+	in << "/component" << std::endl;
+	return in;
+}
+
+std::ofstream & operator<<(std::ofstream & in, const Joint_trajectory& joint_trajectory)
+{
+	in << "trajectory " << joint_trajectory.joint_name << std::endl;
+	for (const auto& comp : joint_trajectory.components)
+	{
+		in << *comp;
+	}
+	in << "/trajectory\n" << std::endl;
+	return in;
+}
+
+std::ofstream & operator<<(std::ofstream & in, const Fsm_state& state)
+{
+	in << "description " << state.get_description() << std::endl;
+	in << "nextState " << state.get_next_state_index() << std::endl;
+	in << "stateStance " << state.m_state_stance << std::endl;
+	if (state.m_transition_on_foot_contact)
+	{
+		in << "transitionOn footDown" << std::endl;
+	}
+	else
+	{
+		in << "transitionOn timeUp" << std::endl;
+
+	}
+	in << "time " << state.get_state_duration() << "\n" << std::endl;
+	for (const auto& traj : state.m_trajectories)
+	{
+		in << *traj;
+	}
+	return in;
 }

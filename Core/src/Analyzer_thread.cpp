@@ -47,12 +47,12 @@ void Analyzer_thread::eval_simulation() const
 	}
 	const auto angular_diff = m_simbicon_framework->get_gait_analyzer()->compute_angular_diff();
 	const auto pos_diff = m_simbicon_framework->get_gait_analyzer()->compute_pelvis_pos_diff();
-	const auto ratio_to_end = m_simbicon_framework->get_gait_analyzer()->get_nb_of_missing_frame();
-	const auto gain_sum = m_simbicon_framework->get_gait_analyzer()->compute_gain_sum();
-	const auto result = angular_diff + ratio_to_end + pos_diff*1e2 + gain_sum*1e-5;
+	//const auto ratio_to_end = m_simbicon_framework->get_gait_analyzer()->get_nb_of_missing_frame();
+	//const auto gain_sum = m_simbicon_framework->get_gait_analyzer()->compute_gain_sum();
+	const auto result = angular_diff + pos_diff;
 
-	std::cout << angular_diff << " + " << ratio_to_end << " + " << pos_diff*1e2 << " + " << gain_sum* 1e-5 << " = " << result << std::endl;
-
+	std::cout << angular_diff << " + " << pos_diff << " = " << result << std::endl;
+	BOOST_LOG_TRIVIAL(trace) << angular_diff << " + " << pos_diff << " = " << result << std::endl;
 	m_simbicon_framework->add_result(result);
 }
 

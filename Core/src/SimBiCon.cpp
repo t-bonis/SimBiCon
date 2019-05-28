@@ -2,6 +2,8 @@
 #include "ConUtils.h"
 #include "Reduced_character_state.h"
 #include "SimBiCon_framework.h"
+#include <fstream>
+#include <iomanip>   
 
 
 SimBiCon::SimBiCon(char* filename, Articulated_figure& character, SimBiCon_framework& control_framework) :
@@ -238,6 +240,20 @@ void SimBiCon::compute_future_desired_pose()
 		}
 	}
 	m_pose_controller->desired_pose_dt = *pose_rs.get_state_ptr();
+}
+
+void SimBiCon::write_state(std::string name)
+{
+	std::ofstream ofs;
+
+	ofs.open(name);
+	auto i = 0;
+	for (auto& state : m_controller_fsm_states)
+	{
+		ofs << "Con_OpenSim_State " << i << std::endl;
+		ofs << *state;
+		++i;
+	}
 }
 
 void SimBiCon::advance_in_time(const double dt)

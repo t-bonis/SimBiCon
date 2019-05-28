@@ -38,7 +38,8 @@ public:
 	void read_trajectory_component(FILE* f);
 	bool is_implicit();
 	void write_base_trajectory(FILE* f);
-	void write_trajectory_component(FILE* f);
+
+	friend std::ofstream& operator<< (std::ofstream& in, Trajectory_component& trajectory_component);
 
 	//this is the array of basis functions that specify the trajectories for the sagittal plane.
 	Trajectory1D base_trj;
@@ -107,7 +108,7 @@ public:
 	void read_trajectory(FILE* f);
 
 	//This method is used to write a trajectory to a file
-	void write_trajectory(FILE* f);
+	friend std::ofstream& operator<< (std::ofstream& in, const Joint_trajectory& joint_trajectory);
 
 	Trajectory_component* get_component(Vector3d axis, bool allow_opposite = true);
 
@@ -193,8 +194,9 @@ public:
 	std::string get_description() const { return m_description; }
 
 	void read_state(FILE* f, size_t offset);
-	void write_state(FILE* f, int index);
 
+	friend std::ofstream& operator<< (std::ofstream& in, const Fsm_state& state);
+	
 	//	This method is used to read the knots of a 1D trajectory from the file, where they are specified one (knot) on a line
 	//	The trajectory is considered complete when a line starting with endingLineType is encountered
 	static void read_trajectory1D(FILE* f, Trajectory1D& result, con_utils endingLineType);
