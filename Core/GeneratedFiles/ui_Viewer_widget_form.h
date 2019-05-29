@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'Viewer_widget_form.ui'
 **
-** Created by: Qt User Interface Compiler version 5.11.3
+** Created by: Qt User Interface Compiler version 5.12.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -31,15 +31,15 @@ public:
     void setupUi(QWidget *Viewer_widget_form)
     {
         if (Viewer_widget_form->objectName().isEmpty())
-            Viewer_widget_form->setObjectName(QStringLiteral("Viewer_widget_form"));
+            Viewer_widget_form->setObjectName(QString::fromUtf8("Viewer_widget_form"));
         Viewer_widget_form->resize(833, 561);
         horizontalLayout = new QHBoxLayout(Viewer_widget_form);
-        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         scrollArea = new QScrollArea(Viewer_widget_form);
-        scrollArea->setObjectName(QStringLiteral("scrollArea"));
+        scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
-        scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
+        scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
         scrollAreaWidgetContents->setGeometry(QRect(0, 0, 813, 541));
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
@@ -47,9 +47,9 @@ public:
         sizePolicy.setHeightForWidth(scrollAreaWidgetContents->sizePolicy().hasHeightForWidth());
         scrollAreaWidgetContents->setSizePolicy(sizePolicy);
         verticalLayout = new QVBoxLayout(scrollAreaWidgetContents);
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         gridLayout = new QGridLayout();
-        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
 
         verticalLayout->addLayout(gridLayout);
 

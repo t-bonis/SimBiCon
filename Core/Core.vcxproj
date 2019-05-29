@@ -63,7 +63,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)ode-0.16\include\;$(QtDir)\include\;$(SolutionDir)include\;$(ProjectDir)GeneratedFiles\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)ode-0.16\include\;$(QTDIR)\include\;$(SolutionDir)include\;$(ProjectDir)GeneratedFiles\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <AdditionalOptions>
@@ -82,7 +82,7 @@
     </Lib>
     <Link>
       <AdditionalDependencies>opengl32.lib;glu32.lib;Qt5Gui.lib;Qt5Widgets.lib;Qt5Core.lib;Qt5Charts.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(QtDir)\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
       <AdditionalOptions>/VERBOSE %(AdditionalOptions)</AdditionalOptions>
     </Link>
@@ -91,22 +91,22 @@
       <PreserveSbr>true</PreserveSbr>
     </Bscmake>
     <QtMoc>
-      <Define>QT_CORE_LIB;QT_OPENGL_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;dDOUBLE</Define>
-      <IncludePath>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.\..\include;.\..;C:\Qt\5.11.3\msvc2017_64\include;C:\Qt\5.11.3\msvc2017_64\include\QtCore;C:\Qt\5.11.3\msvc2017_64\include\QtOpenGL;C:\Qt\5.11.3\msvc2017_64\include\QtGui;C:\Qt\5.11.3\msvc2017_64\include\QtANGLE;C:\Qt\5.11.3\msvc2017_64\include\QtWidgets;$(SolutionDir)\ode-0.16\include;C:\Qt\5.11.3\msvc2017_64\include\QtCharts;$(NOINHERIT)</IncludePath>
+      <Define>_USE_MATH_DEFINES</Define>
+      <IncludePath>$(SolutionDir);$(SolutionDir)ode-0.16\include\;$(QTDIR)\include\;$(SolutionDir)include\;$(ProjectDir)GeneratedFiles\</IncludePath>
       <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
       <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
-      <QTDIR>C:\Qt\5.11.3\msvc2017_64</QTDIR>
+      <QTDIR>$(QtDir)</QTDIR>
     </QtMoc>
     <QtUic>
       <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
       <OutputFile>.\GeneratedFiles\ui_%(Filename).h</OutputFile>
-      <QTDIR>C:\Qt\5.11.3\msvc2017_64</QTDIR>
+      <QTDIR>$(QtDir)</QTDIR>
     </QtUic>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)ode-0.16\include\;$(QtDir)\include\;$(SolutionDir)include\;$(ProjectDir)GeneratedFiles\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)ode-0.16\include\;$(QTDIR)\include\;$(SolutionDir)include\;$(ProjectDir)GeneratedFiles\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_USE_MATH_DEFINES</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
@@ -124,7 +124,7 @@
     </Lib>
     <Link>
       <AdditionalDependencies>opengl32.lib;glu32.lib;Qt5Gui.lib;Qt5Widgets.lib;Qt5Core.lib;Qt5Charts.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(QtDir)\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib</AdditionalLibraryDirectories>
       <AdditionalOptions>/VERBOSE %(AdditionalOptions)</AdditionalOptions>
       <SubSystem>Console</SubSystem>
     </Link>
@@ -133,16 +133,16 @@
       <PreserveSbr>true</PreserveSbr>
     </Bscmake>
     <QtMoc>
-      <Define>QT_CORE_LIB;QT_OPENGL_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;dDOUBLE</Define>
-      <IncludePath>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.\..\include;.\..;C:\Qt\5.11.3\msvc2017_64\include;C:\Qt\5.11.3\msvc2017_64\include\QtCore;C:\Qt\5.11.3\msvc2017_64\include\QtOpenGL;C:\Qt\5.11.3\msvc2017_64\include\QtGui;C:\Qt\5.11.3\msvc2017_64\include\QtANGLE;C:\Qt\5.11.3\msvc2017_64\include\QtWidgets;$(SolutionDir)\ode-0.16\include;C:\Qt\5.11.3\msvc2017_64\include\QtCharts;$(NOINHERIT)</IncludePath>
+      <Define>_USE_MATH_DEFINES</Define>
+      <IncludePath>$(SolutionDir);$(SolutionDir)ode-0.16\include\;$(QTDIR)\include\;$(SolutionDir)include\;$(ProjectDir)GeneratedFiles\</IncludePath>
       <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
       <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
-      <QTDIR>C:\Qt\5.11.3\msvc2017_64</QTDIR>
+      <QTDIR>$(QtDir)</QTDIR>
     </QtMoc>
     <QtUic>
       <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
       <OutputFile>.\GeneratedFiles\ui_%(Filename).h</OutputFile>
-      <QTDIR>C:\Qt\5.11.3\msvc2017_64</QTDIR>
+      <QTDIR>$(QtDir)</QTDIR>
     </QtUic>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -298,7 +298,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties />
+      <UserProperties Qt5Version_x0020_x64="msvc2017_64_5.12.0" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

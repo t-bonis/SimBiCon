@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'Qt_gui.ui'
 **
-** Created by: Qt User Interface Compiler version 5.11.3
+** Created by: Qt User Interface Compiler version 5.12.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -44,7 +44,7 @@ public:
     void setupUi(QMainWindow *QtGuiClass)
     {
         if (QtGuiClass->objectName().isEmpty())
-            QtGuiClass->setObjectName(QStringLiteral("QtGuiClass"));
+            QtGuiClass->setObjectName(QString::fromUtf8("QtGuiClass"));
         QtGuiClass->setEnabled(true);
         QtGuiClass->resize(200, 455);
         QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
@@ -55,14 +55,14 @@ public:
         QtGuiClass->setFocusPolicy(Qt::NoFocus);
         QtGuiClass->setAutoFillBackground(false);
         centralWidget = new QWidget(QtGuiClass);
-        centralWidget->setObjectName(QStringLiteral("centralWidget"));
+        centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         centralWidget->setFocusPolicy(Qt::NoFocus);
         horizontalLayout_2 = new QHBoxLayout(centralWidget);
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         frame = new QFrame(centralWidget);
-        frame->setObjectName(QStringLiteral("frame"));
+        frame->setObjectName(QString::fromUtf8("frame"));
         QSizePolicy sizePolicy1(QSizePolicy::Maximum, QSizePolicy::Maximum);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -73,9 +73,9 @@ public:
         verticalLayout_2 = new QVBoxLayout(frame);
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         pb_simulation = new QPushButton(frame);
-        pb_simulation->setObjectName(QStringLiteral("pb_simulation"));
+        pb_simulation->setObjectName(QString::fromUtf8("pb_simulation"));
         pb_simulation->setEnabled(true);
         QSizePolicy sizePolicy2(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy2.setHorizontalStretch(0);
@@ -87,7 +87,7 @@ public:
         verticalLayout_2->addWidget(pb_simulation, 0, Qt::AlignHCenter);
 
         pb_optimization = new QPushButton(frame);
-        pb_optimization->setObjectName(QStringLiteral("pb_optimization"));
+        pb_optimization->setObjectName(QString::fromUtf8("pb_optimization"));
         sizePolicy2.setHeightForWidth(pb_optimization->sizePolicy().hasHeightForWidth());
         pb_optimization->setSizePolicy(sizePolicy2);
         pb_optimization->setLayoutDirection(Qt::LeftToRight);
@@ -95,7 +95,7 @@ public:
         verticalLayout_2->addWidget(pb_optimization, 0, Qt::AlignHCenter);
 
         pb_force_opti_end = new QPushButton(frame);
-        pb_force_opti_end->setObjectName(QStringLiteral("pb_force_opti_end"));
+        pb_force_opti_end->setObjectName(QString::fromUtf8("pb_force_opti_end"));
         sizePolicy2.setHeightForWidth(pb_force_opti_end->sizePolicy().hasHeightForWidth());
         pb_force_opti_end->setSizePolicy(sizePolicy2);
         pb_force_opti_end->setLayoutDirection(Qt::LeftToRight);
@@ -103,7 +103,7 @@ public:
         verticalLayout_2->addWidget(pb_force_opti_end, 0, Qt::AlignHCenter);
 
         pb_start_learning = new QPushButton(frame);
-        pb_start_learning->setObjectName(QStringLiteral("pb_start_learning"));
+        pb_start_learning->setObjectName(QString::fromUtf8("pb_start_learning"));
         sizePolicy2.setHeightForWidth(pb_start_learning->sizePolicy().hasHeightForWidth());
         pb_start_learning->setSizePolicy(sizePolicy2);
         pb_start_learning->setLayoutDirection(Qt::LeftToRight);
@@ -111,7 +111,7 @@ public:
         verticalLayout_2->addWidget(pb_start_learning, 0, Qt::AlignHCenter);
 
         pb_start = new QPushButton(frame);
-        pb_start->setObjectName(QStringLiteral("pb_start"));
+        pb_start->setObjectName(QString::fromUtf8("pb_start"));
         sizePolicy2.setHeightForWidth(pb_start->sizePolicy().hasHeightForWidth());
         pb_start->setSizePolicy(sizePolicy2);
         pb_start->setLayoutDirection(Qt::LeftToRight);
@@ -119,15 +119,15 @@ public:
         verticalLayout_2->addWidget(pb_start, 0, Qt::AlignHCenter);
 
         frame_2 = new QFrame(frame);
-        frame_2->setObjectName(QStringLiteral("frame_2"));
+        frame_2->setObjectName(QString::fromUtf8("frame_2"));
         frame_2->setFrameShape(QFrame::StyledPanel);
         frame_2->setFrameShadow(QFrame::Raised);
         horizontalLayout = new QHBoxLayout(frame_2);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalSlider = new QSlider(frame_2);
-        horizontalSlider->setObjectName(QStringLiteral("horizontalSlider"));
+        horizontalSlider->setObjectName(QString::fromUtf8("horizontalSlider"));
         horizontalSlider->setMinimum(-10);
         horizontalSlider->setMaximum(4);
         horizontalSlider->setSingleStep(1);
@@ -141,8 +141,8 @@ public:
         horizontalLayout->addWidget(horizontalSlider);
 
         label = new QLabel(frame_2);
-        label->setObjectName(QStringLiteral("label"));
-        label->setText(QStringLiteral("Speed : 1"));
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setText(QString::fromUtf8("Speed : 1"));
 
         horizontalLayout->addWidget(label);
 
@@ -153,7 +153,7 @@ public:
         horizontalLayout_2->addWidget(frame, 0, Qt::AlignVCenter);
 
         tabWidget = new QTabWidget(centralWidget);
-        tabWidget->setObjectName(QStringLiteral("tabWidget"));
+        tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
         tabWidget->setEnabled(false);
         QSizePolicy sizePolicy3(QSizePolicy::Ignored, QSizePolicy::Ignored);
         sizePolicy3.setHorizontalStretch(0);
