@@ -11,7 +11,7 @@ double SimGlobals::speed_multiplier = 1 ;
 
 bool SimGlobals::use_muscle_actuation = false;
 size_t SimGlobals::m_interval_between_measure = 7;
-int SimGlobals::nb_threads = 1;
+int SimGlobals::nb_threads = 6;
 bool SimGlobals::force_end = false;
 
 
