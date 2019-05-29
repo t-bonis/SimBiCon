@@ -26,7 +26,7 @@ struct Cma_object
 		//parameters.stopTolFunHist = 0.005;
 		parameters.stopTolX = 0.01;
 		parameters.stopTolUpXFactor = 100;
-		parameters.weightMode = parameters.LINEAR_WEIGHTS;
+		//parameters.weightMode = parameters.LINEAR_WEIGHTS;
 		fitvals = evo.init(parameters); // alloc fitness values
 		pop = evo.samplePopulation();
 	}
@@ -101,8 +101,8 @@ private:
 	size_t m_sample_evaluated = 0;
 	double m_reconstructed_time = 0;
 	size_t m_target_simulation_time;
-	size_t m_lambda = 2000;
 	int m_dim = 15;
+	size_t m_lambda = 2000;
 	std::array<double,15> m_x_start;
 	std::array<double,15> m_std_dev;
 };
