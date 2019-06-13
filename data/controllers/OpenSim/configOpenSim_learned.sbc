@@ -1,7 +1,22 @@
+PDParams 
+#joint name		Kp				Kd				MaxTorque		ScaleX		ScaleY		ScaleZ
+hip_r			300				30				10000.0			1.0			1.0			1.0
+knee_r			300				30				10000.0			1.0			1.0			1.0
+ankle_r			100				10				10000.0			1.0			1.0			1.0
+hip_l			300				30				10000.0			1.0			1.0			1.0
+knee_l			300				30				10000.0			1.0			1.0			1.0
+ankle_l			100				10				10000.0			1.0			1.0			1.0
+back			1000			10				10000.0			1.0			1.0			1.0
+subtalar_l		100				10				10000.0			1.0			1.0			1.0
+subtalar_r		100				10				10000.0			1.0			1.0			1.0
+mtp_l			0				30				10000.0			1.0			1.0			1.0
+mtp_r			0				30				10000.0			1.0			1.0			1.0
+/PDParams
+
 Con_OpenSim_State 0
 description second phase
 nextState 1
-stateStance 3
+stateStance reverse
 transitionOn timeUp
 time 0.5
 
@@ -1890,10 +1905,11 @@ baseTrajectory
 /component
 /trajectory
 
+/ConState
 Con_OpenSim_State 1
 description first phase
 nextState 0
-stateStance 3
+stateStance reverse
 transitionOn timeUp
 time 0.500000
 
@@ -3817,3 +3833,10 @@ baseTrajectory
 /component
 /trajectory
 
+/ConState
+
+startAtState 0
+startingStance right
+starting_phi 0.42268
+starting_time_in_ref 0.695
+#Useful comment

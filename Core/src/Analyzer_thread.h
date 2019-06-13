@@ -9,7 +9,7 @@ class Analyzer_thread : public QThread
 	Q_OBJECT
 public:
 	Analyzer_thread() = delete;
-	explicit Analyzer_thread(SimBiCon_framework& conF);
+	Analyzer_thread(SimBiCon_framework& conF, bool print_result = false);
 	~Analyzer_thread() = default;
 
 public slots:
@@ -22,5 +22,6 @@ private:
 	void run() override;
 
 	SimBiCon_framework* m_simbicon_framework;
+	bool m_print_result;
 };
 

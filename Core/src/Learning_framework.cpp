@@ -233,10 +233,6 @@ void Learning_framework::analyze_done(SimBiCon_framework* simbicon_framework)
 
 	if (!simbicon_framework->get_success())
 	{
-		for (auto& framework : m_next_saved_frameworks)
-		{
-			delete_framework(simbicon_framework);
-		}
 		m_next_saved_frameworks.clear();
 		next_pop();
 		return;
@@ -306,6 +302,12 @@ void Learning_framework::start_learning()
 	{
 		cma->evo.samplePopulation();
 	}
+	m_timer = std::make_unique<QElapsedTimer>();
+	m_timer->start();
+	if (SimGlobals::nb_threads > m_lambda)
+	{
+		SimGlobals::nb_threads = m_lambda;
+	}
 	for (auto i = 0; i < SimGlobals::nb_threads; ++i)
 	{
 		next_eval();
@@ -338,6 +340,8 @@ void Learning_framework::next_eval()
 void Learning_framework::next_iteration()
 {
 	m_analyzer_thread->wait();
+	std::cout << "Timer elapsed : " << m_timer->elapsed() << std::endl;
+	m_timer->restart();
 	//TODO : prepare the simu : order n_offsring from nSaved
 	m_combinaison_history.resize(m_combinaison_history.size() + 1);
 	auto nb_for_each = m_lambda / m_sample_to_save;
@@ -438,8 +442,10 @@ void Learning_framework::next_pop()
 		}
 	}
 
+	std::stringstream message;
 	for (int iteration = 0; iteration < int(node_best_value.size()); ++iteration)
 	{
+		//message << "Iteration : " << iteration << std::endl;
 		for (int sample = 0; sample < int(node_best_value[iteration].size()); ++sample)
 		{
 			auto cost = node_best_value[iteration][sample];
@@ -448,8 +454,13 @@ void Learning_framework::next_pop()
 			
 			//std::cout << cost << " " << height << " " << m_cma[iteration]->fitvals[sample] << std::endl;
 			//std::cout << "Iteration : " << iteration << " Sample : " << sample << " : " << node_best_value[iteration][sample] << " et " << node_subtree_height[iteration][sample] << std::endl;
+			
+			message << cost << " ";
 		}
+		message << std::endl;
 	}
+	BOOST_LOG_TRIVIAL(trace) << message.str();
+
 
 
 	//TODO : update CMA distrib
@@ -460,11 +471,9 @@ void Learning_framework::next_pop()
 		if (m_cma[i]->evo.testForTermination() && previous_terminated)
 		{
 			std::stringstream message;
-			message << m_cma[i]->evo.get(m_cma[i]->evo.Fitness) << std::endl;
-			message << "cma " << i << " : " << m_cma[i]->evo.getStopMessage();
-
+			message << "cma " << i << " : " << m_cma[i]->evo.getStopMessage() << std::endl;
 			std::cout << message.str();
-			BOOST_LOG_TRIVIAL(trace) << message.str();
+			//BOOST_LOG_TRIVIAL(trace) << message.str();
 			++advance_windows;
 		}
 		else
@@ -476,12 +485,12 @@ void Learning_framework::next_pop()
 	if (advance_windows > 0)
 	{//TODO : run_default simbicon for advance_windows
 		std::cout << "advance_windows : " << advance_windows << std::endl;
-		BOOST_LOG_TRIVIAL(trace) << "advance_windows : " << advance_windows << std::endl;
+		//BOOST_LOG_TRIVIAL(trace) << "advance_windows : " << advance_windows << std::endl;
 		assign_best_values(*m_default_simbicon_framework, advance_windows);
 		m_simulation_threads.push_back(std::make_shared<Simulation_thread>(*m_default_simbicon_framework, true, m_intervals[advance_windows]));
 		m_simulation_threads.back()->start();
 		m_simulation_threads.back()->wait();
-		m_analyzer_thread = std::make_shared<Analyzer_thread>(*m_default_simbicon_framework);
+		m_analyzer_thread = std::make_shared<Analyzer_thread>(*m_default_simbicon_framework, true);
 		m_analyzer_thread->start();
 		m_analyzer_thread->wait();
 		//Increase reconstructed time
@@ -508,6 +517,9 @@ void Learning_framework::next_pop()
 
 	m_next_sample_to_eval = 0;
 	m_sample_evaluated = 0;
+	m_iteration = 0;
+	m_all_cost.clear();
+	m_all_cost.resize(1);
 	++m_current_pop;
 	start_learning();
 }
@@ -523,7 +535,7 @@ void Learning_framework::print_state(const std::shared_ptr<Cma_object>& cma)
 	}
 	message << " B: " << cma->evo.get(cma->evo.Fitness);
 	std::cout << message.str() << std::endl;
-	BOOST_LOG_TRIVIAL(trace) << message.str();
+	//BOOST_LOG_TRIVIAL(trace) << message.str() << std::endl;
 }
 
 size_t Learning_framework::get_rank(SimBiCon_framework* simbicon_framework)

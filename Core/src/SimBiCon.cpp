@@ -251,7 +251,8 @@ void SimBiCon::write_state(std::string name)
 	for (auto& state : m_controller_fsm_states)
 	{
 		ofs << "Con_OpenSim_State " << i << std::endl;
-		ofs << *state;
+		ofs << *state << std::endl;
+		ofs << "/ConState" << std::endl;
 		++i;
 	}
 }

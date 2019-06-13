@@ -3,9 +3,10 @@
 #include "Learning_framework.h"
 
 
-Analyzer_thread::Analyzer_thread(SimBiCon_framework& conF)
+Analyzer_thread::Analyzer_thread(SimBiCon_framework& conF, bool print_result)
 {
 	m_simbicon_framework = &conF;
+	m_print_result = print_result;
 }
 
 void Analyzer_thread::run()
@@ -30,8 +31,11 @@ void Analyzer_thread::eval_simulation() const
 	const auto angular_diff = m_simbicon_framework->get_gait_analyzer()->compute_angular_diff();
 	const auto pos_diff = m_simbicon_framework->get_gait_analyzer()->compute_pelvis_pos_diff();
 	const auto result = angular_diff + pos_diff;
-	//std::cout << angular_diff << " + " << pos_diff << " = " << result << std::endl;
-	//BOOST_LOG_TRIVIAL(trace) << angular_diff << " + " << pos_diff << " = " << result << std::endl;
+	if (m_print_result)
+	{
+		std::cout << angular_diff << " + " << pos_diff << " = " << result << std::endl;
+		//BOOST_LOG_TRIVIAL(trace) << angular_diff << " + " << pos_diff << " = " << result << std::endl;
+	}
 	m_simbicon_framework->add_result(result);
 }
 
