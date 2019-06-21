@@ -2,6 +2,7 @@
 #include "RBUtils.h"
 #include "Utils/src/Utils.h"
 #include "Reduced_character_state.h"
+#include "Full_character_state.h"
 #include "SimGlobals.h"
 #include "Custom_joint.h"
 #include "BallInSocketJoint.h"
@@ -477,7 +478,7 @@ void Articulated_figure::set_state(const std::vector<double>& state, int start)
 		wRel = m_joints[j]->get_parent_arb()->get_vector_world_coordinates(wRel);
 
 		//now that we have this information, we need to restore the state of the rigid body.
-		//set the proper orientation
+		//set the proper arb_orientation
 		m_joints[j]->get_child_arb()->set_orientation(m_joints[j]->get_parent_arb()->get_orientation() * qRel);
 
 		//and the proper angular velocity
@@ -486,6 +487,89 @@ void Articulated_figure::set_state(const std::vector<double>& state, int start)
 
 		//and now set the linear position and velocity
 		m_joints[j]->fix_joint_constraints_parent_to_child(false, true, false);
+	}
+}
+
+void Articulated_figure::set_direct_state(std::vector<double>& state)
+{
+	Full_character_state fs(state);
+
+	//kinda ugly code....
+	m_root->set_cm_position(fs.get_root_position());
+	m_root->set_orientation(fs.get_root_orientation());
+	m_root->set_cm_velocity(fs.get_root_velocity());
+	m_root->set_angular_velocity(fs.get_root_angular_velocity());
+
+	Vector3d r;
+	Vector3d d;
+	Vector3d vRel;
+
+	int i = 0;
+	for (auto arb : m_articulated_rigid_bodies)
+	{
+		arb->set_orientation(fs.get_arb_orientation(i));
+		arb->set_cm_position(fs.get_arb_position(i));
+		arb->set_cm_velocity(fs.get_arb_lin_velocity(i));
+		arb->set_angular_velocity(fs.get_arb_ang_velocity(i));
+
+		i++;
+	}
+}
+
+void Articulated_figure::get_direct_state(std::vector<double>& state)
+{
+	state.clear();
+	//we'll push the root's state information - ugly code....
+	state.push_back(m_root->get_cm_position().x);
+	state.push_back(m_root->get_cm_position().y);
+	state.push_back(m_root->get_cm_position().z);
+
+	state.push_back(m_root->get_orientation().s);
+	state.push_back(m_root->get_orientation().v.x);
+	state.push_back(m_root->get_orientation().v.y);
+	state.push_back(m_root->get_orientation().v.z);
+
+	state.push_back(m_root->get_cm_velocity().x);
+	state.push_back(m_root->get_cm_velocity().y);
+	state.push_back(m_root->get_cm_velocity().z);
+
+	state.push_back(m_root->get_angular_velocity().x);
+	state.push_back(m_root->get_angular_velocity().y);
+	state.push_back(m_root->get_angular_velocity().z);
+
+	//now each joint introduces one more rigid body, so we'll only record its state relative to its parent.
+	//we are assuming here that each joint is resolved!!!
+
+	for (auto arb : m_articulated_rigid_bodies)
+	{
+		auto q = arb->get_orientation();
+		auto p = arb->get_cm_position();
+		auto vl = arb->get_cm_velocity();
+		auto va = arb->get_angular_velocity();
+
+		state.push_back(q.s);
+		state.push_back(q.v.x);
+		state.push_back(q.v.y);
+		state.push_back(q.v.z);
+
+		state.push_back(p.x);
+		state.push_back(p.y);
+		state.push_back(p.z);
+		
+		state.push_back(vl.x);
+		state.push_back(vl.y);
+		state.push_back(vl.z);
+		
+		state.push_back(va.x);
+		state.push_back(va.y);
+		state.push_back(va.z);
+	}
+
+	for (auto& muscle : m_muscles)
+	{
+		double a = muscle->previousActivations.get_newest();
+		state.push_back(a);
+		state.push_back(a);
 	}
 }
 
@@ -512,7 +596,7 @@ void Articulated_figure::set_arbs_lines_state(const std::vector<double>& state, 
 
 	Reduced_character_state rs(state, 0);
 
-	//Position and orientation of fixed_arb will not change
+	//Position and arb_orientation of fixed_arb will not change
 	//Then update position of other bodies based on joints angle
 
 	Vector3d r;

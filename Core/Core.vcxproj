@@ -207,6 +207,7 @@
     <ClCompile Include="src\Viewer_interface.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Full_character_state.h" />
     <ClInclude Include="src\AbstractRBEngine.h" />
     <ClInclude Include="src\Viewer_interface.h" />
     <QtMoc Include="src\Analyzer_thread.h" />

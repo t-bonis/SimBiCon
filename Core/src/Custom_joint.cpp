@@ -55,7 +55,7 @@ Vector3d Custom_joint::get_angles() const
 	{
 		Vector3d angles{ 0,0,0 };
 		Vector3d axis;
-		// get orientation of child arb relative to parent arb
+		// get arb_orientation of child arb relative to parent arb
 		const auto child_orientation = m_child_arb->get_orientation();
 		const auto parent_orientation = m_parent_arb->get_orientation();
 		auto diff = parent_orientation * child_orientation.get_inverse();
@@ -71,7 +71,7 @@ Vector3d Custom_joint::get_angles() const
 	case ball_in_socket_os:
 	{
 		Vector3d angles;
-		// get orientation of child arb relative to parent arb
+		// get arb_orientation of child arb relative to parent arb
 		const auto child_orientation = m_child_arb->get_orientation();
 		const auto parent_orientation = m_parent_arb->get_orientation();
 		auto diff = parent_orientation * child_orientation.get_inverse();
@@ -139,7 +139,7 @@ std::vector<Vector3d> Custom_joint::get_rotation_axes_in_global_coords() const
 	{
 		if (m_axis[i].is_free())
 		{
-			//Global rotation axis is the local axis rotated by parent body orientation
+			//Global rotation axis is the local axis rotated by parent body arb_orientation
 			auto axis = m_parent_arb->get_orientation().rotate(m_axis[i].get_axis());
 			rotation_axes.push_back(axis);
 		}

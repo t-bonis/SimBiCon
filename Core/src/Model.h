@@ -61,7 +61,7 @@ public:
 	Model& operator=(Model&& other) = delete;
 
 	void add_box(Vector3d min, const Vector3d& max);
-	void add_sphere(float radius);
+	void add_sphere(Point3d center, float radius);
 	void add_cylinder(float radius, float length);
 	void load_from_file(const std::string& path);
 	void process_node(aiNode* node, const aiScene* scene);

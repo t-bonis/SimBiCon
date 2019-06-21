@@ -140,7 +140,7 @@ public:
 	/**
 	 * @brief this method is used to observe the velocity pattern of the character's CM during the step
 	 * This method has to be called at every time step of the simulation
-	 * This method also integrate the variations of orientation
+	 * This method also integrate the variations of arb_orientation
 	 * @param cur_phi current phase
 	 * @param v current velocity of the character's CM
 	 */

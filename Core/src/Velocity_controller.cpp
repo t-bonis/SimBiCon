@@ -189,7 +189,7 @@ void Velocity_controller::store_velocity(double cur_phi, Vector3d v)
 
 	change_desired_heading(SimGlobals::desired_heading, true);
 
-	//convert v to the current orientation
+	//convert v to the current arb_orientation
 	v = Quaternion::get_rotation_quaternion(desired_heading, SimGlobals::up).to_local_coordinate(v);
 
 	//store the current speed to be able to know the avg speed at the end
@@ -277,7 +277,7 @@ void Velocity_controller::adapt_learning_curve(Vector3d v, double phi_last_step)
 
 	last_phi = phi_last_step;
 
-	//convert v to the current orientation
+	//convert v to the current arb_orientation
 	v = Quaternion::get_rotation_quaternion(desired_heading, SimGlobals::up).to_local_coordinate(v);
 
 

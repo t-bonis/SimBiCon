@@ -85,7 +85,7 @@ std::vector<std::vector<double>> HingeJoint::get_rotation_limits()
 
 /**
 	This method is used to fix the joint angular constraint to correct for drift. This is done by changing
-		the orientation of the child.
+		the arb_orientation of the child.
 */
 void HingeJoint::fix_angular_constraint_parent_to_child(const Quaternion& qRel)
 {
@@ -98,7 +98,7 @@ void HingeJoint::fix_angular_constraint_parent_to_child(const Quaternion& qRel)
 	//get the rotation angle around the correct axis now (we are not in the world frame now)
 	double ang = axis.dotProductWith(rot_axe) * rotAngle;
 
-	//and compute the correct child orientation
+	//and compute the correct child arb_orientation
 	m_child_arb->set_orientation(m_parent_arb->get_orientation() * Quaternion::get_rotation_quaternion(ang, rot_axe));
 }
 
@@ -113,6 +113,6 @@ void HingeJoint::fix_angular_constraint_child_to_parent(const Quaternion& qRel)
 	//get the rotation angle around the correct axis now (we are not in the world frame now)
 	double ang = axis.dotProductWith(rot_axe) * rotAngle;
 
-	//and compute the correct parent orientation
+	//and compute the correct parent arb_orientation
 	m_parent_arb->set_orientation(m_child_arb->get_orientation() * Quaternion::get_rotation_quaternion(ang, rot_axe));
 }

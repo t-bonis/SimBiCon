@@ -24,14 +24,14 @@ public:
 	Joint& operator=(Joint&& other)  = delete;
 	
 
-	//	This method is used to compute the relative orientation between the parent and the child rigid bodies, expressed in 
+	//	This method is used to compute the relative arb_orientation between the parent and the child rigid bodies, expressed in 
 	//	the frame coordinate of the parent.
 	void compute_relative_orientation(Quaternion& q_rel) const;
 	void compute_relative_angular_velocity(Vector3d& wRel) const;
 	void compute_relative_angular_acceleration(Vector3d& wRel) const;
 
 	//	This method is used to fix the joint angular constraint to correct for drift. This is done by changing
-	//	the orientation of the child relative to the parent
+	//	the arb_orientation of the child relative to the parent
 	virtual void fix_angular_constraint_parent_to_child(const Quaternion& qRel) = 0;
 
 

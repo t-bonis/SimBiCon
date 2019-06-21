@@ -132,7 +132,6 @@ dGeomID Ode_world::get_sphere_geom(SphereCDP* s) const
 	const auto g = dCreateSphere(nullptr, s->get_radius());
 	dSpaceAdd(m_space_id, g);
 	const auto c = s->get_center();
-	dGeomSetPosition(g, c.x, c.y, c.z);
 	return g;
 }
 
@@ -140,8 +139,6 @@ dGeomID Ode_world::get_box_geom(BoxCDP* b) const
 {
 	const auto g = dCreateBox(nullptr, b->getXLen(), b->getYLen(), b->getZLen());
 	dSpaceAdd(m_space_id, g);
-	const auto c = b->getCenter();
-	dGeomSetPosition(g, c.x, c.y, c.z);
 	return g;
 }
 
@@ -156,7 +153,7 @@ dGeomID Ode_world::get_capsule_geom(Capsule_cdp* c) const
 	dGeomSetPosition(g, cen.x, cen.y, cen.z);
 
 
-	//now, the default orientation for this is along the z-axis. We need to rotate this to make it match the direction
+	//now, the default arb_orientation for this is along the z-axis. We need to rotate this to make it match the direction
 	//of ab, so we need an angle and an axis...
 	Vector3d def_a(0, 0, 1);
 
@@ -386,24 +383,38 @@ void Ode_world::create_ode_collision_primitives(Rigid_body& body) const
 	{
 		//depending on the type of collision primitive, we'll now create g.
 		dGeomID g;
-
 		switch (body.get_cdps()[j]->get_type())
 		{
 		case CollisionDetectionPrimitive::sphere_cdp:
-			g = get_sphere_geom(dynamic_cast<SphereCDP*>(body.get_cdps()[j].get()));
+		{
+			auto s = dynamic_cast<SphereCDP*>(body.get_cdps()[j].get());
+			g = get_sphere_geom(s);
+			dGeomSetBody(g, body.get_ode_id());
+			const auto c = s->get_center();
+			dGeomSetOffsetPosition(g, c.x, c.y, c.z);
 			break;
+		}
 		case CollisionDetectionPrimitive::capsule_cdp:
 			g = get_capsule_geom(dynamic_cast<Capsule_cdp*>(body.get_cdps()[j].get()));
+			dGeomSetBody(g, body.get_ode_id());
 			break;
 		case CollisionDetectionPrimitive::box_cdp:
-			g = get_box_geom(dynamic_cast<BoxCDP*>(body.get_cdps()[j].get()));
+		{
+			auto b = dynamic_cast<BoxCDP*>(body.get_cdps()[j].get());
+			g = get_box_geom(b);
+			dGeomSetBody(g, body.get_ode_id());
+			const auto c = b->getCenter();
+			dGeomSetOffsetPosition(g, c.x, c.y, c.z);
 			break;
+		}
 		case CollisionDetectionPrimitive::plane_cdp:
 			//NOTE: only static objects can have planes as their collision primitives - if this isn't static, force it!!
 			g = get_plane_geom(dynamic_cast<Plane_cdp*>(body.get_cdps()[j].get()), body);
+			dGeomSetBody(g, body.get_ode_id());
 			break;
 		case CollisionDetectionPrimitive::tri_mesh_cdp:
 			g = get_tri_mesh_geom(dynamic_cast<Tri_mesh_cdp*>(body.get_cdps()[j].get()));
+			dGeomSetBody(g, body.get_ode_id());
 			break;
 		case CollisionDetectionPrimitive::unknown_cdp:
 		default:
@@ -414,35 +425,6 @@ void Ode_world::create_ode_collision_primitives(Rigid_body& body) const
 
 		//now associate the geom to the rigid body that it belongs to, so that we can look up the properties we need later...
 		dGeomSetData(g, &body);
-
-		//if it's a plane, it means it must be static, so we can't attach a transform to it...
-		if (body.get_cdps()[j]->get_type() == CollisionDetectionPrimitive::plane_cdp)
-			continue;
-
-		//now we've created a geom for the current body. Note: g will be rotated relative to t, so that it is positioned
-		//well in body coordinates, and then t will be attached to the body.
-		//const auto t = dCreateGeomTransform(m_space_id);
-		//make sure that when we destroy the transformation, we destroy the encapsulated objects as well.
-		//dGeomTransformSetCleanup(t, 1);
-
-		//associate the transform geom with the body as well
-		//dGeomSetData(t, &body);
-
-		//if the object is fixed, then we want the geometry to take into account the initial position and orientation of the rigid body
-		if (body.is_locked())
-		{
-			dGeomSetPosition(g, body.get_cm_position().x, body.get_cm_position().y, body.get_cm_position().z);
-			dQuaternion q;
-			q[0] = body.get_orientation().s;
-			q[1] = body.get_orientation().v.x;
-			q[2] = body.get_orientation().v.y;
-			q[3] = body.get_orientation().v.z;
-			dGeomSetQuaternion(g, q);
-		}
-
-		//now setDataFromPosition t (which contains the correctly positioned geom) to the body, if we do really have an ODE body for it
-		if (!body.is_locked())
-			dGeomSetBody(g, body.get_ode_id());
 	}
 }
 
@@ -510,7 +492,7 @@ void Ode_world::process_collisions(dGeomID o1, dGeomID o2)
 		//fill in the missing properties for the contact points
 		for (auto i = 0; i < nb_contacts; i++)
 		{
-			//std::cout << rb1->get_name() << " with " << rb2->get_name() << " : " << m_cps[i].geom.pos[0] << " " << m_cps[i].geom.pos[1] << " " << m_cps[i].geom.pos[2] << std::endl;
+			//std::cout << rb1->get_name() << " with " << rb2->get_name() << " : " << m_cps[i].geom.arb_position[0] << " " << m_cps[i].geom.arb_position[1] << " " << m_cps[i].geom.arb_position[2] << std::endl;
 
 
 			m_cps[i].surface.mode = dContactSoftERP | dContactSoftCFM | dContactRolling | dContactApprox1;
@@ -521,8 +503,8 @@ void Ode_world::process_collisions(dGeomID o1, dGeomID o2)
 			//m_cps[i].surface.bounce = eps_to_use;
 			//m_cps[i].surface.bounce_vel = 1e-5;
 
-			m_cps[i].surface.soft_cfm = 0.1;
-			m_cps[i].surface.soft_erp = 0.8;
+			m_cps[i].surface.soft_cfm = 9e-3;
+			m_cps[i].surface.soft_erp = 0.2;
 		}
 	}
 
@@ -752,7 +734,7 @@ void Ode_world::apply_torque_to(Rigid_body& rigid_body, const Vector3d& t)
 
 void Ode_world::init()
 {
-	const auto max_cont = 16;
+	const auto max_cont = 333;
 	//Initialize the world, simulation space and joint groups
 	dInitODE();
 	m_world_id = dWorldCreate();
@@ -769,7 +751,7 @@ void Ode_world::init()
 	//dWorldSetContactSurfaceLayer(m_world_id, 0.001); // the amount of interpenetration allowed between objects
 	//dWorldSetContactMaxCorrectingVel(m_world_id, 1.0); // maximum velocity that contacts are allowed to generate  
 	dWorldSetERP(m_world_id, 0.2);
-	dWorldSetCFM(m_world_id, 1e-4);
+	dWorldSetCFM(m_world_id, 9e-3);
 
 	//set the gravity...
 	const auto gravity = SimGlobals::up * SimGlobals::gravity;

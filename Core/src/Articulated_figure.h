@@ -111,6 +111,8 @@ public:
 
 
 	void set_state(const std::vector<double>& state, int start = 0);
+	void set_direct_state(std::vector<double>& state);
+	void get_direct_state(std::vector<double>& state);
 	void set_default_state();
 
 	static void set_arbs_lines_state(const std::vector<double>& state, std::vector<Articulated_rigid_body*> arbs_involved);

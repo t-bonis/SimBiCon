@@ -14,11 +14,12 @@ struct Cma_object
 	{
 		parameters.lambda = lambda;
 		parameters.logWarnings = true;
-		parameters.mu = 4;
+		parameters.mu = 10;
 		parameters.stopMaxFunEvals = 1e9;
 		//parameters.stopTolFunHist = 0.005;
-		parameters.stopTolX = 0.0001;
-		parameters.stStopFitness = { true, 0.0001 };
+		parameters.stopTolX = 0.001;
+		//parameters.damps = 0.1;
+		//parameters.stStopFitness = { true, 0.0001 };
 		parameters.stopTolUpXFactor = 100;
 		//parameters.weightMode = parameters.LINEAR_WEIGHTS;
 		parameters.init(dim, x_start, std_dev);
@@ -44,7 +45,11 @@ public:
 	explicit Learning_framework(std::string& input);
 	void compute_intervals();
 
+	void test_default_config();
+
 	~Learning_framework();
+
+	void stop_all_threads();
 
 	Learning_framework(const Learning_framework& other) = delete;
 	Learning_framework(Learning_framework&& other) = delete;
@@ -72,6 +77,7 @@ public:
 
 private slots:
 	void simulation_done(SimBiCon_framework* simbicon_framework);
+	void clear_finished_thread();
 	void analyze_done(SimBiCon_framework* simbicon_framework);
 
 	size_t get_rank(SimBiCon_framework * simbicon_framework);
@@ -91,7 +97,7 @@ private:
 	std::shared_ptr<Analyzer_thread> m_analyzer_thread;
 
 	std::vector<std::shared_ptr<Cma_object>> m_cma;
-	size_t m_target_nb_iterations = 50;
+	size_t m_target_nb_iterations = 10;
 	size_t m_iteration = 0;
 	size_t m_sample_to_save = 100;
 	std::vector<std::vector<double>> m_all_cost;
@@ -108,6 +114,7 @@ private:
 	size_t m_target_simulation_time;
 	int m_dim = 15;
 	size_t m_lambda = 2000;
+	bool m_test = false;
 	std::array<double,15> m_x_start;
 	std::array<double,15> m_std_dev;
 };

@@ -9,6 +9,7 @@
 #include <boost/algorithm/string.hpp>
 #include <filesystem>
 #include "Utils/src/Utils.h"
+#include <fstream>
 
 Rigid_body::Rigid_body(const Rigid_body& other)
 {
@@ -33,7 +34,8 @@ Rigid_body::Rigid_body(const Rigid_body& other)
 		{
 		case CollisionDetectionPrimitive::unknown_cdp: 
 			break;
-		case CollisionDetectionPrimitive::sphere_cdp: 
+		case CollisionDetectionPrimitive::sphere_cdp:
+			m_CDPs.push_back(std::make_shared<SphereCDP>(*std::dynamic_pointer_cast<SphereCDP>(cdp)));
 			break;
 		case CollisionDetectionPrimitive::capsule_cdp: 
 			break;
@@ -78,10 +80,41 @@ void Rigid_body::load_rb_from_struct(const A_RigidBody& a_rigid_body)
 		tmp_mesh->set_color(std::array<float, 3>({ float(mesh.color[0]), float(mesh.color[1]), float(mesh.color[2]) }));
 		m_models.push_back(tmp_mesh);
 
-		auto cdp_file = boost::algorithm::replace_last_copy(mesh.file_name, ".obj", "_cdp.obj");
-		if (std::filesystem::exists(cdp_file))
+		auto cdp_file_obj = boost::algorithm::replace_last_copy(mesh.file_name, ".obj", "_cdp.obj");
+		auto cdp_file_txt = boost::algorithm::replace_last_copy(mesh.file_name, ".obj", "_cdp.txt");
+		if (std::filesystem::exists(cdp_file_obj))
 		{
-			m_CDPs.push_back(std::make_shared<Tri_mesh_cdp>(cdp_file, a_rigid_body));
+			m_CDPs.push_back(std::make_shared<Tri_mesh_cdp>(cdp_file_obj, a_rigid_body));
+		}
+		else if (std::filesystem::exists(cdp_file_txt))
+		{
+			std::ifstream ifs;
+			ifs.open(cdp_file_txt);
+
+			// read to the end
+			while (!ifs.eof())
+			{
+				std::string line;
+				getline(ifs, line);
+				std::vector<std::string> words;
+				boost::algorithm::trim(line);
+				if (!line.empty() && line.front() != '#')
+				{
+					split(words, line, boost::is_space(), boost::algorithm::token_compress_on);
+					switch (m_attribute_id.find(words[0])->second)
+					{
+					case att_id::sphere:
+						{
+						Point3d center(std::stod(words[1]), std::stod(words[2]), std::stod(words[3]));
+						double radius(std::stod(words[4]));	
+						m_CDPs.push_back(std::make_shared<SphereCDP>(center, radius));
+						break;
+						}
+					default:
+						break;
+					}
+				}
+			}
 		}
 		else
 		{
@@ -121,7 +154,7 @@ Point3d Rigid_body::get_point_world_coordinates(const Point3d& localPoint) const
 //This method returns the vector that is passed in as a parameter(expressed in local coordinates), in world coordinates.
 Vector3d Rigid_body::get_vector_world_coordinates(const Vector3d& localVector) const
 {
-	//the rigid body's orientation is a unit quaternion. Using this, we can obtain the global coordinates of a local vector
+	//the rigid body's arb_orientation is a unit quaternion. Using this, we can obtain the global coordinates of a local vector
 	return m_state.orientation.rotate(localVector);
 }
 
@@ -136,7 +169,7 @@ Point3d Rigid_body::get_local_coordinates(const Point3d& globalPoint) const
 //This method is used to return the local coordinates of the vector that is passed in as a parameter (expressed in global coordinates)
 Vector3d Rigid_body::get_local_coordinates(const Vector3d& globalVector) const
 {
-	//the rigid body's orientation is a unit quaternion. Using this, we can obtain the global coordinates of a local vector
+	//the rigid body's arb_orientation is a unit quaternion. Using this, we can obtain the global coordinates of a local vector
 	return this->m_state.orientation.get_conjugate().rotate(globalVector);
 }
 

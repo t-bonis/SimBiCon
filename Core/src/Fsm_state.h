@@ -60,7 +60,7 @@ public:
 
 
 //This helper class is used to hold information regarding one trajectory. This includes: a sequence of components, 
-//the index of the joint that this trajectory applies to, the coordinate frame in which the final orientation is expressed, etc.
+//the index of the joint that this trajectory applies to, the coordinate frame in which the final arb_orientation is expressed, etc.
 class Joint_trajectory
 {
 public:

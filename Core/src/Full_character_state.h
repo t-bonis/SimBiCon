@@ -1,44 +1,30 @@
 #pragma once
 #include "Utils/src/Utils.h"
 
-//This class is used to map the array of doubles that is used to define the state of the character to an
-//easier to use and understand meaning of the state. This should be the only place in the code where we need to know
-//that the first 13 numbers in the array represent the position, arb_orientation, velocity and angular velocity, etc.
-//For the state, we consider the 13-dimensional state of the root, and then only
-//the relative arb_orientation and angular velocity (as measured in parent coordinates) for
-//every other link. The velocities of the CM are derived from this information,
-//using the velocity propagation technique (if that's what it is called).
-//The order in which the bodies appear is given by the array of joints.
-//This works under the assumption that in the joint
-//sequence, the parent of any rigid body appears before its children (assuming that for each joint
-//we read the parent first and then the child).
-//Muscle edit: the activation and excitation of each muscle are also stored in the array.
-//Here, the order is that of the Character's muscles array.
-class Reduced_character_state
+class Full_character_state
 {
 public:
-	Reduced_character_state()
+	Full_character_state()
 	{
 		this->m_start_index = 0;
 		m_state = std::vector<double>(200);
-		//TODO : initialize using number of joint 
+		//TODO : initialize using number of rigid_body 
 	}
-	explicit Reduced_character_state(const std::vector<double>& s, const size_t index = 0)
+	explicit Full_character_state(const std::vector<double>& s, const size_t index = 0)
 	{
 		set_state(s, index);
 	}
-	explicit Reduced_character_state(std::vector<double>&& s, const size_t index = 0)
+	explicit Full_character_state(std::vector<double>&& s, const size_t index = 0)
 	{
 		set_state(std::move(s), index);
 	}
+	~Full_character_state() = default;
 
-	~Reduced_character_state() = default;
+	Full_character_state(const Full_character_state& other) = delete;
+	Full_character_state(Full_character_state&& other) = delete;
+	Full_character_state& operator=(const Full_character_state& other) = delete;
+	Full_character_state& operator=(Full_character_state&& other) = delete;
 
-	Reduced_character_state(const Reduced_character_state& other) = delete;
-	Reduced_character_state(Reduced_character_state&& other)  = delete;
-	Reduced_character_state& operator=(const Reduced_character_state& other) = delete;
-	Reduced_character_state& operator=(Reduced_character_state&& other)  = delete;
-	
 	std::vector<double> get_state() const { return m_state; }
 
 	void set_state(const std::vector<double>& s, const size_t index = 0)
@@ -75,7 +61,7 @@ public:
 	Quaternion get_root_orientation() const
 	{
 		return Quaternion(m_state[3 + m_start_index], m_state[4 + m_start_index], m_state[5 + m_start_index],
-		                  m_state[6 + m_start_index]);
+			m_state[6 + m_start_index]);
 	}
 
 	void set_root_orientation(const QQuaternion& q)
@@ -117,38 +103,66 @@ public:
 		m_state[12 + m_start_index] = v.z;
 	}
 
-	Quaternion get_joint_relative_orientation(const size_t j_index) const
+	Quaternion get_arb_orientation(const size_t j_index) const
 	{
-		const auto offset = m_start_index + 13 + 7 * j_index;
+		const auto offset = m_start_index + 13 + 13 * j_index;
 		return Quaternion(m_state[0 + offset], m_state[1 + offset], m_state[2 + offset], m_state[3 + offset]);
 	}
 
-	void set_joint_relative_orientation(const QQuaternion& q, const size_t j_index)
+	void set_arb_orientation(const QQuaternion& q, const size_t j_index)
 	{
-		set_joint_relative_orientation(Quaternion(q.scalar(), q.x(), q.y(), q.z()), j_index);
+		set_arb_orientation(Quaternion(q.scalar(), q.x(), q.y(), q.z()), j_index);
 	}
 
-	void set_joint_relative_orientation(const Quaternion& q, const size_t j_index)
+	void set_arb_orientation(const Quaternion& q, const size_t j_index)
 	{
-		const auto offset = m_start_index + 13 + 7 * j_index;
+		const auto offset = m_start_index + 13 + 13 * j_index;
 		m_state[0 + offset] = q.s;
 		m_state[1 + offset] = q.v.x;
 		m_state[2 + offset] = q.v.y;
 		m_state[3 + offset] = q.v.z;
 	}
 
-	Vector3d get_joint_relative_ang_velocity(const size_t j_index) const
+	Vector3d get_arb_position(const size_t j_index) const
 	{
-		const auto offset = m_start_index + 13 + 7 * j_index;
+		const auto offset = m_start_index + 13 + 13 * j_index;
 		return Vector3d(m_state[4 + offset], m_state[5 + offset], m_state[6 + offset]);
 	}
 
-	void set_joint_relative_ang_velocity(const Vector3d& w, const size_t j_index)
+	void set_arb_position(const Vector3d& w, const size_t j_index)
 	{
-		const auto offset = m_start_index + 13 + 7 * j_index;
+		const auto offset = m_start_index + 13 + 13 * j_index;
 		m_state[4 + offset] = w.x;
 		m_state[5 + offset] = w.y;
 		m_state[6 + offset] = w.z;
+	}
+
+	Vector3d get_arb_lin_velocity(const size_t j_index) const
+	{
+		const auto offset = m_start_index + 13 + 13 * j_index;
+		return Vector3d(m_state[7 + offset], m_state[8 + offset], m_state[9 + offset]);
+	}
+
+	void set_arb_lin_velocity(const Vector3d& w, const size_t j_index)
+	{
+		const auto offset = m_start_index + 13 + 13 * j_index;
+		m_state[7 + offset] = w.x;
+		m_state[8 + offset] = w.y;
+		m_state[9 + offset] = w.z;
+	}
+
+	Vector3d get_arb_ang_velocity(const size_t j_index) const
+	{
+		const auto offset = m_start_index + 13 + 13 * j_index;
+		return Vector3d(m_state[10 + offset], m_state[11 + offset], m_state[12 + offset]);
+	}
+
+	void set_arb_ang_velocity(const Vector3d& w, const size_t j_index)
+	{
+		const auto offset = m_start_index + 13 + 13 * j_index;
+		m_state[10 + offset] = w.x;
+		m_state[11 + offset] = w.y;
+		m_state[12 + offset] = w.z;
 	}
 
 	std::vector<double>* get_state_ptr()
@@ -160,5 +174,6 @@ private:
 
 	std::vector<double> m_state;
 
-	size_t m_start_index{0};
+	size_t m_start_index{ 0 };
+
 };

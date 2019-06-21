@@ -19,15 +19,19 @@ public:
 	Gait_analyzer& operator=(const Gait_analyzer& other) = delete;
 	Gait_analyzer& operator=(Gait_analyzer&& other) = delete;
 
-	double compute_angular_diff(std::array<size_t, 2> interval = {0,0});
+	double compute_pose_control(std::array<size_t, 2> interval = {0,0});
 
 	double compute_effort(std::array<size_t, 2> interval = { 0,0 });
 
-	double compute_pelvis_pos_diff(std::array<size_t, 2> interval = { 0,0 });
+	double compute_root_control(std::array<size_t, 2> interval = { 0,0 });
 
-	double compute_pelvis_orientation_diff(std::array<size_t, 2> interval = { 0,0 });
+	double compute_end_effector_control(std::array<size_t, 2> interval = { 0,0 });
+
+	double compute_balance_control(std::array<size_t, 2> interval = { 0,0 });
 
 	double compute_gain_sum() const;
+
+	double get_nb_frame();
 
 	void reset();
 
@@ -43,26 +47,23 @@ private :
 public:
 	std::vector<std::vector<double>> activations;
 
-	std::vector<std::vector<Vector3d>> angles;
-	std::vector<std::vector<Vector3d>> angles_reference;
+	std::vector<std::vector<Quaternion>> joint_relative_orientation;
+	std::vector<std::vector<Quaternion>> joint_relative_orientation_ref;
 
-	std::vector<std::vector<Vector3d>> angular_velocity;
-	std::vector<std::vector<Vector3d>> angular_velocity_reference;
+	std::vector<std::vector<Vector3d>> joint_relative_angular_velocity;
+	std::vector<std::vector<Vector3d>> joint_relative_angular_velocity_ref;
 
 	std::vector<std::vector<Vector3d>> arb_angular_velocity;
-	std::vector<std::vector<Vector3d>> arb_angular_velocity_reference;
+	std::vector<std::vector<Vector3d>> arb_angular_velocity_ref;
 	
-	std::vector<std::vector<Vector3d>> angular_acceleration;
-	std::vector<std::vector<Vector3d>> angular_acceleration_reference;
+	std::vector<std::vector<Point3d>> arb_position;
+	std::vector<std::vector<Point3d>> arb_position_ref;
 
-	std::vector<std::vector<Point3d>> pos;
-	std::vector<std::vector<Point3d>> pos_reference;
+	std::vector<std::vector<Vector3d>> arb_linear_velocity;
+	std::vector<std::vector<Vector3d>> arb_linear_velocity_ref;
 
-	std::vector<std::vector<Vector3d>> vel;
-	std::vector<std::vector<Vector3d>> vel_reference;
-
-	std::vector<std::vector<Quaternion>> orientation;
-	std::vector<std::vector<Quaternion>> orientation_reference;
+	std::vector<std::vector<Quaternion>> arb_orientation;
+	std::vector<std::vector<Quaternion>> arb_orientation_ref;
 
 	std::vector<std::vector<Vector3d>> torques1;
 	std::vector<std::vector<Vector3d>> torques2;
@@ -78,6 +79,9 @@ public:
 	std::vector<Vector3d> cop;
 	std::vector<Vector3d> com_vel;
 	std::vector<Vector3d> com_vel_ref;
+	std::vector<Vector3d> com_pos;
+	std::vector<Vector3d> com_pos_ref;
+
 	
 	size_t target_simulation_length{size_t(-1)};
 

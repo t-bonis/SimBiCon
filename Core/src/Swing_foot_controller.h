@@ -100,14 +100,14 @@ protected:
 	void compute_swing_leg_target(double dt, Quaternion desired_heading_pelvis);
 
 	/**
-	This method returns a target for the location of the swing foot, based on some state information. It is assumed that the velocity vel
+	This method returns a target for the location of the swing foot, based on some state information. It is assumed that the velocity arb_linear_velocity
 	is expressed in character-relative coordinates (i.e. the sagittal component is the z-component), while the com position, and the
 	initial swing foot position is expressed in world coordinates. The resulting desired foot position is also expressed in world coordinates.
 	*/
 	Point3d swing_foot_target_location(double t, const Point3d& com, const Quaternion& charFrameToWorld);
 
 	/**
-	This method is used to compute the desired orientation and angular velocity for a parent RB and a child RB, relative to the grandparent RB and
+	This method is used to compute the desired arb_orientation and angular velocity for a parent RB and a child RB, relative to the grandparent RB and
 	parent RB repsectively. The input is:
 	- the index of the joint that connects the grandparent RB to the parent RB, and the index of the joint between parent and child
 

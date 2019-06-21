@@ -96,13 +96,6 @@ SimBiCon_framework::SimBiCon_framework(std::string& conF_filename)
 	{
 		arb->notify();
 	}
-
-	if (get_gait_analyzer())
-	{
-		get_reference_handler()->notify();
-		get_controlled_character()->notify();
-		get_desired_pose_handler()->notify();
-	}
 }
 
 
@@ -118,6 +111,7 @@ SimBiCon_framework::SimBiCon_framework(const SimBiCon_framework& other)
 
 	//ref trajectories
 	m_reference_trajectories = other.m_reference_trajectories;
+	m_ref_traj_correction = other.m_ref_traj_correction;
 
 	//reference handler
 	m_walking_cycle_time = other.m_walking_cycle_time;
@@ -161,7 +155,15 @@ SimBiCon_framework::SimBiCon_framework(const SimBiCon_framework& other)
 	if (auto ode_world = dynamic_cast<Ode_world*>(m_physical_world.get()))
 	{
 		ode_world->link_simbicon_with_ode();
-		init_controlled_character_state();
+		std::vector<double> state;
+		other.get_physical_world()->get_character()->get_direct_state(state);
+		get_physical_world()->get_character()->set_direct_state(state);
+		get_physical_world()->get_character()->save_previous_state();
+
+		for (auto& arb : m_physical_world->get_character()->get_arbs())
+		{
+			arb->notify();
+		}
 	}
 
 
@@ -173,19 +175,12 @@ SimBiCon_framework::SimBiCon_framework(const SimBiCon_framework& other)
 
 	update_desired_pos_handler();
 
-	update_ref_traj_correction();
+	//update_ref_traj_correction();
 	update_reference_trajectories();
 
 	for (auto& arb : std::dynamic_pointer_cast<SimBiCon>(m_controllers[0])->get_controlled_character()->get_arbs())
 	{
 		arb->notify();
-	}
-
-	if (get_gait_analyzer())
-	{
-		get_reference_handler()->notify();
-		get_controlled_character()->notify();
-		get_desired_pose_handler()->notify();
 	}
 }
 
@@ -317,7 +312,7 @@ void SimBiCon_framework::global_step(const double dt)
 	update_walking_cycle_time();
 	update_reference_trajectories();
 	//std::cout << "ref : " << m_reference_handler->get_arb_by_name("pelvis")->get_cm_velocity() << std::endl;
-	//std::cout << "vel : " << m_physical_world->get_character()->get_arb_by_name("pelvis")->get_cm_velocity() << std::endl;
+	//std::cout << "arb_linear_velocity : " << m_physical_world->get_character()->get_arb_by_name("pelvis")->get_cm_velocity() << std::endl;
 
 	//Advance the simulation (apply torque or muscle torque)
 	m_physical_world->engine_simulation_step();
@@ -471,6 +466,14 @@ void SimBiCon_framework::add_drawing()
 		orientation.set_to_rotation_quaternion(angle, axis);
 		m_gl_widget->add_arrow(Vector3d(contact_point->cp), orientation, force.length()*1e-3);
 	}
+
+	//COM velocity
+	Quaternion orientation;
+	Vector3d force = character->get_com_velocity();
+	auto axis = force.cross_product_with(SimGlobals::up).toUnit();
+	const auto angle = force.angle_with(SimGlobals::up);
+	orientation.set_to_rotation_quaternion(angle, axis);
+	m_gl_widget->add_arrow(Vector3d(character->get_com()), orientation.get_inverse(), force.length()*1e-1);
 }
 
 void SimBiCon_framework::update_desired_pos_handler()

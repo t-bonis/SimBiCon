@@ -13,11 +13,15 @@ class Articulated_rigid_body;
 class Rigid_body : public Subject_interface
 {
 public:
+	enum att_id
+	{
+		sphere
+	};
 	struct RBState
 	{
 		// the position of the center of mass of the rigid body
 		Point3d position{ 0.0, 0.0, 0.0 };
-		// its orientation
+		// its arb_orientation
 		Quaternion orientation{ 1.0, 0.0, 0.0, 0.0 };
 		// the velocity of the center of mass
 		Vector3d velocity{ 0.0, 0.0, 0.0 };
@@ -163,13 +167,13 @@ public:
 		return m_properties.local_moi;
 	}
 
-	// this method returns the body's orientation
+	// this method returns the body's arb_orientation
 	Quaternion get_orientation() const
 	{
 		return m_state.orientation;
 	}
 
-	// this method sets the body's orientation
+	// this method sets the body's arb_orientation
 	void set_orientation(const Quaternion& q)
 	{
 		m_state.orientation = q;
@@ -267,7 +271,7 @@ public:
 	void update_angular_velocity_avg();
 
 protected:
-	// the state of the rigid body: made up of the object's position in the world, its orientation and linear/angular velocities (stored in world coordinates)
+	// the state of the rigid body: made up of the object's position in the world, its arb_orientation and linear/angular velocities (stored in world coordinates)
 	RBState m_state;
 
 	RBState m_previous_state;
@@ -290,4 +294,9 @@ protected:
 	std::vector<Vector3d> m_previous_angular_velocity_avg;
 	Vector3d m_angular_velocity_avg;
 	int m_previous_angular_vel_avg_max_size{};
+
+	private:
+		std::map<std::string, att_id> m_attribute_id{
+	{"sphere",sphere},
+		};
 };
