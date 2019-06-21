@@ -72,7 +72,7 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <SupportJustMyCode>true</SupportJustMyCode>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DebugInformationFormat>None</DebugInformationFormat>
     </ClCompile>
     <Lib>
       <AdditionalLibraryDirectories>
@@ -107,7 +107,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)ode-0.16\include\;$(QTDIR)\include\;$(SolutionDir)include\;$(ProjectDir)GeneratedFiles\</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_USE_MATH_DEFINES;_DEBUG</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_USE_MATH_DEFINES</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <AdditionalOptions>
@@ -133,7 +133,7 @@
       <PreserveSbr>true</PreserveSbr>
     </Bscmake>
     <QtMoc>
-      <Define>_USE_MATH_DEFINES;_DEBUG</Define>
+      <Define>_USE_MATH_DEFINES</Define>
       <IncludePath>$(SolutionDir);$(SolutionDir)ode-0.16\include\;$(QTDIR)\include\;$(SolutionDir)include\;$(ProjectDir)GeneratedFiles\</IncludePath>
       <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
       <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
