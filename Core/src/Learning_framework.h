@@ -9,12 +9,6 @@ struct Cma_object
 	Parameters<double> parameters;
 	double*const* pop; // sampled population
 	double* fitvals; // objective function values of sampled population
-	double fbestever = 0, *xbestever = nullptr; // store best solution
-	double fmean;
-
-	int irun = 0;
-	int countevals = 0;
-	int iSampleEval = 0;
 
 	Cma_object::Cma_object(size_t lambda, const int dim,const double* x_start,const double* std_dev)
 	{
@@ -24,7 +18,7 @@ struct Cma_object
 		parameters.mu = 6;
 		parameters.stopMaxFunEvals = 1e9;
 		//parameters.stopTolFunHist = 0.005;
-		parameters.stopTolX = 0.01;
+		parameters.stopTolX = 0.05;
 		parameters.stopTolUpXFactor = 100;
 		//parameters.weightMode = parameters.LINEAR_WEIGHTS;
 		fitvals = evo.init(parameters); // alloc fitness values
@@ -59,11 +53,12 @@ public:
 	void assign_values(SimBiCon_framework& simbicon_framework, size_t sample_to_eval);
 	void assign_best_values(SimBiCon_framework& available_framework, size_t nomber_to_update);
 	static knot_ptr get_next_knot(std::vector<std::shared_ptr<Fsm_state>> fsm_states, knot_ptr current_knot);
-	void eval_simbicon_framework(SimBiCon_framework& simbicon_framework);
+	void eval_simbicon_framework(SimBiCon_framework & simbicon_framework, size_t interval_begining, size_t nb_of_intervals);
 	void start_learning();
-	SimBiCon_framework* create_simbicon_framework();
+	SimBiCon_framework* create_simbicon_framework(SimBiCon_framework* in_simbicon_framework);
 	bool is_feasible(double* p, Cma_object* cma) const;
 	void next_eval();
+	void next_iteration();
 	void next_pop();
 
 	void print_state(const std::shared_ptr<Cma_object>& cma);
@@ -77,32 +72,39 @@ private slots:
 	void simulation_done(SimBiCon_framework* simbicon_framework);
 	void analyze_done(SimBiCon_framework* simbicon_framework);
 
+	size_t get_rank(SimBiCon_framework * simbicon_framework);
+
 private:
+	void delete_framework(SimBiCon_framework * simbicon_framework);
+	std::shared_ptr<SimBiCon_framework> get_ptr(SimBiCon_framework * simbicon_framework);
 	void end_reconstruction();
+
+private:
 	std::shared_ptr<SimBiCon_framework> m_default_simbicon_framework;
 	std::vector<std::shared_ptr<SimBiCon_framework>> m_simbicon_frameworks;
+	std::vector<SimBiCon_framework*> m_saved_frameworks;
+	std::vector<SimBiCon_framework*> m_next_saved_frameworks;
 
 	std::vector<std::shared_ptr<Simulation_thread>> m_simulation_threads;
 	std::shared_ptr<Analyzer_thread> m_analyzer_thread;
 
 	std::vector<std::shared_ptr<Cma_object>> m_cma;
-
-	size_t m_windows_start;
-
-	size_t m_windows_size;
-
-	size_t m_max_cma_to_update;
-
+	size_t m_target_nb_iterations = 10;
+	size_t m_iteration = 0;
+	size_t m_sample_to_save = 10;
+	std::vector<std::vector<double>> m_all_cost;
+	std::vector<double> m_final_cost;
+	std::vector<std::vector<std::pair<size_t, size_t>>> m_combinaison_history;
 	std::vector<double> m_intervals{};
 
-private:
 	size_t m_next_sample_to_eval = 0;
+	
 	size_t m_current_pop = 0;
 	size_t m_sample_evaluated = 0;
 	double m_reconstructed_time = 0;
 	size_t m_target_simulation_time;
 	int m_dim = 15;
-	size_t m_lambda = 2000;
+	size_t m_lambda = 200;
 	std::array<double,15> m_x_start;
 	std::array<double,15> m_std_dev;
 };

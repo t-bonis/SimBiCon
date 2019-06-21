@@ -10,7 +10,6 @@ class Analyzer_thread : public QThread
 public:
 	Analyzer_thread() = delete;
 	explicit Analyzer_thread(SimBiCon_framework& conF);
-	Analyzer_thread(SimBiCon_framework& conF, Learning_framework& learnF);
 	~Analyzer_thread() = default;
 
 public slots:
@@ -20,10 +19,8 @@ signals:
 
 private:
 	void eval_simulation() const;
-	void eval_intervals() const;
 	void run() override;
 
 	SimBiCon_framework* m_simbicon_framework;
-	Learning_framework* m_learning_framework = nullptr;
 };
 
