@@ -35,9 +35,9 @@ void Arb_angular_velocities::update(const Subject_interface* subject)
 				const auto y12 = gait_analyzer->arb_angular_velocity[i][j].y;
 				const auto y13 = gait_analyzer->arb_angular_velocity[i][j].z;
 
-				const auto y21 = gait_analyzer->arb_angular_velocity_reference[i][j].x;
-				const auto y22 = gait_analyzer->arb_angular_velocity_reference[i][j].y;
-				const auto y23 = gait_analyzer->arb_angular_velocity_reference[i][j].z;
+				const auto y21 = gait_analyzer->arb_angular_velocity_ref[i][j].x;
+				const auto y22 = gait_analyzer->arb_angular_velocity_ref[i][j].y;
+				const auto y23 = gait_analyzer->arb_angular_velocity_ref[i][j].z;
 
 				const auto x = j;
 

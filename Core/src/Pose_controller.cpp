@@ -149,7 +149,7 @@ void Pose_controller::compute_torques()
 		const auto joint_id = joint->get_af_id();
 		if (m_control_params[joint_id].controlled)
 		{
-			//get the current relative orientation between the child and parent
+			//get the current relative arb_orientation between the child and parent
 			joint->compute_relative_orientation(qRel);
 			//and the relative angular velocity, computed in parent coordinates
 			joint->compute_relative_angular_velocity(wRel);

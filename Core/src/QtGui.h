@@ -44,7 +44,9 @@ private slots:
 	void simulation_done();
 	void setup_simulation();
 	void setup_optimization();
-	void start_learning();
+	void setup_learning();
+	void test_default_config();
+	void run_learning();
 	void stop_opti() const;
 	void set_speed_value(int) const;
 

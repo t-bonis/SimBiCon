@@ -163,7 +163,7 @@ void Swing_foot_controller::simulation_step(const Quaternion& desired_heading_pe
 	//    oss<<"sagital traj count";
 	//      <<swing_foot_trajectory_sagittal.getKnotValue(0)<<"  "<<
 	//         swing_foot_trajectory_sagittal.getKnotValue(1);
-	//    for (int i=pos;i<pos+2;++i){
+	//    for (int i=arb_position;i<arb_position+2;++i){
 	//        oss<<swing_foot_trajectory_sagittal.getKnotValue(i)<<"  ";
 	//    }
 	//    std::cout<<oss.str();
@@ -287,7 +287,7 @@ Vector3d Swing_foot_controller::ipm_compute_swing_foot_location(const Point3d &c
 		Vector3d currentSwingStepPos(comPos, con->getSwingFootPos());
 		currentSwingStepPos = con->getCharacterFrame().inverseRotate(initialStep); currentSwingStepPos.y = 0;
 		//compute the phase for the via point based on: d1/d2 = 1-x / x-phase, where d1 is the length of the vector from
-		//the via point to the final location, and d2 is the length of the vector from the swing foot pos to the via point...
+		//the via point to the final location, and d2 is the length of the vector from the swing foot arb_position to the via point...
 		double d1 = (step - suggestedViaPoint).length(); double d2 = (suggestedViaPoint - currentSwingStepPos).length(); if (d2 < 0.0001) d2 = d1 + 0.001;
 		double c = d1 / d2;
 		double viaPointPhase = (1 + phase*c) / (1 + c);
@@ -544,13 +544,13 @@ void Swing_foot_controller::compute_swing_leg_target(double dt, Quaternion desir
 	}
 
 	//    std::ostringstream oss;
-	//oss<<"ipm pos: "<<(pNow-com_pos).x<<"  "<<(pNow-com_pos).z;
+	//oss<<"ipm arb_position: "<<(pNow-com_pos).x<<"  "<<(pNow-com_pos).z;
 	//    Point3d ankle_pos=character->swing_foot()->getWorldCoordinates(ankle->child_joint_position());
-	//    oss<<std::endl<<"ankle pos: "<<(ankle_pos-pNow).x<<"  "<<(ankle_pos-pNow).z;
+	//    oss<<std::endl<<"ankle arb_position: "<<(ankle_pos-pNow).x<<"  "<<(ankle_pos-pNow).z;
 	//    std::cout<<oss.str();
 
 
-	//first we set no orientation the hip base
+	//first we set no arb_orientation the hip base
 	//meaning that the computation will be some as if we want the hip rotation to be done
 	//in the y-z plane
 	Vector3d swingLegPlaneOfRotation = Vector3d(-1, 0, 0);
@@ -606,9 +606,9 @@ Point3d Swing_foot_controller::swing_foot_target_location(double t, const Point3
 //	Articulated_rigid_body* gParent = parentJoint->get_parent_arb();
 //	//this is the reduced character space where we will be setting the desired orientations and ang vels.
 //	Reduced_character_state rs(Pose_controller::desired_pose);
-//	//the desired relative orientation between parent and grandparent
+//	//the desired relative arb_orientation between parent and grandparent
 //	Quaternion qParent;
-//	//and the desired relative orientation between child and parent
+//	//and the desired relative arb_orientation between child and parent
 //	Quaternion qChild;
 //
 //
@@ -623,13 +623,13 @@ Point3d Swing_foot_controller::swing_foot_target_location(double t, const Point3
 //	{
 //		Vector3d t = qChild.v;
 //		if ((t.x != t.x) || (t.y != t.y) || (t.z != t.z)) {
-//			std::cout << "Swing_foot_controller::compute_inversed_kinematics nan when compution orientation target";
+//			std::cout << "Swing_foot_controller::compute_inversed_kinematics nan when compution arb_orientation target";
 //		}
 //	}
 //	{
 //		Vector3d t = qParent.v;
 //		if ((t.x != t.x) || (t.y != t.y) || (t.z != t.z)) {
-//			std::cout << "Swing_foot_controller::compute_inversed_kinematics nan when compution orientation target";
+//			std::cout << "Swing_foot_controller::compute_inversed_kinematics nan when compution arb_orientation target";
 //		}
 //	}
 //
@@ -864,7 +864,7 @@ void Swing_foot_controller::compute_ipm_alteration(Velocity_controller* vel_cont
 		std::cout<<oss.str();
 		//*/
 
-		//and now we have to ask the vel control to try to lower the virtual force
+		//and now we have to ask the arb_linear_velocity control to try to lower the virtual force
 		//so that the main part of the velocity is compensated by the IPM
 		vel_control->lower_force_intensity(0.3);
 

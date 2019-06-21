@@ -19,7 +19,7 @@ public:
 	BallInSocketJoint& operator=(BallInSocketJoint&& other) = delete;
 
 	//This method is used to fix the joint angular constraint to correct for drift. This is done by changing
-	//the orientation of the child.
+	//the arb_orientation of the child.
 	void fix_angular_constraint_parent_to_child(const Quaternion& qRel) override;
 
 	//This method is used to pass information regarding the joint limits for a joint. The string that is passed in is expected to

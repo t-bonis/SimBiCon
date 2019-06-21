@@ -26,10 +26,12 @@ Qt_gui::~Qt_gui()
 //Load SimBiCon_framework from files, create a GLWindow for drawing and windows of charts 
 void Qt_gui::setup_simulation()
 {
+	get_ui().pb_simulation->setEnabled(false);
 	try
 	{
 
 		SimGlobals::draw = true;
+
 		std::cout << std::setprecision(std::numeric_limits<double>::digits10 + 1);
 		std::string inputConF = "../../init/input.conF";
 
@@ -58,12 +60,14 @@ void Qt_gui::setup_simulation()
 	}
 
 	//Start a tread where simulation steps will be computed
-	m_simulation_thread = std::make_shared<Simulation_thread>(*m_simbicon_framework, 0);
+	m_simulation_thread = std::make_shared<Simulation_thread>(*m_simbicon_framework, false, 186);
 	connect(m_gl_widget.get(), SIGNAL(key_d_pressed()), m_simulation_thread.get(), SLOT(process_one_task()));
 	connect(get_ui().pb_start, SIGNAL(released()), m_simulation_thread.get(), SLOT(start_simulation()));
 	connect(m_simulation_thread.get(), &Simulation_thread::simulation_done, this,
 		&Qt_gui::simulation_done);
 	m_simulation_thread->start();
+	get_ui().pb_start->setEnabled(true);
+	
 }
 
 
@@ -95,7 +99,7 @@ void Qt_gui::setup_optimization()
 	}
 }
 
-void Qt_gui::start_learning()
+void Qt_gui::setup_learning()
 {
 	std::cout << "Learning start\n";
 	try
@@ -114,9 +118,21 @@ void Qt_gui::start_learning()
 		std::cout << "Error during model loading : " << err.what();
 		return;
 	}
+	get_ui().pb_test_default->setEnabled(true);
+	get_ui().pb_run_learning->setEnabled(true);
+}
 
+void Qt_gui::run_learning()
+{
+	get_ui().pb_run_learning->setEnabled(false);
 	//Start the main learning loop
 	m_learning_framework->start_learning();
+
+}
+
+void Qt_gui::test_default_config()
+{
+	m_learning_framework->test_default_config();
 }
 
 void Qt_gui::stop_opti() const
@@ -181,6 +197,6 @@ void Qt_gui::setup_data_viewer(SimBiCon_framework& simbicon_framework)
 
 void Qt_gui::simulation_done()
 {
-	m_analyzer_thread = std::make_shared<Analyzer_thread>(*m_simbicon_framework);
+	m_analyzer_thread = std::make_shared<Analyzer_thread>(*m_simbicon_framework,true);
 	m_analyzer_thread->start();
 }

@@ -23,7 +23,7 @@ BallInSocketJoint::BallInSocketJoint(const BallInSocketJoint& other) : Joint(oth
 }
 
 //	This method is used to fix the joint angular constraint to correct for drift. This is done by changing
-//	the orientation of the child.
+//	the arb_orientation of the child.
 void BallInSocketJoint::fix_angular_constraint_parent_to_child(const Quaternion& qRel)
 {
 }

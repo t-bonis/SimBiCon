@@ -152,10 +152,13 @@ void Model::add_box(Vector3d min, const Vector3d& max)
 }
 
 
-void Model::add_sphere(float radius)
+void Model::add_sphere(Point3d center, float radius)
 {
-	// load a sphere of size (1)
-	//resize it
+	// load a box of size (1,1,1)
+	load_from_file("../../data/models/sphere111.obj");
+	// resize
+	scale_meshes(Vector3d(radius,radius,radius));
+	translate_vertex(Vector3d(-center.x, -center.y, -center.z));
 }
 
 void Model::add_cylinder(float radius, float length)

@@ -1,7 +1,7 @@
 RigidBody
 	name ground
 	static
-	CDP_Plane 0 1 0 0 -0.01615 0
+	CDP_Plane 0 1 0 0 -0.025 0
 	frictionCoefficient 1e30
 	restitutionCoefficient 0	
 /End

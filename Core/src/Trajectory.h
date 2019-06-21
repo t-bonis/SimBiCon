@@ -177,7 +177,7 @@ public:
 		values[i] = val;
 	}
 
-	//	Sets the position of the ith knot to pos. It is assumed that i is within the correct range.
+	//	Sets the position of the ith knot to arb_position. It is assumed that i is within the correct range.
 	void setKnotPosition(int i, double pos)
 	{
 		if (i - 1 >= 0 && tValues[i - 1] >= pos) return;

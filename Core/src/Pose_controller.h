@@ -10,7 +10,7 @@ class Controller_interface;
 //	A pose controller is used to have the character track a given pose.
 //	Each pose is given as a series of relative orientations, one for
 //	each parent-child pair (i.e. joint). Classes extending this one 
-//	have to worry about setting the desired relative orientation properly.
+//	have to worry about setting the desired relative arb_orientation properly.
 class Pose_controller
 {
 public:
@@ -26,7 +26,7 @@ public:
 		//of the child
 		Vector3d scale;
 
-		//and this is the coordinate frame that the desired orientation is specified in, if relToCharFrame is true
+		//and this is the coordinate frame that the desired arb_orientation is specified in, if relToCharFrame is true
 		Quaternion char_frame;
 
 		Control_params()
@@ -62,15 +62,15 @@ public:
 	//	This method is used to compute the torques, based on the current and desired poses
 	void compute_torques();
 
-	//This method is used to compute the PD torque, given the current relative orientation of two coordinate frames (child and parent),
-	//the relative angular velocity, the desired values for the relative orientation and ang. vel, as well as the virtual motor's
+	//This method is used to compute the PD torque, given the current relative arb_orientation of two coordinate frames (child and parent),
+	//the relative angular velocity, the desired values for the relative arb_orientation and ang. arb_linear_velocity, as well as the virtual motor's
 	//PD gains. The torque returned is expressed in the coordinate frame of the 'parent'.
 	static Vector3d compute_pd_torque(const Quaternion& qRel, const Quaternion& qRelD, const Vector3d& wRel,
 		const Vector3d& wRelD, Control_params* cParams);
 	static Vector3d compute_spd_torque(const Quaternion& qRel, const Quaternion& qRelD, const Vector3d& wRel,
 	                            const Vector3d& wRelD, const Vector3d& wwRel, Control_params* cParams);
 
-	//This method is used to scale and apply joint limits to the torque that is passed in as a parameter. The orientation that transforms
+	//This method is used to scale and apply joint limits to the torque that is passed in as a parameter. The arb_orientation that transforms
 	//the torque from the coordinate frame that it is currently stored in, to the coordinate frame of the 'child' to which the torque is
 	//applied to (it wouldn't make sense to scale the torques in any other coordinate frame)  is also passed in as a parameter.
 	static void scale_and_limit_torque(Vector3d* torque, Control_params* cParams, const Quaternion& qToChild);

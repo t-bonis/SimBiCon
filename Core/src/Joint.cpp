@@ -13,26 +13,26 @@ Joint::Joint(const Joint& other)
 	m_name = other.m_name;
 }
 
-//	This method is used to compute the relative orientation between the parent and the child rigid bodies, expressed in
+//	This method is used to compute the relative arb_orientation between the parent and the child rigid bodies, expressed in
 //	the frame coordinate of the parent.
 void Joint::compute_relative_orientation(Quaternion& q_rel) const
 {
-	//if qp is the quaternion that gives the orientation of the parent, and qc gives the orientation of the child, then  qp^-1 * qc gives the relative
-	//orientation between the child and the parent, expressed in the parent's coordinates (child to parent)
+	//if qp is the quaternion that gives the arb_orientation of the parent, and qc gives the arb_orientation of the child, then  qp^-1 * qc gives the relative
+	//arb_orientation between the child and the parent, expressed in the parent's coordinates (child to parent)
 	q_rel = m_parent_arb->get_orientation().get_inverse() * m_child_arb->get_orientation();
 }
 
 void Joint::compute_relative_angular_velocity(Vector3d& wRel) const
 {
 	wRel = m_child_arb->get_angular_velocity() - m_parent_arb->get_angular_velocity();
-	//we will store wRel in the parent's coordinates, to get an orientation invariant expression for it
+	//we will store wRel in the parent's coordinates, to get an arb_orientation invariant expression for it
 	wRel = m_parent_arb->get_local_coordinates(wRel);
 }
 
 void Joint::compute_relative_angular_acceleration(Vector3d& wwRel) const
 {
 	wwRel = m_child_arb->get_angular_acceleration() - m_parent_arb->get_angular_acceleration();
-	//we will store wRel in the parent's coordinates, to get an orientation invariant expression for it
+	//we will store wRel in the parent's coordinates, to get an arb_orientation invariant expression for it
 	wwRel = m_parent_arb->get_local_coordinates(wwRel);
 
 }
@@ -45,7 +45,7 @@ void Joint::fix_joint_constraints_parent_to_child(bool fixOrientations, bool fix
 	//if it has a parent, we will assume that the parent's position is correct, and move the children to satisfy the joint constraint
 	if (m_parent_arb)
 	{
-		//first fix the relative orientation, if desired
+		//first fix the relative arb_orientation, if desired
 		if (fixOrientations)
 		{
 			Quaternion qRel;
@@ -97,9 +97,9 @@ void Joint::fix_joint_constraints_child_to_parent(bool fixOrientations, bool fix
 	//if it has a parent, we will assume that the parent's position is correct, and move the children to satisfy the joint constraint
 	if (m_child_arb)
 	{
-		//fix the orientation problems here... hopefully no rigid body is locked (except for the root, which is ok)
+		//fix the arb_orientation problems here... hopefully no rigid body is locked (except for the root, which is ok)
 
-		//first fix the relative orientation, if desired
+		//first fix the relative arb_orientation, if desired
 		if (fixOrientations)
 		{
 			Quaternion qRel;

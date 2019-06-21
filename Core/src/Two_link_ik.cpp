@@ -14,16 +14,16 @@ All quantities that are passed in as parameters here need to be expressed in the
 - n: this is the default normal to the rotation plane (it will get modified as little as possible to account for the target location)
 
 - vParent: vector from parent origin to child origin, expressed in parent coordinates
-- nParent: this is the rotation axis, expressed in parent coordinates. The relative orientation between child and parent will be about this axis
+- nParent: this is the rotation axis, expressed in parent coordinates. The relative arb_orientation between child and parent will be about this axis
 - vChild: vector from child origin, to position of the end effector, expressed in child coordinates
 
 Output:
-- qP: relative orientation of parent, relative to "global" coordinate frame
-- qC: relative orientation of child, relative to the parent coordinate frame
+- qP: relative arb_orientation of parent, relative to "global" coordinate frame
+- qC: relative arb_orientation of child, relative to the parent coordinate frame
 
 
 NOTE: for now, the vector vChild is pretty much ignored. Only its length is taken into account. The axis that the child is lined up around is the same as the direction
-of the vector from the parent's origin to the child's origin (when there is zero relative orientation between the two, the axis has the same coordinates in both
+of the vector from the parent's origin to the child's origin (when there is zero relative arb_orientation between the two, the axis has the same coordinates in both
 child and parent frame).
 */
 void Two_link_ik::getIKOrientations(const Point3d& p1, const Point3d& p2, const Vector3d& n, const Vector3d& vParent,
@@ -44,7 +44,7 @@ void Two_link_ik::getIKOrientations(const Point3d& p1, const Point3d& p2, const 
 
 
 	//now we need to solve for the orientations of the parent and child
-	//if the parent has 0 relative orientation to the grandparent (default), then the grandparent's orientation is also the parent's
+	//if the parent has 0 relative arb_orientation to the grandparent (default), then the grandparent's arb_orientation is also the parent's
 	*qP = Two_link_ik::getParentOrientation(vParentG, nG, vParent, nParent);
 	{
 		Vector3d t = qP->v;
@@ -113,7 +113,7 @@ Quaternion Two_link_ik::getParentOrientation(const Vector3d &vGlobal, const Vect
 
 	q = Quaternion::get_rotation_quaternion(ang, axis);
 
-	//now q rotates nLocal into nGlobal. We now need an aditional orientation that aligns vLocal to vGlobal
+	//now q rotates nLocal into nGlobal. We now need an aditional arb_orientation that aligns vLocal to vGlobal
 
 	//nLocal is perpendicular to vLocal so q*nLocal is perpendicular to q*vLocal. Also, q*nLocal is equal to nGlobal,
 	//so nGlobal is perpendicular to both q*vLocal and vGlobal, which means that this rotation better be about vGlobal!!!

@@ -28,6 +28,7 @@ void Simulation_thread::run()
 		}
 		if(isInterruptionRequested())
 		{
+			quit();
 			return;
 		}
 		while (m_forced_run || m_step_to_advance > 0)
@@ -47,6 +48,7 @@ void Simulation_thread::run()
 		}
 	}
 	emit simulation_done(m_simbicon_framework);
+	quit();
 }
 
 void Simulation_thread::start_simulation()
